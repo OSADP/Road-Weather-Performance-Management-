@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>2.6</ProductVersion>
+    <ProjectGuid>a0401a2d-62ec-414d-b583-5b9b8db0e529</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RWPM</RootNamespace>
+    <AssemblyName>RWPM</AssemblyName>
+    <StartDevelopmentStorage>True</StartDevelopmentStorage>
+    <Name>RWPM</Name>
+    <PackageEnableRemoteDebugger>False</PackageEnableRemoteDebugger>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- Items for the project -->
+  <ItemGroup>
+    <ServiceDefinition Include="ServiceDefinition.csdef" />
+    <ServiceConfiguration Include="ServiceConfiguration.Local.cscfg" />
+    <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="BsmWorkerRole\BsmWorkerRole.csproj">
+      <Name>BsmWorkerRole</Name>
+      <Project>{1e7336ac-d157-4cec-b05d-bbf1ec57d0c2}</Project>
+      <Private>True</Private>
+      <RoleType>Worker</RoleType>
+      <RoleName>BsmWorkerRole</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+    </ProjectReference>
+    <ProjectReference Include="DataProcessorWorkerRole\DataProcessorWorkerRole.csproj">
+      <Name>DataProcessorWorkerRole</Name>
+      <Project>{5eba249e-76d1-4f83-bb51-030b2cf87abb}</Project>
+      <Private>True</Private>
+      <RoleType>Worker</RoleType>
+      <RoleName>DataProcessorWorkerRole</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+    </ProjectReference>
+    <ProjectReference Include="InfloWebRole\InfloWebRole.csproj">
+      <Name>InfloWebRole</Name>
+      <Project>{126e865c-53be-46b0-a62d-1954efe043ad}</Project>
+      <Private>True</Private>
+      <RoleType>Web</RoleType>
+      <RoleName>InfloWebRole</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+    </ProjectReference>
+    <ProjectReference Include="PikalertDataWorkerRole\PikalertDataWorkerRole.csproj">
+      <Name>PikalertDataWorkerRole</Name>
+      <Project>{02110655-3b7e-4671-b795-041f7d98096e}</Project>
+      <Private>True</Private>
+      <RoleType>Worker</RoleType>
+      <RoleName>PikalertDataWorkerRole</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BsmWorkerRoleContent\" />
+    <Folder Include="DataProcessorWorkerRoleContent\" />
+    <Folder Include="InfloWebRoleContent\" />
+    <Folder Include="PikalertDataWorkerRoleContent\" />
+    <Folder Include="Profiles" />
+  </ItemGroup>
+  <ItemGroup>
+    <DiagnosticsConfiguration Include="BsmWorkerRoleContent\diagnostics.wadcfgx" />
+    <DiagnosticsConfiguration Include="DataProcessorWorkerRoleContent\diagnostics.wadcfgx" />
+    <DiagnosticsConfiguration Include="InfloWebRoleContent\diagnostics.wadcfgx" />
+    <DiagnosticsConfiguration Include="PikalertDataWorkerRoleContent\diagnostics.wadcfgx" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishProfile Include="Profiles\RWPMProduction.azurePubxml" />
+  </ItemGroup>
+  <!-- Import the target files for this project template -->
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+    <CloudExtensionsDir Condition=" '$(CloudExtensionsDir)' == '' ">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Windows Azure Tools\2.6\</CloudExtensionsDir>
+  </PropertyGroup>
+  <Import Project="$(CloudExtensionsDir)Microsoft.WindowsAzure.targets" />
+</Project>

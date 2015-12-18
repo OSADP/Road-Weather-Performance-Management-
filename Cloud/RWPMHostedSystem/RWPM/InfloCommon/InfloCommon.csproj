@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CA8AE942-0B3A-49BF-A52C-5DA012259CAD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>InfloCommon</RootNamespace>
+    <AssemblyName>InfloCommon</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpRepository.EfRepository">
+      <HintPath>..\packages\SharpRepository.EfRepository.1.4.6.15\lib\net40\SharpRepository.EfRepository.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpRepository.InMemoryRepository">
+      <HintPath>..\packages\SharpRepository.InMemoryRepository.1.4.0.0\lib\net40\SharpRepository.InMemoryRepository.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpRepository.Repository">
+      <HintPath>..\packages\SharpRepository.Repository.1.4.6.15\lib\net40\SharpRepository.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionCode.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration_ESS.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration_INFLOThresholds.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration_Roadway.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration_RoadwayESS.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration_RoadwayLinks.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration_RoadwayLinksDetectorStation.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration_RoadwayLinksESS.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration_RoadwayMileMarkers.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration_RoadwaySubLinks.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration_TSSDetectionZone.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration_TSSDetectorStation.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="District.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMSSAlert.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InfloDb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfloDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InfloDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InfloDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfloDb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="InfloDb1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MAWAlertCodeConverter.cs" />
+    <Compile Include="MAWOutput.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BsmBundle.cs" />
+    <Compile Include="Models\BsmMessage.cs" />
+    <Compile Include="Models\Common.cs" />
+    <Compile Include="Models\CustomAttributes.cs" />
+    <Compile Include="Models\GoogleMapsDirections.cs" />
+    <Compile Include="Models\MAWOutputModel.cs" />
+    <Compile Include="Models\MotoristAlertModel.cs" />
+    <Compile Include="Models\PA_District.cs" />
+    <Compile Include="Models\PA_DistrictAlerts.cs" />
+    <Compile Include="Models\PA_Site.cs" />
+    <Compile Include="Models\PA_Time_Series.cs" />
+    <Compile Include="Models\PA_Vehicles_District.cs" />
+    <Compile Include="Models\PA_Vehicles_Vehicle.cs" />
+    <Compile Include="Models\Pikalert_Vehicles.cs" />
+    <Compile Include="Models\RWProbeModel.cs" />
+    <Compile Include="Models\TimMessage.cs" />
+    <Compile Include="Models\VisualDisplayModels.cs" />
+    <Compile Include="PavementCode.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrecipitationCode.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\InMemoryUnitOfWork.cs" />
+    <Compile Include="Repositories\IUnitOfWork.cs" />
+    <Compile Include="Repositories\UnitOfWork.cs" />
+    <Compile Include="RoadWeatherProbeInputs.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Site.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SiteObservation.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TMEOutput_QWARNMessage_CV.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TMEOutput_QWARN_QueueInfo.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TMEOutput_ShockWaveInformation.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TMEOutput_SPDHARMMessage_CV.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TMEOutput_SPDHARMMessage_Infrastructure.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TMEOutput_WRTM_Alerts.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TME_CVData_Input.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TME_CVData_Input_Processed.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TME_CVData_SubLink.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TME_ESSData_Input.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TME_ESSMobileData_Input.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TME_TSSData_Input.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TME_TSSESS_Link.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VisibilityCode.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WeatherEvent.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WeatherEventStatistics.cs" />
+    <Compile Include="WorkerRoleCommon\BaseProcManager.cs" />
+    <Compile Include="WorkerRoleCommon\BaseProcWorker.cs" />
+    <Compile Include="WorkerRoleCommon\IProcessWorker.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="InfloDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>InfloDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="InfloDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>InfloDb.edmx</DependentUpon>
+      <LastGenOutput>InfloDb.Context.cs</LastGenOutput>
+    </None>
+    <None Include="InfloDb.edmx.diagram">
+      <DependentUpon>InfloDb.edmx</DependentUpon>
+    </None>
+    <None Include="InfloDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>InfloDb.edmx</DependentUpon>
+      <LastGenOutput>InfloDb1.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="InfloDb.edmx.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

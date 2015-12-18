@@ -1,0 +1,90 @@
+﻿<Window x:Class="RWProbeSimulator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="RW Probe Simulator" Height="750" Width="700">
+	<Window.Resources>
+		<Style x:Key="ItemButton">
+			<Setter Property="Button.FontSize" Value="12"/>
+			<Setter Property="Button.Margin" Value="5"/>
+			<Setter Property="Button.MinWidth" Value="80"/>
+		</Style>
+		<Style x:Key="ItemTextBlock">
+			<Setter Property="TextBlock.FontSize" Value="12"/>
+			<Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+			<Setter Property="TextBlock.Margin" Value="3"/>
+		</Style>
+		<!--<Style x:Key="TableTextBlock" BasedOn="{StaticResource ItemTextBlock}">
+			<Setter Property="TextBlock.HorizontalAlignment" Value="Right"/>
+		</Style>
+		<Style x:Key="TableTextBox" BasedOn="{StaticResource ItemTextBlock}">
+			<Setter Property="TextBlock.HorizontalAlignment" Value="Stretch"/>
+		</Style>-->
+	</Window.Resources>
+	<DockPanel>
+		<StackPanel DockPanel.Dock="Top">
+			<StackPanel Orientation="Horizontal" Margin="0">
+				<Button Style="{StaticResource ItemButton}" x:Name="StartButton" Content="Start" Click="StartButton_Click" />
+				<Button Style="{StaticResource ItemButton}" x:Name="StopButton" Content="Stop" Click="StopButton_Click" IsEnabled="False"/>
+				<TextBlock Style="{StaticResource ItemTextBlock}" Text="Base Address:"/>
+				<TextBox x:Name="BaseAddressTextBox" Margin="3" Width="400" Text="http://rwpm.cloudapp.net/api/"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Style="{StaticResource ItemTextBlock}" Text="Probe Data Uploaded:"/>
+				<TextBlock Style="{StaticResource ItemTextBlock}" x:Name="UploadCountTextBlock" FontWeight="Bold" Text="0"/>
+			</StackPanel>
+			<TextBlock Style="{StaticResource ItemTextBlock}" Text="Probe Data:"/>
+			<xctk:PropertyGrid x:Name="ProbePropertyGrid" Margin="5" Width="300" HorizontalAlignment="Left"
+							   ShowSearchBox="False" ShowTitle="False" ShowSortOptions="False" AutoGenerateProperties="False">
+				<xctk:PropertyGrid.PropertyDefinitions>
+					<xctk:PropertyDefinition TargetProperties="AirTemperature" />
+					<xctk:PropertyDefinition TargetProperties="AtmosphericPressure" />
+					<xctk:PropertyDefinition TargetProperties="Speed" />
+					<xctk:PropertyDefinition TargetProperties="SteeringWheelAngle" />
+					<xctk:PropertyDefinition TargetProperties="WiperStatus" />
+					<xctk:PropertyDefinition TargetProperties="RightFrontWheelSpeed" />
+					<xctk:PropertyDefinition TargetProperties="LeftFrontWheelSpeed" />
+					<xctk:PropertyDefinition TargetProperties="LeftRearWheelSpeed" />
+					<xctk:PropertyDefinition TargetProperties="RightRearWheelSpeed" />
+					<xctk:PropertyDefinition TargetProperties="GpsHeading" />
+					<xctk:PropertyDefinition TargetProperties="GpsLatitude" />
+					<xctk:PropertyDefinition TargetProperties="GpsLongitude" />
+					<xctk:PropertyDefinition TargetProperties="GpsElevation" />
+					<xctk:PropertyDefinition TargetProperties="GpsSpeed" />
+					<xctk:PropertyDefinition TargetProperties="CVQueuedStatus" />
+					<xctk:PropertyDefinition TargetProperties="LatAccel" />
+					<xctk:PropertyDefinition TargetProperties="LongAccel" />
+				</xctk:PropertyGrid.PropertyDefinitions>
+				<xctk:PropertyGrid.EditorDefinitions>
+					<xctk:EditorTemplateDefinition TargetProperties="AirTemperature,AtmosphericPressure,Speed,SteeringWheelAngle,RightFrontWheelSpeed,LeftFrontWheelSpeed,LeftRearWheelSpeed,RightRearWheelSpeed,GpsHeading,GpsLatitude,GpsLongitude,GpsElevation,GpsSpeed,LatAccel,LongAccel">
+						<xctk:EditorTemplateDefinition.EditingTemplate>
+							<DataTemplate>
+								<xctk:DoubleUpDown Value="{Binding Path=Value}" FormatString="F2" Increment=".5" />
+							</DataTemplate>
+						</xctk:EditorTemplateDefinition.EditingTemplate>
+					</xctk:EditorTemplateDefinition>
+				</xctk:PropertyGrid.EditorDefinitions>
+			</xctk:PropertyGrid>
+			<!--<Grid Margin="5">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="2*"/>
+				</Grid.ColumnDefinitions>
+				<TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource TableTextBlock}" Text="Testing 1:"/>
+				<TextBox   Grid.Row="0" Grid.Column="1" Style="{StaticResource TableTextBox}" x:Name="Test" />
+				<TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource TableTextBlock}" Text="Testing 2:"/>
+				<TextBox   Grid.Row="1" Grid.Column="1" Style="{StaticResource TableTextBox}" x:Name="Test2" />
+			</Grid>-->
+			<!--<TextBox x:Name="SendTextBox" Height="230" Margin="3" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Text="" />-->
+			<TextBlock Style="{StaticResource ItemTextBlock}" Text="Log:"/>
+		</StackPanel>
+
+		<TextBox x:Name="LogTextBox" Margin="3" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" Text=""/>
+	</DockPanel>
+</Window>

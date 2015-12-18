@@ -1,0 +1,5 @@
+{
+	"OutputFolder":"/home/ivp/RWPM/output",
+	"InitialDataSeconds": 300,
+	"QueryFrequencySeconds": 30
+}

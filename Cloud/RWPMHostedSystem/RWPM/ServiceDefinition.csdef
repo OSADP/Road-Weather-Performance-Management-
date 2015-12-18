@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="RWPM" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2015-04.2.6">
+  <WorkerRole name="DataProcessorWorkerRole" vmsize="ExtraSmall">
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="StorageAccountConnectionString" />
+      <Setting name="InfloDatabaseConnectionString" />
+      <Setting name="RunCVProcessor" />
+      <Setting name="RunTSSProcessor" />
+      <Setting name="CVProcessorSleepTimeSec" />
+      <Setting name="TSSProcessorSleepTimeSec" />
+      <Setting name="INFLOConfigFile" />
+      <Setting name="LoggerLevel" />
+    </ConfigurationSettings>
+    <Imports>
+      <Import moduleName="RemoteAccess" />
+      <Import moduleName="RemoteForwarder" />
+    </Imports>
+  </WorkerRole>
+  <WorkerRole name="BsmWorkerRole" vmsize="ExtraSmall">
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="StorageAccountConnectionString" />
+      <Setting name="InfloDatabaseConnectionString" />
+      <Setting name="Stats_LogStatisticalData" />
+      <Setting name="Stats_MinimalLoggedElapsedTime" />
+      <Setting name="OsmMapModelDbConnectionString" />
+    </ConfigurationSettings>
+    <Imports>
+      <Import moduleName="RemoteAccess" />
+    </Imports>
+  </WorkerRole>
+  <WebRole name="InfloWebRole" vmsize="ExtraSmall">
+    <Sites>
+      <Site name="Web">
+        <Bindings>
+          <Binding name="Endpoint1" endpointName="Endpoint1" />
+        </Bindings>
+      </Site>
+    </Sites>
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="StorageAccountConnectionString" />
+      <Setting name="InfloDatabaseConnectionString" />
+      <Setting name="AlertSearchDistance" />
+      <Setting name="QWarnAlertDistance" />
+      <Setting name="OsmMapModelDbConnectionString" />
+    </ConfigurationSettings>
+    <Endpoints>
+      <InputEndpoint name="Endpoint1" protocol="http" port="80" />
+    </Endpoints>
+    <Imports>
+      <Import moduleName="RemoteAccess" />
+    </Imports>
+  </WebRole>
+  <WorkerRole name="PikalertDataWorkerRole" vmsize="Medium">
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="InfloDatabaseConnectionString" />
+      <Setting name="OsmMapModelDbConnectionString" />
+      <Setting name="RunPikAlertProcessor" />
+      <Setting name="RunDetectorDataProcessor" />
+      <Setting name="PikAlertSleepTimeSec" />
+      <Setting name="DetectorDataSleepTimeSec" />
+    </ConfigurationSettings>
+    <Imports>
+      <Import moduleName="RemoteAccess" />
+    </Imports>
+  </WorkerRole>
+</ServiceDefinition>

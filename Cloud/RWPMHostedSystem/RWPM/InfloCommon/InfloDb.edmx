@@ -1,0 +1,1815 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="InfloCommon.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="InfloCommonStoreContainer">
+    <EntitySet Name="Configuration_ESS" EntityType="InfloCommon.Store.Configuration_ESS" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Configuration_INFLOThresholds" EntityType="InfloCommon.Store.Configuration_INFLOThresholds" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Configuration_Roadway" EntityType="InfloCommon.Store.Configuration_Roadway" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Configuration_RoadwayESS" EntityType="InfloCommon.Store.Configuration_RoadwayESS" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Configuration_RoadwayLinks" EntityType="InfloCommon.Store.Configuration_RoadwayLinks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Configuration_RoadwayLinksDetectorStation" EntityType="InfloCommon.Store.Configuration_RoadwayLinksDetectorStation" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Configuration_RoadwayLinksESS" EntityType="InfloCommon.Store.Configuration_RoadwayLinksESS" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Configuration_RoadwayMileMarkers" EntityType="InfloCommon.Store.Configuration_RoadwayMileMarkers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Configuration_RoadwaySubLinks" EntityType="InfloCommon.Store.Configuration_RoadwaySubLinks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Configuration_TSSDetectionZone" EntityType="InfloCommon.Store.Configuration_TSSDetectionZone" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Configuration_TSSDetectorStation" EntityType="InfloCommon.Store.Configuration_TSSDetectorStation" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="InfloCommon.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TME_CVData_Input" EntityType="InfloCommon.Store.TME_CVData_Input" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TME_CVData_Input_Processed" EntityType="InfloCommon.Store.TME_CVData_Input_Processed" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TME_CVData_SubLink" EntityType="InfloCommon.Store.TME_CVData_SubLink" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TME_ESSData_Input" EntityType="InfloCommon.Store.TME_ESSData_Input" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TME_ESSMobileData_Input" EntityType="InfloCommon.Store.TME_ESSMobileData_Input" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TME_TSSData_Input" EntityType="InfloCommon.Store.TME_TSSData_Input" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TME_TSSESS_Link" EntityType="InfloCommon.Store.TME_TSSESS_Link" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TMEOutput_QWARN_QueueInfo" EntityType="InfloCommon.Store.TMEOutput_QWARN_QueueInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TMEOutput_QWARNMessage_CV" EntityType="InfloCommon.Store.TMEOutput_QWARNMessage_CV" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TMEOutput_ShockWaveInformation" EntityType="InfloCommon.Store.TMEOutput_ShockWaveInformation" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TMEOutput_SPDHARMMessage_CV" EntityType="InfloCommon.Store.TMEOutput_SPDHARMMessage_CV" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TMEOutput_SPDHARMMessage_Infrastructure" EntityType="InfloCommon.Store.TMEOutput_SPDHARMMessage_Infrastructure" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TMEOutput_WRTM_Alerts" EntityType="InfloCommon.Store.TMEOutput_WRTM_Alerts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RoadWeatherProbeInputs" EntityType="InfloCommon.Store.RoadWeatherProbeInputs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MAWOutputs" EntityType="InfloCommon.Store.MAWOutputs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WeatherEvents" EntityType="InfloCommon.Store.WeatherEvents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EDMSSAlerts" EntityType="InfloCommon.Store.EDMSSAlerts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Districts" EntityType="InfloCommon.Store.Districts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sites" EntityType="InfloCommon.Store.Sites" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SiteObservations" EntityType="InfloCommon.Store.SiteObservations" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="EDMSSAlertDistrict" Association="InfloCommon.Store.EDMSSAlertDistrict">
+      <End Role="EDMSSAlert" EntitySet="EDMSSAlerts" />
+      <End Role="District" EntitySet="Districts" />
+    </AssociationSet>
+    <AssociationSet Name="DistrictSite" Association="InfloCommon.Store.DistrictSite">
+      <End Role="District" EntitySet="Districts" />
+      <End Role="Site" EntitySet="Sites" />
+    </AssociationSet>
+    <AssociationSet Name="SiteSiteObservation" Association="InfloCommon.Store.SiteSiteObservation">
+      <End Role="Site" EntitySet="Sites" />
+      <End Role="SiteObservation" EntitySet="SiteObservations" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Configuration_ESS">
+    <Key>
+      <PropertyRef Name="ESSId" />
+    </Key>
+    <Property Name="ESSId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="ESSType" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="ESSOperationType" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="ESSMobilityType" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="BeginMM" Type="float" Nullable="true" />
+    <Property Name="EndMM" Type="float" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Configuration_INFLOThresholds">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="CVDataPollingFrequency" Type="smallint" Nullable="false" />
+    <Property Name="TSSDataPollingFrequency" Type="smallint" Nullable="false" />
+    <Property Name="CVDataLoadingFrequency" Type="smallint" Nullable="true" />
+    <Property Name="TSSDataLoadingFrequency" Type="smallint" Nullable="true" />
+    <Property Name="ESSDataPollingFrequency" Type="smallint" Nullable="false" />
+    <Property Name="MobileESSDataPollingFrequency" Type="smallint" Nullable="false" />
+    <Property Name="QueuedSpeedThreshold" Type="smallint" Nullable="false" />
+    <Property Name="CongestedSpeedThreshold" Type="smallint" Nullable="false" />
+    <Property Name="MinimumDisplaySpeed" Type="smallint" Nullable="true" />
+    <Property Name="TroupeRange" Type="smallint" Nullable="true" />
+    <Property Name="ThreeGantrySpeed" Type="smallint" Nullable="true" />
+    <Property Name="RecurringCongestionMMLocation" Type="smallint" Nullable="true" />
+    <Property Name="SublinkLength" Type="float" Nullable="true" />
+    <Property Name="SublinkPercentQueuedCV" Type="smallint" Nullable="true" />
+    <Property Name="MaximumDisplaySpeed" Type="smallint" Nullable="true" />
+    <Property Name="COFLowerThreshold" Type="float" Nullable="true" />
+    <Property Name="COFUpperThreshold" Type="float" Nullable="true" />
+    <Property Name="RoadSurfaceStatusDryCOF" Type="float" Nullable="true" />
+    <Property Name="RoadSurfaceStatusSnowCOF" Type="float" Nullable="true" />
+    <Property Name="RoadSurfaceStatusWetCOF" Type="float" Nullable="true" />
+    <Property Name="RoadSurfaceStatusIceCOF" Type="float" Nullable="true" />
+    <Property Name="WRTMMaxRecommendedSpeed" Type="float" Nullable="true" />
+    <Property Name="WRTMMaxRecommendedSpeedLevel1" Type="float" Nullable="true" />
+    <Property Name="WRTMMaxRecommendedSpeedLevel2" Type="float" Nullable="true" />
+    <Property Name="WRTMMaxRecommendedSpeedLevel3" Type="float" Nullable="true" />
+    <Property Name="WRTMMaxRecommendedSpeedLevel4" Type="float" Nullable="true" />
+    <Property Name="WRTMMinRecommendedSpeed" Type="float" Nullable="true" />
+    <Property Name="VisibilityThreshold" Type="float" Nullable="true" />
+    <Property Name="VisibilityStatusClear" Type="float" Nullable="true" />
+    <Property Name="VisibilityStatusFogNotPatchy" Type="float" Nullable="true" />
+    <Property Name="VisibilityStatusPatchyFog" Type="float" Nullable="true" />
+    <Property Name="VisibilityStatusBlowingSnow" Type="float" Nullable="true" />
+    <Property Name="VisibilityStatusSmoke" Type="float" Nullable="true" />
+    <Property Name="VisibilityStatusSeaSpray" Type="float" Nullable="true" />
+    <Property Name="VisibilityStatusVehicleSpray" Type="float" Nullable="true" />
+    <Property Name="VisibilityStatusBlowingDust" Type="float" Nullable="true" />
+    <Property Name="VisibilityStatusBlowingSand" Type="float" Nullable="true" />
+    <Property Name="VisibilityStatusSunGlare" Type="float" Nullable="true" />
+    <Property Name="VisibilityStatusSwarmsOfInsects" Type="float" Nullable="true" />
+    <Property Name="OccupancyThreshold" Type="smallint" Nullable="true" />
+    <Property Name="VolumeThreshold" Type="smallint" Nullable="true" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Configuration_Roadway">
+    <Key>
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Direction" />
+      <PropertyRef Name="BeginMM" />
+      <PropertyRef Name="EndMM" />
+      <PropertyRef Name="MMIncreasingDirection" />
+    </Key>
+    <Property Name="RoadwayId" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="Direction" Type="nvarchar" Nullable="false" MaxLength="15" />
+    <Property Name="Grade" Type="float" Nullable="true" />
+    <Property Name="BeginMM" Type="float" Nullable="false" />
+    <Property Name="EndMM" Type="float" Nullable="false" />
+    <Property Name="MMIncreasingDirection" Type="nvarchar" Nullable="false" MaxLength="15" />
+    <Property Name="LowerHeading" Type="float" Nullable="true" />
+    <Property Name="UpperHeading" Type="float" Nullable="true" />
+    <Property Name="RecurringCongestionMMLocation" Type="float" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Configuration_RoadwayESS">
+    <Key>
+      <PropertyRef Name="RoadwayId" />
+      <PropertyRef Name="ESSId" />
+    </Key>
+    <Property Name="RoadwayId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="ESSId" Type="nvarchar" Nullable="false" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Configuration_RoadwayLinks">
+    <Key>
+      <PropertyRef Name="LinkId" />
+      <PropertyRef Name="BeginMM" />
+      <PropertyRef Name="EndMM" />
+      <PropertyRef Name="RoadwayId" />
+    </Key>
+    <Property Name="RoadwayId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="LinkId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="BeginMM" Type="float" Nullable="false" />
+    <Property Name="EndMM" Type="float" Nullable="false" />
+    <Property Name="StartCrossStreetName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="EndCrossStreetName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="UpstreamLinkId" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="DownstreamLinkId" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="NumberLanes" Type="smallint" Nullable="true" />
+    <Property Name="SpeedLimit" Type="smallint" Nullable="true" />
+    <Property Name="NumberDetectorStations" Type="smallint" Nullable="true" />
+    <Property Name="DetectorStations" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="ESS" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="VSLSignId" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="DMSId" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="RSEId" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="Direction" Type="nvarchar" Nullable="true" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="Configuration_RoadwayLinksDetectorStation">
+    <Key>
+      <PropertyRef Name="LinkId" />
+      <PropertyRef Name="DSId" />
+    </Key>
+    <Property Name="LinkId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="DSId" Type="nvarchar" Nullable="false" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Configuration_RoadwayLinksESS">
+    <Key>
+      <PropertyRef Name="LinkId" />
+      <PropertyRef Name="ESSId" />
+    </Key>
+    <Property Name="LinkId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="ESSId" Type="nvarchar" Nullable="false" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Configuration_RoadwayMileMarkers">
+    <Key>
+      <PropertyRef Name="RoadwayId" />
+      <PropertyRef Name="MMNumber" />
+      <PropertyRef Name="Latitude1" />
+      <PropertyRef Name="Longitude1" />
+      <PropertyRef Name="Latitude2" />
+      <PropertyRef Name="Longitude2" />
+    </Key>
+    <Property Name="RoadwayId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="MMNumber" Type="float" Nullable="false" />
+    <Property Name="Latitude1" Type="float" Nullable="false" />
+    <Property Name="Longitude1" Type="float" Nullable="false" />
+    <Property Name="Latitude2" Type="float" Nullable="false" />
+    <Property Name="Longitude2" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Configuration_RoadwaySubLinks">
+    <Key>
+      <PropertyRef Name="RoadwayId" />
+      <PropertyRef Name="SubLinkId" />
+      <PropertyRef Name="BeginMM" />
+      <PropertyRef Name="EndMM" />
+    </Key>
+    <Property Name="RoadwayId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="SubLinkId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="BeginMM" Type="float" Nullable="false" />
+    <Property Name="EndMM" Type="float" Nullable="false" />
+    <Property Name="SpeedLimit" Type="smallint" Nullable="true" />
+    <Property Name="NumberLanes" Type="smallint" Nullable="true" />
+    <Property Name="DownstreamSubLinkId" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="UpstreamSubLinkId" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="VSLSignID" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="DMSID" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="RSEID" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="Direction" Type="nvarchar" Nullable="true" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="Configuration_TSSDetectionZone">
+    <Key>
+      <PropertyRef Name="DSId" />
+      <PropertyRef Name="DZId" />
+      <PropertyRef Name="LaneNumber" />
+    </Key>
+    <Property Name="DSId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="DZId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="DZType" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="LaneNumber" Type="int" Nullable="false" />
+    <Property Name="LaneType" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="LaneDescription" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="DataType" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="DZStatus" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="Direction" Type="nvarchar" Nullable="true" MaxLength="3" />
+    <Property Name="RoadwayId" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Configuration_TSSDetectorStation">
+    <Key>
+      <PropertyRef Name="DSId" />
+      <PropertyRef Name="MMLocation" />
+      <PropertyRef Name="NumberDetectionZones" />
+    </Key>
+    <Property Name="LinkId" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="DSId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="DSName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="MMLocation" Type="float" Nullable="false" />
+    <Property Name="NumberLanes" Type="smallint" Nullable="true" />
+    <Property Name="NumberDetectionZones" Type="smallint" Nullable="false" />
+    <Property Name="DetectionZones" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="Latitude" Type="float" Nullable="true" />
+    <Property Name="Longitude" Type="float" Nullable="true" />
+    <Property Name="Direction" Type="nvarchar" Nullable="true" MaxLength="3" />
+    <Property Name="RoadwayId" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" Nullable="true" />
+    <Property Name="definition" Type="varbinary(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TME_CVData_Input">
+    <Key>
+      <PropertyRef Name="CVMessageIdentifier" />
+    </Key>
+    <Property Name="CVMessageIdentifier" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomadicDeviceID" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="DateGenerated" Type="datetime" Nullable="true" />
+    <Property Name="Speed" Type="float" Nullable="true" />
+    <Property Name="Heading" Type="smallint" Nullable="true" />
+    <Property Name="Latitude" Type="float" Nullable="true" />
+    <Property Name="Longitude" Type="float" Nullable="true" />
+    <Property Name="MMLocation" Type="float" Nullable="false" />
+    <Property Name="CVQueuedState" Type="bit" Nullable="true" />
+    <Property Name="CoefficientOfFriction" Type="float" Nullable="true" />
+    <Property Name="Temperature" Type="smallint" Nullable="true" />
+    <Property Name="RoadwayId" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="LateralAcceleration" Type="float" Nullable="true" />
+    <Property Name="LongitudinalAcceleration" Type="float" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TME_CVData_Input_Processed">
+    <Key>
+      <PropertyRef Name="MMLocation" />
+    </Key>
+    <Property Name="NomadicDeviceID" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="DateGenerated" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="DateProcessed" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="Speed" Type="float" Nullable="true" />
+    <Property Name="Heading" Type="smallint" Nullable="true" />
+    <Property Name="MMLocation" Type="float" Nullable="false" />
+    <Property Name="CVQueuedState" Type="bit" Nullable="true" />
+    <Property Name="RoadwayID" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="CoefficientOfFriction" Type="float" Nullable="true" />
+    <Property Name="Temperature" Type="smallint" Nullable="true" />
+    <Property Name="SubLinkId" Type="nvarchar" Nullable="true" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="TME_CVData_SubLink">
+    <Key>
+      <PropertyRef Name="SubLinkId" />
+      <PropertyRef Name="DateProcessed" />
+      <PropertyRef Name="CVAvgSpeed" />
+      <PropertyRef Name="NumberCVs" />
+      <PropertyRef Name="NumberQueuedCVs" />
+    </Key>
+    <Property Name="RoadwayId" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="SubLinkId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="DateProcessed" Type="datetime" Nullable="false" />
+    <Property Name="IntervalLength" Type="smallint" Nullable="true" />
+    <Property Name="TSSAvgSpeed" Type="float" Nullable="true" />
+    <Property Name="WRTMSpeed" Type="float" Nullable="true" />
+    <Property Name="CVAvgSpeed" Type="float" Nullable="false" />
+    <Property Name="NumberCVs" Type="smallint" Nullable="false" />
+    <Property Name="NumberQueuedCVs" Type="smallint" Nullable="false" />
+    <Property Name="PercentQueuedCVs" Type="smallint" Nullable="true" />
+    <Property Name="CVQueuedState" Type="bit" Nullable="true" />
+    <Property Name="CVCongestedState" Type="bit" Nullable="true" />
+    <Property Name="RecommendedTargetSpeed" Type="smallint" Nullable="true" />
+    <Property Name="RecommendedTargetSpeedSource" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TME_ESSData_Input">
+    <Key>
+      <PropertyRef Name="ESSId" />
+      <PropertyRef Name="DateReceived" />
+    </Key>
+    <Property Name="ESSId" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="ESSVisibilityDistance" Type="float" Nullable="true" />
+    <Property Name="ESSVisibilityStatus" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="ESSCoefficientOfFriction" Type="float" Nullable="true" />
+    <Property Name="ESSSurfaceStatus" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="DateReceived" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TME_ESSMobileData_Input">
+    <Key>
+      <PropertyRef Name="MobileESSId" />
+      <PropertyRef Name="Longitude" />
+    </Key>
+    <Property Name="MobileESSId" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="Latitude" Type="float" Nullable="true" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
+    <Property Name="Bearing" Type="float" Nullable="true" />
+    <Property Name="Friction" Type="float" Nullable="true" />
+    <Property Name="ObservationPavement" Type="nvarchar" Nullable="true" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="TME_TSSData_Input">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="DZId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="DSId" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="DateReceived" Type="datetime" Nullable="true" />
+    <Property Name="StartInterval" Type="smallint" Nullable="true" />
+    <Property Name="EndInterval" Type="smallint" Nullable="true" />
+    <Property Name="IntervalLength" Type="smallint" Nullable="true" />
+    <Property Name="BeginTime" Type="datetime" Nullable="true" />
+    <Property Name="EndTime" Type="datetime" Nullable="true" />
+    <Property Name="Volume" Type="smallint" Nullable="false" />
+    <Property Name="Occupancy" Type="real" Nullable="false" />
+    <Property Name="AvgSpeed" Type="smallint" Nullable="false" />
+    <Property Name="Queued" Type="bit" Nullable="true" />
+    <Property Name="Congested" Type="bit" Nullable="true" />
+    <Property Name="DZStatus" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="DataType" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="RoadwayId" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TME_TSSESS_Link">
+    <Key>
+      <PropertyRef Name="LinkId" />
+      <PropertyRef Name="DateProcessed" />
+      <PropertyRef Name="TSSSpeed" />
+      <PropertyRef Name="TSSVolume" />
+    </Key>
+    <Property Name="RoadwayId" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="LinkId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="DateProcessed" Type="datetime" Nullable="false" />
+    <Property Name="IntervalLength" Type="smallint" Nullable="true" />
+    <Property Name="TSSSpeed" Type="float" Nullable="false" />
+    <Property Name="ESSSpeed" Type="float" Nullable="true" />
+    <Property Name="TSSVolume" Type="smallint" Nullable="false" />
+    <Property Name="TSSOccupancy" Type="float" Nullable="true" />
+    <Property Name="Congested" Type="bit" Nullable="true" />
+    <Property Name="Queued" Type="bit" Nullable="true" />
+    <Property Name="RecommendedSpeed" Type="smallint" Nullable="true" />
+    <Property Name="RecommendedSpeedSource" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="CurrentDMSMessage" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="CurrentVSLSignSpeed" Type="smallint" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TMEOutput_QWARN_QueueInfo">
+    <Key>
+      <PropertyRef Name="DateGenerated" />
+      <PropertyRef Name="BOQ_MMLocation" />
+      <PropertyRef Name="BOQ_LinkId" />
+      <PropertyRef Name="FOQ_MMLocation" />
+      <PropertyRef Name="FOQ_LinkId" />
+      <PropertyRef Name="RateOfQueueGrowth" />
+      <PropertyRef Name="SPeed_In_Queue" />
+    </Key>
+    <Property Name="DateGenerated" Type="datetime" Nullable="false" />
+    <Property Name="BOQ_MMLocation" Type="smallint" Nullable="false" />
+    <Property Name="BOQ_LinkId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="FOQ_MMLocation" Type="float" Nullable="false" />
+    <Property Name="FOQ_LinkId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="RateOfQueueGrowth" Type="float" Nullable="false" />
+    <Property Name="SPeed_In_Queue" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TMEOutput_QWARNMessage_CV">
+    <Key>
+      <PropertyRef Name="DateGenerated" />
+      <PropertyRef Name="BOQMMLocation" />
+      <PropertyRef Name="FOQMMLocation" />
+    </Key>
+    <Property Name="DateGenerated" Type="datetime" Nullable="false" />
+    <Property Name="RoadwayID" Type="nvarchar" Nullable="true" MaxLength="25" />
+    <Property Name="BOQMMLocation" Type="float" Nullable="false" />
+    <Property Name="FOQMMLocation" Type="float" Nullable="false" />
+    <Property Name="SpeedInQueue" Type="smallint" Nullable="true" />
+    <Property Name="RateOfQueueGrowth" Type="float" Nullable="true" />
+    <Property Name="ValidityDuration" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TMEOutput_ShockWaveInformation">
+    <Key>
+      <PropertyRef Name="Timestamp" />
+      <PropertyRef Name="RoadwayIdentifier" />
+      <PropertyRef Name="MileMarkerLocation" />
+      <PropertyRef Name="SchockwaveSpeed" />
+    </Key>
+    <Property Name="Timestamp" Type="datetime" Nullable="false" />
+    <Property Name="RoadwayIdentifier" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="MileMarkerLocation" Type="float" Nullable="false" />
+    <Property Name="SchockwaveSpeed" Type="smallint" Nullable="false" />
+    <Property Name="SchockwaveDirection" Type="nvarchar" Nullable="true" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="TMEOutput_SPDHARMMessage_CV">
+    <Key>
+      <PropertyRef Name="DateGenerated" />
+      <PropertyRef Name="RecommendedSpeed" />
+      <PropertyRef Name="BeginMM" />
+      <PropertyRef Name="Justification" />
+    </Key>
+    <Property Name="DateGenerated" Type="datetime" Nullable="false" />
+    <Property Name="RoadwayId" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="RecommendedSpeed" Type="smallint" Nullable="false" />
+    <Property Name="BeginMM" Type="float" Nullable="false" />
+    <Property Name="EndMM" Type="float" Nullable="true" />
+    <Property Name="Justification" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="ValidityDuration" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TMEOutput_SPDHARMMessage_Infrastructure">
+    <Key>
+      <PropertyRef Name="DateGenerated" />
+      <PropertyRef Name="RecommendedSpeed" />
+      <PropertyRef Name="VSLId" />
+      <PropertyRef Name="Justification" />
+    </Key>
+    <Property Name="DateGenerated" Type="datetime" Nullable="false" />
+    <Property Name="RecommendedSpeed" Type="smallint" Nullable="false" />
+    <Property Name="VSLId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="Justification" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="LinkId" Type="nvarchar" Nullable="true" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="TMEOutput_WRTM_Alerts">
+    <Key>
+      <PropertyRef Name="DateGenerated" />
+      <PropertyRef Name="WeatherAlert" />
+      <PropertyRef Name="Justification" />
+      <PropertyRef Name="RoadwayId" />
+      <PropertyRef Name="BeginMM" />
+      <PropertyRef Name="EndMM" />
+    </Key>
+    <Property Name="DateGenerated" Type="datetime" Nullable="false" />
+    <Property Name="WeatherAlert" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Justification" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="RoadwayId" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="BeginMM" Type="float" Nullable="false" />
+    <Property Name="EndMM" Type="float" Nullable="false" />
+    <Property Name="BeginTime" Type="datetime" Nullable="true" />
+    <Property Name="EndTime" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="RoadWeatherProbeInputs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomadicDeviceId" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DateGenerated" Type="datetime" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="AirTemperature" Type="float" Nullable="true" />
+    <Property Name="AtmosphericPressure" Type="float" Nullable="true" />
+    <Property Name="HeadlightStatus" Type="bit" Nullable="true" />
+    <Property Name="Speed" Type="float" Nullable="false" />
+    <Property Name="SteeringWheelAngle" Type="float" Nullable="true" />
+    <Property Name="WiperStatus" Type="bit" Nullable="true" />
+    <Property Name="RightFrontWheelSpeed" Type="float" Nullable="true" />
+    <Property Name="LeftFrontWheelSpeed" Type="float" Nullable="true" />
+    <Property Name="LeftRearWheelSpeed" Type="float" Nullable="true" />
+    <Property Name="RightRearWheelSpeed" Type="float" Nullable="true" />
+    <Property Name="GpsHeading" Type="float" Nullable="false" />
+    <Property Name="GpsLatitude" Type="float" Nullable="false" />
+    <Property Name="GpsLongitude" Type="float" Nullable="false" />
+    <Property Name="GpsElevation" Type="float" Nullable="false" />
+    <Property Name="GpsSpeed" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MAWOutputs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AlertRequestTime" Type="datetime" Nullable="false" />
+    <Property Name="AlertTime" Type="datetime" Nullable="false" />
+    <Property Name="AlertGenTime" Type="datetime" Nullable="false" />
+    <Property Name="PrecipitationCode" Type="int" Nullable="false" />
+    <Property Name="PavementCode" Type="int" Nullable="false" />
+    <Property Name="VisibilityCode" Type="int" Nullable="false" />
+    <Property Name="ActionCode" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WeatherEvents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="StartTime" Type="datetime" Nullable="false" />
+    <Property Name="EndTime" Type="datetime" Nullable="true" />
+    <Property Name="Mode" Type="smallint" Nullable="false" DefaultValue="1" />
+  </EntityType>
+  <EntityType Name="EDMSSAlerts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Districts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EDMSSAlertId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Hr06AlertSummaryCode" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Hr24AlertSummaryCode" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Hr72AlertSummaryCode" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="MaxLatitude" Type="float" Nullable="false" />
+    <Property Name="MaxLongitude" Type="float" Nullable="false" />
+    <Property Name="MinLatitude" Type="float" Nullable="false" />
+    <Property Name="MinLongitude" Type="float" Nullable="false" />
+    <Property Name="ObservAlertSummaryCode" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Sites">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Hr06AlertSummaryCode" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Hr24AlertSummaryCode" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Hr72AlertSummaryCode" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="IsRoadCondSite" Type="bit" Nullable="false" />
+    <Property Name="IsWeatherObservSite" Type="bit" Nullable="false" />
+    <Property Name="Latitude" Type="float" Nullable="false" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
+    <Property Name="ObservAlertCode" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="SiteIdName" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="SiteNum" Type="bigint" Nullable="false" />
+    <Property Name="DistrictId" Type="int" Nullable="false" />
+    <Property Name="MileMarker" Type="float" Nullable="true" />
+  </EntityType>
+  <EntityType Name="SiteObservations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
+    <Property Name="AlertCode" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Chemical" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Pavement" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Plow" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Precipitation" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="RoadTemp" Type="float" Nullable="false" />
+    <Property Name="TreatmentAlertCode" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Visibility" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="SiteId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="EDMSSAlertDistrict">
+    <End Role="EDMSSAlert" Type="InfloCommon.Store.EDMSSAlerts" Multiplicity="1" />
+    <End Role="District" Type="InfloCommon.Store.Districts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EDMSSAlert">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="EDMSSAlertId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DistrictSite">
+    <End Role="District" Type="InfloCommon.Store.Districts" Multiplicity="1" />
+    <End Role="Site" Type="InfloCommon.Store.Sites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Site">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SiteSiteObservation">
+    <End Role="Site" Type="InfloCommon.Store.Sites" Multiplicity="1" />
+    <End Role="SiteObservation" Type="InfloCommon.Store.SiteObservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Site">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SiteObservation">
+        <PropertyRef Name="SiteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InfloCommon" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Configuration_ESS">
+          <Key>
+            <PropertyRef Name="ESSId" />
+          </Key>
+          <Property Name="ESSId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ESSType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ESSOperationType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ESSMobilityType" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="BeginMM" Type="Double" />
+          <Property Name="EndMM" Type="Double" />
+        </EntityType>
+        <EntityType Name="Configuration_INFLOThresholds">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="CVDataPollingFrequency" Type="Int16" Nullable="false" />
+          <Property Name="TSSDataPollingFrequency" Type="Int16" Nullable="false" />
+          <Property Name="CVDataLoadingFrequency" Type="Int16" />
+          <Property Name="TSSDataLoadingFrequency" Type="Int16" />
+          <Property Name="ESSDataPollingFrequency" Type="Int16" Nullable="false" />
+          <Property Name="MobileESSDataPollingFrequency" Type="Int16" Nullable="false" />
+          <Property Name="QueuedSpeedThreshold" Type="Int16" Nullable="false" />
+          <Property Name="CongestedSpeedThreshold" Type="Int16" Nullable="false" />
+          <Property Name="MinimumDisplaySpeed" Type="Int16" />
+          <Property Name="TroupeRange" Type="Int16" />
+          <Property Name="ThreeGantrySpeed" Type="Int16" />
+          <Property Name="RecurringCongestionMMLocation" Type="Int16" />
+          <Property Name="SublinkLength" Type="Double" />
+          <Property Name="SublinkPercentQueuedCV" Type="Int16" />
+          <Property Name="MaximumDisplaySpeed" Type="Int16" />
+          <Property Name="COFLowerThreshold" Type="Double" />
+          <Property Name="COFUpperThreshold" Type="Double" />
+          <Property Name="RoadSurfaceStatusDryCOF" Type="Double" />
+          <Property Name="RoadSurfaceStatusSnowCOF" Type="Double" />
+          <Property Name="RoadSurfaceStatusWetCOF" Type="Double" />
+          <Property Name="RoadSurfaceStatusIceCOF" Type="Double" />
+          <Property Name="WRTMMaxRecommendedSpeed" Type="Double" />
+          <Property Name="WRTMMaxRecommendedSpeedLevel1" Type="Double" />
+          <Property Name="WRTMMaxRecommendedSpeedLevel2" Type="Double" />
+          <Property Name="WRTMMaxRecommendedSpeedLevel3" Type="Double" />
+          <Property Name="WRTMMaxRecommendedSpeedLevel4" Type="Double" />
+          <Property Name="WRTMMinRecommendedSpeed" Type="Double" />
+          <Property Name="VisibilityThreshold" Type="Double" />
+          <Property Name="VisibilityStatusClear" Type="Double" />
+          <Property Name="VisibilityStatusFogNotPatchy" Type="Double" />
+          <Property Name="VisibilityStatusPatchyFog" Type="Double" />
+          <Property Name="VisibilityStatusBlowingSnow" Type="Double" />
+          <Property Name="VisibilityStatusSmoke" Type="Double" />
+          <Property Name="VisibilityStatusSeaSpray" Type="Double" />
+          <Property Name="VisibilityStatusVehicleSpray" Type="Double" />
+          <Property Name="VisibilityStatusBlowingDust" Type="Double" />
+          <Property Name="VisibilityStatusBlowingSand" Type="Double" />
+          <Property Name="VisibilityStatusSunGlare" Type="Double" />
+          <Property Name="VisibilityStatusSwarmsOfInsects" Type="Double" />
+          <Property Name="OccupancyThreshold" Type="Int16" />
+          <Property Name="VolumeThreshold" Type="Int16" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Configuration_Roadway">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Direction" />
+            <PropertyRef Name="BeginMM" />
+            <PropertyRef Name="EndMM" />
+            <PropertyRef Name="MMIncreasingDirection" />
+          </Key>
+          <Property Name="RoadwayId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Direction" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Grade" Type="Double" />
+          <Property Name="BeginMM" Type="Double" Nullable="false" />
+          <Property Name="EndMM" Type="Double" Nullable="false" />
+          <Property Name="MMIncreasingDirection" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LowerHeading" Type="Double" />
+          <Property Name="UpperHeading" Type="Double" />
+          <Property Name="RecurringCongestionMMLocation" Type="Double" />
+        </EntityType>
+        <EntityType Name="Configuration_RoadwayESS">
+          <Key>
+            <PropertyRef Name="RoadwayId" />
+            <PropertyRef Name="ESSId" />
+          </Key>
+          <Property Name="RoadwayId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ESSId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Configuration_RoadwayLinks">
+          <Key>
+            <PropertyRef Name="LinkId" />
+            <PropertyRef Name="BeginMM" />
+            <PropertyRef Name="EndMM" />
+            <PropertyRef Name="RoadwayId" />
+          </Key>
+          <Property Name="RoadwayId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LinkId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BeginMM" Type="Double" Nullable="false" />
+          <Property Name="EndMM" Type="Double" Nullable="false" />
+          <Property Name="StartCrossStreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EndCrossStreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpstreamLinkId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="DownstreamLinkId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="NumberLanes" Type="Int16" />
+          <Property Name="SpeedLimit" Type="Int16" />
+          <Property Name="NumberDetectorStations" Type="Int16" />
+          <Property Name="DetectorStations" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ESS" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="VSLSignId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="DMSId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="RSEId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Direction" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Configuration_RoadwayLinksDetectorStation">
+          <Key>
+            <PropertyRef Name="LinkId" />
+            <PropertyRef Name="DSId" />
+          </Key>
+          <Property Name="LinkId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DSId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Configuration_RoadwayLinksESS">
+          <Key>
+            <PropertyRef Name="LinkId" />
+            <PropertyRef Name="ESSId" />
+          </Key>
+          <Property Name="LinkId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ESSId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Configuration_RoadwayMileMarkers">
+          <Key>
+            <PropertyRef Name="RoadwayId" />
+            <PropertyRef Name="MMNumber" />
+            <PropertyRef Name="Latitude1" />
+            <PropertyRef Name="Longitude1" />
+            <PropertyRef Name="Latitude2" />
+            <PropertyRef Name="Longitude2" />
+          </Key>
+          <Property Name="RoadwayId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MMNumber" Type="Double" Nullable="false" />
+          <Property Name="Latitude1" Type="Double" Nullable="false" />
+          <Property Name="Longitude1" Type="Double" Nullable="false" />
+          <Property Name="Latitude2" Type="Double" Nullable="false" />
+          <Property Name="Longitude2" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Configuration_RoadwaySubLinks">
+          <Key>
+            <PropertyRef Name="RoadwayId" />
+            <PropertyRef Name="SubLinkId" />
+            <PropertyRef Name="BeginMM" />
+            <PropertyRef Name="EndMM" />
+          </Key>
+          <Property Name="RoadwayId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SubLinkId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BeginMM" Type="Double" Nullable="false" />
+          <Property Name="EndMM" Type="Double" Nullable="false" />
+          <Property Name="SpeedLimit" Type="Int16" />
+          <Property Name="NumberLanes" Type="Int16" />
+          <Property Name="DownstreamSubLinkId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="UpstreamSubLinkId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="VSLSignID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="DMSID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="RSEID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Direction" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Configuration_TSSDetectionZone">
+          <Key>
+            <PropertyRef Name="DSId" />
+            <PropertyRef Name="DZId" />
+            <PropertyRef Name="LaneNumber" />
+          </Key>
+          <Property Name="DSId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DZId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DZType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LaneNumber" Type="Int32" Nullable="false" />
+          <Property Name="LaneType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LaneDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DataType" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="DZStatus" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Direction" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="RoadwayId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Configuration_TSSDetectorStation">
+          <Key>
+            <PropertyRef Name="DSId" />
+            <PropertyRef Name="MMLocation" />
+            <PropertyRef Name="NumberDetectionZones" />
+          </Key>
+          <Property Name="LinkId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="DSId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DSName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MMLocation" Type="Double" Nullable="false" />
+          <Property Name="NumberLanes" Type="Int16" />
+          <Property Name="NumberDetectionZones" Type="Int16" Nullable="false" />
+          <Property Name="DetectionZones" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="Direction" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="RoadwayId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TME_CVData_Input">
+          <Key>
+            <PropertyRef Name="CVMessageIdentifier" />
+          </Key>
+          <Property Name="CVMessageIdentifier" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomadicDeviceID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="DateGenerated" Type="DateTime" Precision="3" />
+          <Property Name="Speed" Type="Double" />
+          <Property Name="Heading" Type="Int16" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="MMLocation" Type="Double" Nullable="false" />
+          <Property Name="CVQueuedState" Type="Boolean" />
+          <Property Name="CoefficientOfFriction" Type="Double" />
+          <Property Name="Temperature" Type="Int16" />
+          <Property Name="RoadwayId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="LateralAcceleration" Type="Double" />
+          <Property Name="LongitudinalAcceleration" Type="Double" />
+        </EntityType>
+        <EntityType Name="TME_CVData_Input_Processed">
+          <Key>
+            <PropertyRef Name="MMLocation" />
+          </Key>
+          <Property Name="NomadicDeviceID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="DateGenerated" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="DateProcessed" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Speed" Type="Double" />
+          <Property Name="Heading" Type="Int16" />
+          <Property Name="MMLocation" Type="Double" Nullable="false" />
+          <Property Name="CVQueuedState" Type="Boolean" />
+          <Property Name="RoadwayID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="CoefficientOfFriction" Type="Double" />
+          <Property Name="Temperature" Type="Int16" />
+          <Property Name="SubLinkId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TME_CVData_SubLink">
+          <Key>
+            <PropertyRef Name="SubLinkId" />
+            <PropertyRef Name="DateProcessed" />
+            <PropertyRef Name="CVAvgSpeed" />
+            <PropertyRef Name="NumberCVs" />
+            <PropertyRef Name="NumberQueuedCVs" />
+          </Key>
+          <Property Name="RoadwayId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="SubLinkId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateProcessed" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IntervalLength" Type="Int16" />
+          <Property Name="TSSAvgSpeed" Type="Double" />
+          <Property Name="WRTMSpeed" Type="Double" />
+          <Property Name="CVAvgSpeed" Type="Double" Nullable="false" />
+          <Property Name="NumberCVs" Type="Int16" Nullable="false" />
+          <Property Name="NumberQueuedCVs" Type="Int16" Nullable="false" />
+          <Property Name="PercentQueuedCVs" Type="Int16" />
+          <Property Name="CVQueuedState" Type="Boolean" />
+          <Property Name="CVCongestedState" Type="Boolean" />
+          <Property Name="RecommendedTargetSpeed" Type="Int16" />
+          <Property Name="RecommendedTargetSpeedSource" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TME_ESSData_Input">
+          <Key>
+            <PropertyRef Name="ESSId" />
+            <PropertyRef Name="DateReceived" />
+          </Key>
+          <Property Name="ESSId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ESSVisibilityDistance" Type="Double" />
+          <Property Name="ESSVisibilityStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ESSCoefficientOfFriction" Type="Double" />
+          <Property Name="ESSSurfaceStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateReceived" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="TME_ESSMobileData_Input">
+          <Key>
+            <PropertyRef Name="MobileESSId" />
+            <PropertyRef Name="Longitude" />
+          </Key>
+          <Property Name="MobileESSId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Bearing" Type="Double" />
+          <Property Name="Friction" Type="Double" />
+          <Property Name="ObservationPavement" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TME_TSSData_Input">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="DZId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DSId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateReceived" Type="DateTime" Precision="3" />
+          <Property Name="StartInterval" Type="Int16" />
+          <Property Name="EndInterval" Type="Int16" />
+          <Property Name="IntervalLength" Type="Int16" />
+          <Property Name="BeginTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="Volume" Type="Int16" Nullable="false" />
+          <Property Name="Occupancy" Type="Single" Nullable="false" />
+          <Property Name="AvgSpeed" Type="Int16" Nullable="false" />
+          <Property Name="Queued" Type="Boolean" />
+          <Property Name="Congested" Type="Boolean" />
+          <Property Name="DZStatus" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="DataType" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="RoadwayId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="TME_TSSESS_Link">
+          <Key>
+            <PropertyRef Name="LinkId" />
+            <PropertyRef Name="DateProcessed" />
+            <PropertyRef Name="TSSSpeed" />
+            <PropertyRef Name="TSSVolume" />
+          </Key>
+          <Property Name="RoadwayId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="LinkId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateProcessed" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IntervalLength" Type="Int16" />
+          <Property Name="TSSSpeed" Type="Double" Nullable="false" />
+          <Property Name="ESSSpeed" Type="Double" />
+          <Property Name="TSSVolume" Type="Int16" Nullable="false" />
+          <Property Name="TSSOccupancy" Type="Double" />
+          <Property Name="Congested" Type="Boolean" />
+          <Property Name="Queued" Type="Boolean" />
+          <Property Name="RecommendedSpeed" Type="Int16" />
+          <Property Name="RecommendedSpeedSource" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentDMSMessage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentVSLSignSpeed" Type="Int16" />
+        </EntityType>
+        <EntityType Name="TMEOutput_QWARN_QueueInfo">
+          <Key>
+            <PropertyRef Name="DateGenerated" />
+            <PropertyRef Name="BOQ_MMLocation" />
+            <PropertyRef Name="BOQ_LinkId" />
+            <PropertyRef Name="FOQ_MMLocation" />
+            <PropertyRef Name="FOQ_LinkId" />
+            <PropertyRef Name="RateOfQueueGrowth" />
+            <PropertyRef Name="SPeed_In_Queue" />
+          </Key>
+          <Property Name="DateGenerated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BOQ_MMLocation" Type="Int16" Nullable="false" />
+          <Property Name="BOQ_LinkId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FOQ_MMLocation" Type="Double" Nullable="false" />
+          <Property Name="FOQ_LinkId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RateOfQueueGrowth" Type="Double" Nullable="false" />
+          <Property Name="SPeed_In_Queue" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TMEOutput_QWARNMessage_CV">
+          <Key>
+            <PropertyRef Name="DateGenerated" />
+            <PropertyRef Name="BOQMMLocation" />
+            <PropertyRef Name="FOQMMLocation" />
+          </Key>
+          <Property Name="DateGenerated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RoadwayID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="BOQMMLocation" Type="Double" Nullable="false" />
+          <Property Name="FOQMMLocation" Type="Double" Nullable="false" />
+          <Property Name="SpeedInQueue" Type="Int16" />
+          <Property Name="RateOfQueueGrowth" Type="Double" />
+          <Property Name="ValidityDuration" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TMEOutput_ShockWaveInformation">
+          <Key>
+            <PropertyRef Name="Timestamp" />
+            <PropertyRef Name="RoadwayIdentifier" />
+            <PropertyRef Name="MileMarkerLocation" />
+            <PropertyRef Name="SchockwaveSpeed" />
+          </Key>
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RoadwayIdentifier" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MileMarkerLocation" Type="Double" Nullable="false" />
+          <Property Name="SchockwaveSpeed" Type="Int16" Nullable="false" />
+          <Property Name="SchockwaveDirection" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TMEOutput_SPDHARMMessage_CV">
+          <Key>
+            <PropertyRef Name="DateGenerated" />
+            <PropertyRef Name="RecommendedSpeed" />
+            <PropertyRef Name="BeginMM" />
+            <PropertyRef Name="Justification" />
+          </Key>
+          <Property Name="DateGenerated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RoadwayId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RecommendedSpeed" Type="Int16" Nullable="false" />
+          <Property Name="BeginMM" Type="Double" Nullable="false" />
+          <Property Name="EndMM" Type="Double" />
+          <Property Name="Justification" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ValidityDuration" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TMEOutput_SPDHARMMessage_Infrastructure">
+          <Key>
+            <PropertyRef Name="DateGenerated" />
+            <PropertyRef Name="RecommendedSpeed" />
+            <PropertyRef Name="VSLId" />
+            <PropertyRef Name="Justification" />
+          </Key>
+          <Property Name="DateGenerated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RecommendedSpeed" Type="Int16" Nullable="false" />
+          <Property Name="VSLId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Justification" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LinkId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TMEOutput_WRTM_Alerts">
+          <Key>
+            <PropertyRef Name="DateGenerated" />
+            <PropertyRef Name="WeatherAlert" />
+            <PropertyRef Name="Justification" />
+            <PropertyRef Name="RoadwayId" />
+            <PropertyRef Name="BeginMM" />
+            <PropertyRef Name="EndMM" />
+          </Key>
+          <Property Name="DateGenerated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WeatherAlert" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Justification" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoadwayId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BeginMM" Type="Double" Nullable="false" />
+          <Property Name="EndMM" Type="Double" Nullable="false" />
+          <Property Name="BeginTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Configuration_ESS" EntityType="Self.Configuration_ESS" />
+          <EntitySet Name="Configuration_INFLOThresholds" EntityType="Self.Configuration_INFLOThresholds" />
+          <EntitySet Name="Configuration_Roadway" EntityType="Self.Configuration_Roadway" />
+          <EntitySet Name="Configuration_RoadwayESS" EntityType="Self.Configuration_RoadwayESS" />
+          <EntitySet Name="Configuration_RoadwayLinks" EntityType="Self.Configuration_RoadwayLinks" />
+          <EntitySet Name="Configuration_RoadwayLinksDetectorStation" EntityType="Self.Configuration_RoadwayLinksDetectorStation" />
+          <EntitySet Name="Configuration_RoadwayLinksESS" EntityType="Self.Configuration_RoadwayLinksESS" />
+          <EntitySet Name="Configuration_RoadwayMileMarkers" EntityType="Self.Configuration_RoadwayMileMarkers" />
+          <EntitySet Name="Configuration_RoadwaySubLinks" EntityType="Self.Configuration_RoadwaySubLinks" />
+          <EntitySet Name="Configuration_TSSDetectionZone" EntityType="Self.Configuration_TSSDetectionZone" />
+          <EntitySet Name="Configuration_TSSDetectorStation" EntityType="Self.Configuration_TSSDetectorStation" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TME_CVData_Input" EntityType="Self.TME_CVData_Input" />
+          <EntitySet Name="TME_CVData_Input_Processed" EntityType="Self.TME_CVData_Input_Processed" />
+          <EntitySet Name="TME_CVData_SubLink" EntityType="Self.TME_CVData_SubLink" />
+          <EntitySet Name="TME_ESSData_Input" EntityType="Self.TME_ESSData_Input" />
+          <EntitySet Name="TME_ESSMobileData_Input" EntityType="Self.TME_ESSMobileData_Input" />
+          <EntitySet Name="TME_TSSData_Input" EntityType="Self.TME_TSSData_Input" />
+          <EntitySet Name="TME_TSSESS_Link" EntityType="Self.TME_TSSESS_Link" />
+          <EntitySet Name="TMEOutput_QWARN_QueueInfo" EntityType="Self.TMEOutput_QWARN_QueueInfo" />
+          <EntitySet Name="TMEOutput_QWARNMessage_CV" EntityType="Self.TMEOutput_QWARNMessage_CV" />
+          <EntitySet Name="TMEOutput_ShockWaveInformation" EntityType="Self.TMEOutput_ShockWaveInformation" />
+          <EntitySet Name="TMEOutput_SPDHARMMessage_CV" EntityType="Self.TMEOutput_SPDHARMMessage_CV" />
+          <EntitySet Name="TMEOutput_SPDHARMMessage_Infrastructure" EntityType="Self.TMEOutput_SPDHARMMessage_Infrastructure" />
+          <EntitySet Name="TMEOutput_WRTM_Alerts" EntityType="Self.TMEOutput_WRTM_Alerts" />
+          <EntitySet Name="RoadWeatherProbeInputs" EntityType="InfloCommon.RoadWeatherProbeInputs" />
+          <EntitySet Name="MAWOutputs" EntityType="InfloCommon.MAWOutput" />
+          <EntitySet Name="WeatherEvents" EntityType="InfloCommon.WeatherEvent" />
+          <EntitySet Name="EDMSSAlerts" EntityType="InfloCommon.EDMSSAlert" />
+          <EntitySet Name="Districts" EntityType="InfloCommon.District" />
+          <AssociationSet Name="EDMSSAlertDistrict" Association="InfloCommon.EDMSSAlertDistrict">
+            <End Role="EDMSSAlert" EntitySet="EDMSSAlerts" />
+            <End Role="District" EntitySet="Districts" />
+          </AssociationSet>
+          <EntitySet Name="Sites" EntityType="InfloCommon.Site" />
+          <AssociationSet Name="DistrictSite" Association="InfloCommon.DistrictSite">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="Site" EntitySet="Sites" />
+          </AssociationSet>
+          <EntitySet Name="SiteObservations" EntityType="InfloCommon.SiteObservation" />
+          <AssociationSet Name="SiteSiteObservation" Association="InfloCommon.SiteSiteObservation">
+            <End Role="Site" EntitySet="Sites" />
+            <End Role="SiteObservation" EntitySet="SiteObservations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="RoadWeatherProbeInputs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomadicDeviceId" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DateGenerated" Nullable="false" Type="DateTime" Precision="3" />
+          <Property Name="DateCreated" Nullable="false" Type="DateTime" Precision="3" />
+          <Property Name="AirTemperature" Type="Double" Nullable="true" />
+          <Property Name="AtmosphericPressure" Type="Double" Nullable="true" />
+          <Property Name="HeadlightStatus" Type="Boolean" Nullable="true" />
+          <Property Name="Speed" Type="Double" Nullable="false" />
+          <Property Name="SteeringWheelAngle" Type="Double" Nullable="true" />
+          <Property Name="WiperStatus" Type="Boolean" Nullable="true" />
+          <Property Name="RightFrontWheelSpeed" Type="Double" Nullable="true" />
+          <Property Name="LeftFrontWheelSpeed" Type="Double" Nullable="true" />
+          <Property Name="LeftRearWheelSpeed" Type="Double" Nullable="true" />
+          <Property Name="RightRearWheelSpeed" Type="Double" Nullable="true" />
+          <Property Name="GpsHeading" Type="Double" Nullable="false" />
+          <Property Name="GpsLatitude" Type="Double" Nullable="false" />
+          <Property Name="GpsLongitude" Type="Double" Nullable="false" />
+          <Property Name="GpsElevation" Type="Double" Nullable="false" />
+          <Property Name="GpsSpeed" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAWOutput">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlertRequestTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AlertTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AlertGenTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PrecipitationCode" Type="InfloCommon.PrecipitationCode" Nullable="false" />
+          <Property Name="PavementCode" Type="InfloCommon.PavementCode" Nullable="false" />
+          <Property Name="VisibilityCode" Type="InfloCommon.VisibilityCode" Nullable="false" />
+          <Property Name="ActionCode" Type="InfloCommon.ActionCode" Nullable="false" />
+        </EntityType>
+        <EnumType Name="PrecipitationCode">
+          <Member Name="Clear" Value="0" />
+          <Member Name="LightRain" Value="1" />
+          <Member Name="ModerateRain" Value="2" />
+          <Member Name="HeavyRain" Value="3" />
+          <Member Name="LightRainSnowMix" Value="4" />
+          <Member Name="ModerateRainSnowMix" Value="5" />
+          <Member Name="HeavyRainSnowMix" Value="6" />
+          <Member Name="LightSnow" Value="7" />
+          <Member Name="ModerateSnow" Value="8" />
+          <Member Name="HeavySnow" Value="9" />
+        </EnumType>
+        <EnumType Name="PavementCode">
+          <Member Name="Clear" Value="0" />
+          <Member Name="WetRoads" Value="1" />
+          <Member Name="SnowyRoads" Value="2" />
+          <Member Name="SnowySlickRoads" Value="3" />
+          <Member Name="IcyRoads" Value="4" />
+          <Member Name="IcySlickRoads" Value="5" />
+          <Member Name="HydroplaningPossible" Value="6" />
+          <Member Name="BlackIce" Value="7" />
+          <Member Name="IcyRoadsPossible" Value="8" />
+          <Member Name="IcySlickRoadsPossible" Value="9" />
+        </EnumType>
+        <EnumType Name="VisibilityCode">
+          <Member Name="Clear" Value="0" />
+          <Member Name="LowVisibility" Value="1" />
+          <Member Name="BlowingSnow" Value="2" />
+          <Member Name="Fog" Value="3" />
+          <Member Name="Haze" Value="4" />
+          <Member Name="Dust" Value="5" />
+          <Member Name="Smoke" Value="6" />
+        </EnumType>
+        <EnumType Name="ActionCode">
+          <Member Name="None" Value="0" />
+          <Member Name="UseCaution" Value="1" />
+          <Member Name="DriveSlowlyAndUseCaution" Value="2" />
+          <Member Name="DelayTravelSeekAlternateRouteOrDriveSlowlyAndUseExtremeCaution" Value="3" />
+        </EnumType>
+        <EntityType Name="WeatherEvent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="Mode" Type="Int16" Nullable="false" DefaultValue="1" />
+        </EntityType>
+        <EntityType Name="EDMSSAlert">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Districts" Relationship="InfloCommon.EDMSSAlertDistrict" FromRole="EDMSSAlert" ToRole="District" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="EDMSSAlert" Relationship="InfloCommon.EDMSSAlertDistrict" FromRole="District" ToRole="EDMSSAlert" />
+          <Property Name="EDMSSAlertId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Hr06AlertSummaryCode" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Hr24AlertSummaryCode" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Hr72AlertSummaryCode" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="MaxLatitude" Type="Double" Nullable="false" />
+          <Property Name="MaxLongitude" Type="Double" Nullable="false" />
+          <Property Name="MinLatitude" Type="Double" Nullable="false" />
+          <Property Name="MinLongitude" Type="Double" Nullable="false" />
+          <Property Name="ObservAlertSummaryCode" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Sites" Relationship="InfloCommon.DistrictSite" FromRole="District" ToRole="Site" />
+        </EntityType>
+        <Association Name="EDMSSAlertDistrict">
+          <End Type="InfloCommon.EDMSSAlert" Role="EDMSSAlert" Multiplicity="1" />
+          <End Type="InfloCommon.District" Role="District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EDMSSAlert">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="EDMSSAlertId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Hr06AlertSummaryCode" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Hr24AlertSummaryCode" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Hr72AlertSummaryCode" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="IsRoadCondSite" Type="Boolean" Nullable="false" />
+          <Property Name="IsWeatherObservSite" Type="Boolean" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="ObservAlertCode" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="SiteIdName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="SiteNum" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="District" Relationship="InfloCommon.DistrictSite" FromRole="Site" ToRole="District" />
+          <Property Name="DistrictId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SiteObservations" Relationship="InfloCommon.SiteSiteObservation" FromRole="Site" ToRole="SiteObservation" />
+          <Property Name="MileMarker" Type="Double" Nullable="true" />
+        </EntityType>
+        <Association Name="DistrictSite">
+          <End Type="InfloCommon.District" Role="District" Multiplicity="1" />
+          <End Type="InfloCommon.Site" Role="Site" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Site">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SiteObservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AlertCode" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Chemical" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Pavement" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Plow" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Precipitation" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="RoadTemp" Type="Double" Nullable="false" />
+          <Property Name="TreatmentAlertCode" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Visibility" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Site" Relationship="InfloCommon.SiteSiteObservation" FromRole="SiteObservation" ToRole="Site" />
+          <Property Name="SiteId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="SiteSiteObservation">
+          <End Type="InfloCommon.Site" Role="Site" Multiplicity="1" />
+          <End Type="InfloCommon.SiteObservation" Role="SiteObservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Site">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SiteObservation">
+              <PropertyRef Name="SiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InfloCommonStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Configuration_ESS">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.Configuration_ESS)">
+        <MappingFragment StoreEntitySet="Configuration_ESS">
+          <ScalarProperty Name="ESSId" ColumnName="ESSId" />
+          <ScalarProperty Name="ESSType" ColumnName="ESSType" />
+          <ScalarProperty Name="ESSOperationType" ColumnName="ESSOperationType" />
+          <ScalarProperty Name="ESSMobilityType" ColumnName="ESSMobilityType" />
+          <ScalarProperty Name="BeginMM" ColumnName="BeginMM" />
+          <ScalarProperty Name="EndMM" ColumnName="EndMM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Configuration_INFLOThresholds">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.Configuration_INFLOThresholds)">
+        <MappingFragment StoreEntitySet="Configuration_INFLOThresholds">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CVDataPollingFrequency" ColumnName="CVDataPollingFrequency" />
+          <ScalarProperty Name="TSSDataPollingFrequency" ColumnName="TSSDataPollingFrequency" />
+          <ScalarProperty Name="CVDataLoadingFrequency" ColumnName="CVDataLoadingFrequency" />
+          <ScalarProperty Name="TSSDataLoadingFrequency" ColumnName="TSSDataLoadingFrequency" />
+          <ScalarProperty Name="ESSDataPollingFrequency" ColumnName="ESSDataPollingFrequency" />
+          <ScalarProperty Name="MobileESSDataPollingFrequency" ColumnName="MobileESSDataPollingFrequency" />
+          <ScalarProperty Name="QueuedSpeedThreshold" ColumnName="QueuedSpeedThreshold" />
+          <ScalarProperty Name="CongestedSpeedThreshold" ColumnName="CongestedSpeedThreshold" />
+          <ScalarProperty Name="MinimumDisplaySpeed" ColumnName="MinimumDisplaySpeed" />
+          <ScalarProperty Name="TroupeRange" ColumnName="TroupeRange" />
+          <ScalarProperty Name="ThreeGantrySpeed" ColumnName="ThreeGantrySpeed" />
+          <ScalarProperty Name="RecurringCongestionMMLocation" ColumnName="RecurringCongestionMMLocation" />
+          <ScalarProperty Name="SublinkLength" ColumnName="SublinkLength" />
+          <ScalarProperty Name="SublinkPercentQueuedCV" ColumnName="SublinkPercentQueuedCV" />
+          <ScalarProperty Name="MaximumDisplaySpeed" ColumnName="MaximumDisplaySpeed" />
+          <ScalarProperty Name="COFLowerThreshold" ColumnName="COFLowerThreshold" />
+          <ScalarProperty Name="COFUpperThreshold" ColumnName="COFUpperThreshold" />
+          <ScalarProperty Name="RoadSurfaceStatusDryCOF" ColumnName="RoadSurfaceStatusDryCOF" />
+          <ScalarProperty Name="RoadSurfaceStatusSnowCOF" ColumnName="RoadSurfaceStatusSnowCOF" />
+          <ScalarProperty Name="RoadSurfaceStatusWetCOF" ColumnName="RoadSurfaceStatusWetCOF" />
+          <ScalarProperty Name="RoadSurfaceStatusIceCOF" ColumnName="RoadSurfaceStatusIceCOF" />
+          <ScalarProperty Name="WRTMMaxRecommendedSpeed" ColumnName="WRTMMaxRecommendedSpeed" />
+          <ScalarProperty Name="WRTMMaxRecommendedSpeedLevel1" ColumnName="WRTMMaxRecommendedSpeedLevel1" />
+          <ScalarProperty Name="WRTMMaxRecommendedSpeedLevel2" ColumnName="WRTMMaxRecommendedSpeedLevel2" />
+          <ScalarProperty Name="WRTMMaxRecommendedSpeedLevel3" ColumnName="WRTMMaxRecommendedSpeedLevel3" />
+          <ScalarProperty Name="WRTMMaxRecommendedSpeedLevel4" ColumnName="WRTMMaxRecommendedSpeedLevel4" />
+          <ScalarProperty Name="WRTMMinRecommendedSpeed" ColumnName="WRTMMinRecommendedSpeed" />
+          <ScalarProperty Name="VisibilityThreshold" ColumnName="VisibilityThreshold" />
+          <ScalarProperty Name="VisibilityStatusClear" ColumnName="VisibilityStatusClear" />
+          <ScalarProperty Name="VisibilityStatusFogNotPatchy" ColumnName="VisibilityStatusFogNotPatchy" />
+          <ScalarProperty Name="VisibilityStatusPatchyFog" ColumnName="VisibilityStatusPatchyFog" />
+          <ScalarProperty Name="VisibilityStatusBlowingSnow" ColumnName="VisibilityStatusBlowingSnow" />
+          <ScalarProperty Name="VisibilityStatusSmoke" ColumnName="VisibilityStatusSmoke" />
+          <ScalarProperty Name="VisibilityStatusSeaSpray" ColumnName="VisibilityStatusSeaSpray" />
+          <ScalarProperty Name="VisibilityStatusVehicleSpray" ColumnName="VisibilityStatusVehicleSpray" />
+          <ScalarProperty Name="VisibilityStatusBlowingDust" ColumnName="VisibilityStatusBlowingDust" />
+          <ScalarProperty Name="VisibilityStatusBlowingSand" ColumnName="VisibilityStatusBlowingSand" />
+          <ScalarProperty Name="VisibilityStatusSunGlare" ColumnName="VisibilityStatusSunGlare" />
+          <ScalarProperty Name="VisibilityStatusSwarmsOfInsects" ColumnName="VisibilityStatusSwarmsOfInsects" />
+          <ScalarProperty Name="OccupancyThreshold" ColumnName="OccupancyThreshold" />
+          <ScalarProperty Name="VolumeThreshold" ColumnName="VolumeThreshold" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Configuration_Roadway">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.Configuration_Roadway)">
+        <MappingFragment StoreEntitySet="Configuration_Roadway">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Direction" ColumnName="Direction" />
+          <ScalarProperty Name="BeginMM" ColumnName="BeginMM" />
+          <ScalarProperty Name="EndMM" ColumnName="EndMM" />
+          <ScalarProperty Name="MMIncreasingDirection" ColumnName="MMIncreasingDirection" />
+          <ScalarProperty Name="RoadwayId" ColumnName="RoadwayId" />
+          <ScalarProperty Name="Grade" ColumnName="Grade" />
+          <ScalarProperty Name="LowerHeading" ColumnName="LowerHeading" />
+          <ScalarProperty Name="UpperHeading" ColumnName="UpperHeading" />
+          <ScalarProperty Name="RecurringCongestionMMLocation" ColumnName="RecurringCongestionMMLocation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Configuration_RoadwayESS">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.Configuration_RoadwayESS)">
+        <MappingFragment StoreEntitySet="Configuration_RoadwayESS">
+          <ScalarProperty Name="RoadwayId" ColumnName="RoadwayId" />
+          <ScalarProperty Name="ESSId" ColumnName="ESSId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Configuration_RoadwayLinks">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.Configuration_RoadwayLinks)">
+        <MappingFragment StoreEntitySet="Configuration_RoadwayLinks">
+          <ScalarProperty Name="LinkId" ColumnName="LinkId" />
+          <ScalarProperty Name="BeginMM" ColumnName="BeginMM" />
+          <ScalarProperty Name="EndMM" ColumnName="EndMM" />
+          <ScalarProperty Name="RoadwayId" ColumnName="RoadwayId" />
+          <ScalarProperty Name="StartCrossStreetName" ColumnName="StartCrossStreetName" />
+          <ScalarProperty Name="EndCrossStreetName" ColumnName="EndCrossStreetName" />
+          <ScalarProperty Name="UpstreamLinkId" ColumnName="UpstreamLinkId" />
+          <ScalarProperty Name="DownstreamLinkId" ColumnName="DownstreamLinkId" />
+          <ScalarProperty Name="NumberLanes" ColumnName="NumberLanes" />
+          <ScalarProperty Name="SpeedLimit" ColumnName="SpeedLimit" />
+          <ScalarProperty Name="NumberDetectorStations" ColumnName="NumberDetectorStations" />
+          <ScalarProperty Name="DetectorStations" ColumnName="DetectorStations" />
+          <ScalarProperty Name="ESS" ColumnName="ESS" />
+          <ScalarProperty Name="VSLSignId" ColumnName="VSLSignId" />
+          <ScalarProperty Name="DMSId" ColumnName="DMSId" />
+          <ScalarProperty Name="RSEId" ColumnName="RSEId" />
+          <ScalarProperty Name="Direction" ColumnName="Direction" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Configuration_RoadwayLinksDetectorStation">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.Configuration_RoadwayLinksDetectorStation)">
+        <MappingFragment StoreEntitySet="Configuration_RoadwayLinksDetectorStation">
+          <ScalarProperty Name="LinkId" ColumnName="LinkId" />
+          <ScalarProperty Name="DSId" ColumnName="DSId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Configuration_RoadwayLinksESS">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.Configuration_RoadwayLinksESS)">
+        <MappingFragment StoreEntitySet="Configuration_RoadwayLinksESS">
+          <ScalarProperty Name="LinkId" ColumnName="LinkId" />
+          <ScalarProperty Name="ESSId" ColumnName="ESSId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Configuration_RoadwayMileMarkers">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.Configuration_RoadwayMileMarkers)">
+        <MappingFragment StoreEntitySet="Configuration_RoadwayMileMarkers">
+          <ScalarProperty Name="RoadwayId" ColumnName="RoadwayId" />
+          <ScalarProperty Name="MMNumber" ColumnName="MMNumber" />
+          <ScalarProperty Name="Latitude1" ColumnName="Latitude1" />
+          <ScalarProperty Name="Longitude1" ColumnName="Longitude1" />
+          <ScalarProperty Name="Latitude2" ColumnName="Latitude2" />
+          <ScalarProperty Name="Longitude2" ColumnName="Longitude2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Configuration_RoadwaySubLinks">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.Configuration_RoadwaySubLinks)">
+        <MappingFragment StoreEntitySet="Configuration_RoadwaySubLinks">
+          <ScalarProperty Name="RoadwayId" ColumnName="RoadwayId" />
+          <ScalarProperty Name="SubLinkId" ColumnName="SubLinkId" />
+          <ScalarProperty Name="BeginMM" ColumnName="BeginMM" />
+          <ScalarProperty Name="EndMM" ColumnName="EndMM" />
+          <ScalarProperty Name="SpeedLimit" ColumnName="SpeedLimit" />
+          <ScalarProperty Name="NumberLanes" ColumnName="NumberLanes" />
+          <ScalarProperty Name="DownstreamSubLinkId" ColumnName="DownstreamSubLinkId" />
+          <ScalarProperty Name="UpstreamSubLinkId" ColumnName="UpstreamSubLinkId" />
+          <ScalarProperty Name="VSLSignID" ColumnName="VSLSignID" />
+          <ScalarProperty Name="DMSID" ColumnName="DMSID" />
+          <ScalarProperty Name="RSEID" ColumnName="RSEID" />
+          <ScalarProperty Name="Direction" ColumnName="Direction" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Configuration_TSSDetectionZone">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.Configuration_TSSDetectionZone)">
+        <MappingFragment StoreEntitySet="Configuration_TSSDetectionZone">
+          <ScalarProperty Name="DSId" ColumnName="DSId" />
+          <ScalarProperty Name="DZId" ColumnName="DZId" />
+          <ScalarProperty Name="LaneNumber" ColumnName="LaneNumber" />
+          <ScalarProperty Name="DZType" ColumnName="DZType" />
+          <ScalarProperty Name="LaneType" ColumnName="LaneType" />
+          <ScalarProperty Name="LaneDescription" ColumnName="LaneDescription" />
+          <ScalarProperty Name="DataType" ColumnName="DataType" />
+          <ScalarProperty Name="DZStatus" ColumnName="DZStatus" />
+          <ScalarProperty Name="Direction" ColumnName="Direction" />
+          <ScalarProperty Name="RoadwayId" ColumnName="RoadwayId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Configuration_TSSDetectorStation">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.Configuration_TSSDetectorStation)">
+        <MappingFragment StoreEntitySet="Configuration_TSSDetectorStation">
+          <ScalarProperty Name="DSId" ColumnName="DSId" />
+          <ScalarProperty Name="MMLocation" ColumnName="MMLocation" />
+          <ScalarProperty Name="NumberDetectionZones" ColumnName="NumberDetectionZones" />
+          <ScalarProperty Name="LinkId" ColumnName="LinkId" />
+          <ScalarProperty Name="DSName" ColumnName="DSName" />
+          <ScalarProperty Name="NumberLanes" ColumnName="NumberLanes" />
+          <ScalarProperty Name="DetectionZones" ColumnName="DetectionZones" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Direction" ColumnName="Direction" />
+          <ScalarProperty Name="RoadwayId" ColumnName="RoadwayId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.sysdiagram)">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TME_CVData_Input">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.TME_CVData_Input)">
+        <MappingFragment StoreEntitySet="TME_CVData_Input">
+          <ScalarProperty Name="CVMessageIdentifier" ColumnName="CVMessageIdentifier" />
+          <ScalarProperty Name="NomadicDeviceID" ColumnName="NomadicDeviceID" />
+          <ScalarProperty Name="DateGenerated" ColumnName="DateGenerated" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="Heading" ColumnName="Heading" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="MMLocation" ColumnName="MMLocation" />
+          <ScalarProperty Name="CVQueuedState" ColumnName="CVQueuedState" />
+          <ScalarProperty Name="CoefficientOfFriction" ColumnName="CoefficientOfFriction" />
+          <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+          <ScalarProperty Name="RoadwayId" ColumnName="RoadwayId" />
+          <ScalarProperty Name="LateralAcceleration" ColumnName="LateralAcceleration" />
+          <ScalarProperty Name="LongitudinalAcceleration" ColumnName="LongitudinalAcceleration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TME_CVData_Input_Processed">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.TME_CVData_Input_Processed)">
+        <MappingFragment StoreEntitySet="TME_CVData_Input_Processed">
+          <ScalarProperty Name="MMLocation" ColumnName="MMLocation" />
+          <ScalarProperty Name="NomadicDeviceID" ColumnName="NomadicDeviceID" />
+          <ScalarProperty Name="DateGenerated" ColumnName="DateGenerated" />
+          <ScalarProperty Name="DateProcessed" ColumnName="DateProcessed" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="Heading" ColumnName="Heading" />
+          <ScalarProperty Name="CVQueuedState" ColumnName="CVQueuedState" />
+          <ScalarProperty Name="RoadwayID" ColumnName="RoadwayID" />
+          <ScalarProperty Name="CoefficientOfFriction" ColumnName="CoefficientOfFriction" />
+          <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+          <ScalarProperty Name="SubLinkId" ColumnName="SubLinkId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TME_CVData_SubLink">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.TME_CVData_SubLink)">
+        <MappingFragment StoreEntitySet="TME_CVData_SubLink">
+          <ScalarProperty Name="SubLinkId" ColumnName="SubLinkId" />
+          <ScalarProperty Name="DateProcessed" ColumnName="DateProcessed" />
+          <ScalarProperty Name="CVAvgSpeed" ColumnName="CVAvgSpeed" />
+          <ScalarProperty Name="NumberCVs" ColumnName="NumberCVs" />
+          <ScalarProperty Name="NumberQueuedCVs" ColumnName="NumberQueuedCVs" />
+          <ScalarProperty Name="RoadwayId" ColumnName="RoadwayId" />
+          <ScalarProperty Name="IntervalLength" ColumnName="IntervalLength" />
+          <ScalarProperty Name="TSSAvgSpeed" ColumnName="TSSAvgSpeed" />
+          <ScalarProperty Name="WRTMSpeed" ColumnName="WRTMSpeed" />
+          <ScalarProperty Name="PercentQueuedCVs" ColumnName="PercentQueuedCVs" />
+          <ScalarProperty Name="CVQueuedState" ColumnName="CVQueuedState" />
+          <ScalarProperty Name="CVCongestedState" ColumnName="CVCongestedState" />
+          <ScalarProperty Name="RecommendedTargetSpeed" ColumnName="RecommendedTargetSpeed" />
+          <ScalarProperty Name="RecommendedTargetSpeedSource" ColumnName="RecommendedTargetSpeedSource" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TME_ESSData_Input">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.TME_ESSData_Input)">
+        <MappingFragment StoreEntitySet="TME_ESSData_Input">
+          <ScalarProperty Name="ESSId" ColumnName="ESSId" />
+          <ScalarProperty Name="DateReceived" ColumnName="DateReceived" />
+          <ScalarProperty Name="ESSVisibilityDistance" ColumnName="ESSVisibilityDistance" />
+          <ScalarProperty Name="ESSVisibilityStatus" ColumnName="ESSVisibilityStatus" />
+          <ScalarProperty Name="ESSCoefficientOfFriction" ColumnName="ESSCoefficientOfFriction" />
+          <ScalarProperty Name="ESSSurfaceStatus" ColumnName="ESSSurfaceStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TME_ESSMobileData_Input">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.TME_ESSMobileData_Input)">
+        <MappingFragment StoreEntitySet="TME_ESSMobileData_Input">
+          <ScalarProperty Name="MobileESSId" ColumnName="MobileESSId" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Bearing" ColumnName="Bearing" />
+          <ScalarProperty Name="Friction" ColumnName="Friction" />
+          <ScalarProperty Name="ObservationPavement" ColumnName="ObservationPavement" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TME_TSSData_Input">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.TME_TSSData_Input)">
+        <MappingFragment StoreEntitySet="TME_TSSData_Input">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DZId" ColumnName="DZId" />
+          <ScalarProperty Name="DSId" ColumnName="DSId" />
+          <ScalarProperty Name="DateReceived" ColumnName="DateReceived" />
+          <ScalarProperty Name="StartInterval" ColumnName="StartInterval" />
+          <ScalarProperty Name="EndInterval" ColumnName="EndInterval" />
+          <ScalarProperty Name="IntervalLength" ColumnName="IntervalLength" />
+          <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="Volume" ColumnName="Volume" />
+          <ScalarProperty Name="Occupancy" ColumnName="Occupancy" />
+          <ScalarProperty Name="AvgSpeed" ColumnName="AvgSpeed" />
+          <ScalarProperty Name="Queued" ColumnName="Queued" />
+          <ScalarProperty Name="Congested" ColumnName="Congested" />
+          <ScalarProperty Name="DZStatus" ColumnName="DZStatus" />
+          <ScalarProperty Name="DataType" ColumnName="DataType" />
+          <ScalarProperty Name="RoadwayId" ColumnName="RoadwayId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TME_TSSESS_Link">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.TME_TSSESS_Link)">
+        <MappingFragment StoreEntitySet="TME_TSSESS_Link">
+          <ScalarProperty Name="LinkId" ColumnName="LinkId" />
+          <ScalarProperty Name="DateProcessed" ColumnName="DateProcessed" />
+          <ScalarProperty Name="TSSSpeed" ColumnName="TSSSpeed" />
+          <ScalarProperty Name="TSSVolume" ColumnName="TSSVolume" />
+          <ScalarProperty Name="RoadwayId" ColumnName="RoadwayId" />
+          <ScalarProperty Name="IntervalLength" ColumnName="IntervalLength" />
+          <ScalarProperty Name="ESSSpeed" ColumnName="ESSSpeed" />
+          <ScalarProperty Name="TSSOccupancy" ColumnName="TSSOccupancy" />
+          <ScalarProperty Name="Congested" ColumnName="Congested" />
+          <ScalarProperty Name="Queued" ColumnName="Queued" />
+          <ScalarProperty Name="RecommendedSpeed" ColumnName="RecommendedSpeed" />
+          <ScalarProperty Name="RecommendedSpeedSource" ColumnName="RecommendedSpeedSource" />
+          <ScalarProperty Name="CurrentDMSMessage" ColumnName="CurrentDMSMessage" />
+          <ScalarProperty Name="CurrentVSLSignSpeed" ColumnName="CurrentVSLSignSpeed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TMEOutput_QWARN_QueueInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.TMEOutput_QWARN_QueueInfo)">
+        <MappingFragment StoreEntitySet="TMEOutput_QWARN_QueueInfo">
+          <ScalarProperty Name="DateGenerated" ColumnName="DateGenerated" />
+          <ScalarProperty Name="BOQ_MMLocation" ColumnName="BOQ_MMLocation" />
+          <ScalarProperty Name="BOQ_LinkId" ColumnName="BOQ_LinkId" />
+          <ScalarProperty Name="FOQ_MMLocation" ColumnName="FOQ_MMLocation" />
+          <ScalarProperty Name="FOQ_LinkId" ColumnName="FOQ_LinkId" />
+          <ScalarProperty Name="RateOfQueueGrowth" ColumnName="RateOfQueueGrowth" />
+          <ScalarProperty Name="SPeed_In_Queue" ColumnName="SPeed_In_Queue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TMEOutput_QWARNMessage_CV">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.TMEOutput_QWARNMessage_CV)">
+        <MappingFragment StoreEntitySet="TMEOutput_QWARNMessage_CV">
+          <ScalarProperty Name="DateGenerated" ColumnName="DateGenerated" />
+          <ScalarProperty Name="BOQMMLocation" ColumnName="BOQMMLocation" />
+          <ScalarProperty Name="FOQMMLocation" ColumnName="FOQMMLocation" />
+          <ScalarProperty Name="RoadwayID" ColumnName="RoadwayID" />
+          <ScalarProperty Name="SpeedInQueue" ColumnName="SpeedInQueue" />
+          <ScalarProperty Name="RateOfQueueGrowth" ColumnName="RateOfQueueGrowth" />
+          <ScalarProperty Name="ValidityDuration" ColumnName="ValidityDuration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TMEOutput_ShockWaveInformation">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.TMEOutput_ShockWaveInformation)">
+        <MappingFragment StoreEntitySet="TMEOutput_ShockWaveInformation">
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="RoadwayIdentifier" ColumnName="RoadwayIdentifier" />
+          <ScalarProperty Name="MileMarkerLocation" ColumnName="MileMarkerLocation" />
+          <ScalarProperty Name="SchockwaveSpeed" ColumnName="SchockwaveSpeed" />
+          <ScalarProperty Name="SchockwaveDirection" ColumnName="SchockwaveDirection" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TMEOutput_SPDHARMMessage_CV">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.TMEOutput_SPDHARMMessage_CV)">
+        <MappingFragment StoreEntitySet="TMEOutput_SPDHARMMessage_CV">
+          <ScalarProperty Name="DateGenerated" ColumnName="DateGenerated" />
+          <ScalarProperty Name="RecommendedSpeed" ColumnName="RecommendedSpeed" />
+          <ScalarProperty Name="BeginMM" ColumnName="BeginMM" />
+          <ScalarProperty Name="Justification" ColumnName="Justification" />
+          <ScalarProperty Name="RoadwayId" ColumnName="RoadwayId" />
+          <ScalarProperty Name="EndMM" ColumnName="EndMM" />
+          <ScalarProperty Name="ValidityDuration" ColumnName="ValidityDuration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TMEOutput_SPDHARMMessage_Infrastructure">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.TMEOutput_SPDHARMMessage_Infrastructure)">
+        <MappingFragment StoreEntitySet="TMEOutput_SPDHARMMessage_Infrastructure">
+          <ScalarProperty Name="DateGenerated" ColumnName="DateGenerated" />
+          <ScalarProperty Name="RecommendedSpeed" ColumnName="RecommendedSpeed" />
+          <ScalarProperty Name="VSLId" ColumnName="VSLId" />
+          <ScalarProperty Name="Justification" ColumnName="Justification" />
+          <ScalarProperty Name="LinkId" ColumnName="LinkId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TMEOutput_WRTM_Alerts">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.TMEOutput_WRTM_Alerts)">
+        <MappingFragment StoreEntitySet="TMEOutput_WRTM_Alerts">
+          <ScalarProperty Name="DateGenerated" ColumnName="DateGenerated" />
+          <ScalarProperty Name="WeatherAlert" ColumnName="WeatherAlert" />
+          <ScalarProperty Name="Justification" ColumnName="Justification" />
+          <ScalarProperty Name="RoadwayId" ColumnName="RoadwayId" />
+          <ScalarProperty Name="BeginMM" ColumnName="BeginMM" />
+          <ScalarProperty Name="EndMM" ColumnName="EndMM" />
+          <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoadWeatherProbeInputs">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.RoadWeatherProbeInputs)">
+        <MappingFragment StoreEntitySet="RoadWeatherProbeInputs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NomadicDeviceId" ColumnName="NomadicDeviceId" />
+          <ScalarProperty Name="DateGenerated" ColumnName="DateGenerated" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="AirTemperature" ColumnName="AirTemperature" />
+          <ScalarProperty Name="AtmosphericPressure" ColumnName="AtmosphericPressure" />
+          <ScalarProperty Name="HeadlightStatus" ColumnName="HeadlightStatus" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="SteeringWheelAngle" ColumnName="SteeringWheelAngle" />
+          <ScalarProperty Name="WiperStatus" ColumnName="WiperStatus" />
+          <ScalarProperty Name="RightFrontWheelSpeed" ColumnName="RightFrontWheelSpeed" />
+          <ScalarProperty Name="LeftFrontWheelSpeed" ColumnName="LeftFrontWheelSpeed" />
+          <ScalarProperty Name="LeftRearWheelSpeed" ColumnName="LeftRearWheelSpeed" />
+          <ScalarProperty Name="RightRearWheelSpeed" ColumnName="RightRearWheelSpeed" />
+          <ScalarProperty Name="GpsHeading" ColumnName="GpsHeading" />
+          <ScalarProperty Name="GpsLatitude" ColumnName="GpsLatitude" />
+          <ScalarProperty Name="GpsLongitude" ColumnName="GpsLongitude" />
+          <ScalarProperty Name="GpsElevation" ColumnName="GpsElevation" />
+          <ScalarProperty Name="GpsSpeed" ColumnName="GpsSpeed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MAWOutputs">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.MAWOutput)">
+        <MappingFragment StoreEntitySet="MAWOutputs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AlertRequestTime" ColumnName="AlertRequestTime" />
+          <ScalarProperty Name="AlertTime" ColumnName="AlertTime" />
+          <ScalarProperty Name="AlertGenTime" ColumnName="AlertGenTime" />
+          <ScalarProperty Name="PrecipitationCode" ColumnName="PrecipitationCode" />
+          <ScalarProperty Name="PavementCode" ColumnName="PavementCode" />
+          <ScalarProperty Name="VisibilityCode" ColumnName="VisibilityCode" />
+          <ScalarProperty Name="ActionCode" ColumnName="ActionCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WeatherEvents">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.WeatherEvent)">
+        <MappingFragment StoreEntitySet="WeatherEvents">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EDMSSAlerts">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.EDMSSAlert)">
+        <MappingFragment StoreEntitySet="EDMSSAlerts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Districts">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.District)">
+        <MappingFragment StoreEntitySet="Districts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EDMSSAlertId" ColumnName="EDMSSAlertId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Hr06AlertSummaryCode" ColumnName="Hr06AlertSummaryCode" />
+          <ScalarProperty Name="Hr24AlertSummaryCode" ColumnName="Hr24AlertSummaryCode" />
+          <ScalarProperty Name="Hr72AlertSummaryCode" ColumnName="Hr72AlertSummaryCode" />
+          <ScalarProperty Name="MaxLatitude" ColumnName="MaxLatitude" />
+          <ScalarProperty Name="MaxLongitude" ColumnName="MaxLongitude" />
+          <ScalarProperty Name="MinLatitude" ColumnName="MinLatitude" />
+          <ScalarProperty Name="MinLongitude" ColumnName="MinLongitude" />
+          <ScalarProperty Name="ObservAlertSummaryCode" ColumnName="ObservAlertSummaryCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sites">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.Site)">
+        <MappingFragment StoreEntitySet="Sites">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Hr06AlertSummaryCode" ColumnName="Hr06AlertSummaryCode" />
+          <ScalarProperty Name="Hr24AlertSummaryCode" ColumnName="Hr24AlertSummaryCode" />
+          <ScalarProperty Name="Hr72AlertSummaryCode" ColumnName="Hr72AlertSummaryCode" />
+          <ScalarProperty Name="IsRoadCondSite" ColumnName="IsRoadCondSite" />
+          <ScalarProperty Name="IsWeatherObservSite" ColumnName="IsWeatherObservSite" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="ObservAlertCode" ColumnName="ObservAlertCode" />
+          <ScalarProperty Name="SiteIdName" ColumnName="SiteIdName" />
+          <ScalarProperty Name="SiteNum" ColumnName="SiteNum" />
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+          <ScalarProperty Name="MileMarker" ColumnName="MileMarker" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SiteObservations">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.SiteObservation)">
+        <MappingFragment StoreEntitySet="SiteObservations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="AlertCode" ColumnName="AlertCode" />
+          <ScalarProperty Name="Chemical" ColumnName="Chemical" />
+          <ScalarProperty Name="Pavement" ColumnName="Pavement" />
+          <ScalarProperty Name="Plow" ColumnName="Plow" />
+          <ScalarProperty Name="Precipitation" ColumnName="Precipitation" />
+          <ScalarProperty Name="RoadTemp" ColumnName="RoadTemp" />
+          <ScalarProperty Name="TreatmentAlertCode" ColumnName="TreatmentAlertCode" />
+          <ScalarProperty Name="Visibility" ColumnName="Visibility" />
+          <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

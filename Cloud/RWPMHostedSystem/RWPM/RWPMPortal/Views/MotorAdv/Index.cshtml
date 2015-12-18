@@ -1,0 +1,251 @@
+﻿@using RWPMPortal.Common
+@{
+    ViewBag.Title = "Motorist Advisories";
+}
+
+<h2>Motorist Advisories</h2>
+
+@if (User.IsInRole(UIConstants.ROLE_BATTELLE_STR) || User.IsInRole(UIConstants.ROLE_MOTORADV_ADMIN_STR))
+{
+    @Html.ActionLink("Motorist Advisory Administration", "Admin", "MotorAdv")<br /><br />
+}
+<i>Displays all active Motorist Alerts; MAW, SPD-HARM, Q-WARN.</i>
+@Html.Hidden("selectedRoadwayId")
+@Html.Hidden("selectedBeginMM")
+@Html.Hidden("selectedEndMM")
+<div id="container">
+    <div id="sidebar">
+        <div id="settings-box">
+            <form>
+                <input type="checkbox" id="traffic" checked="checked" /><label> Show Traffic</label><br>
+                <img src="~/Content/googlemapslegend.png" /><br />
+                <img src="~/Content/dkred.png" /><input type="checkbox" id="queue" checked="checked" /><label> Show Queues</label><br>
+                <img src="~/Content/dkpurple.png" /><input type="checkbox" id="speedharm" checked="checked" /><label> Show Speed Harm</label><br>
+                @if (User.IsInRole(UIConstants.ROLE_BATTELLE_STR) || User.IsInRole(UIConstants.ROLE_MOTORADV_ADMIN_STR))
+                {
+                    <img src="~/Content/car.png" /><input type="checkbox" id="vehicles" checked="checked"><label> Vehicles</label><br />;
+                }
+            </form>
+        </div>
+        <div id="sidebar-content">
+            <div id="info-box"> </div>
+            <div id="spdHarmBtnDiv">
+                @if (User.IsInRole(UIConstants.ROLE_BATTELLE_STR) || User.IsInRole(UIConstants.ROLE_MOTORADV_ADMIN_STR))
+                {
+                <button id="removeSpdHarmBtn" name="removeSpdHarmBtn" class="removeSpdHarmBtn" type="button">Remove Speed Harm Alert</button>
+                }
+
+            </div>
+            <div id="qWarnBtnDiv">
+                @if (User.IsInRole(UIConstants.ROLE_BATTELLE_STR) || User.IsInRole(UIConstants.ROLE_MOTORADV_ADMIN_STR))
+                {
+                <button id="removeQWarnBtn" name="removeQWarnBtn" class="removeQWarnBtn" type="button">Remove Queue Warning Alert</button>
+                }
+
+            </div>
+            <div id="rmvAlertErr"></div>
+        </div>
+        
+    </div>
+    <div id="map"></div>
+    <div id="cleared"></div>
+</div>
+@section scripts {
+    <script src="~/Scripts/InfloDisplay.js"></script>
+    <script type="text/javascript">
+        $("#spdHarmBtnDiv").hide();
+        $("#qWarnBtnDiv").hide();
+
+        $("#removeSpdHarmBtn").click(function () {
+            speedHarmLayer.remove(selectedEvent);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Content("~/TrafCont/PostSpdHarm")',
+                data: {
+                    roadwayId: $("#selectedRoadwayId").val(),
+                    beginMM: $("#selectedBeginMM").val(),
+                    endMM: $("#selectedEndMM").val(),
+                },
+
+                success: function (response) {
+
+                },
+                error: function () { document.getElementById('rmvAlertErr').innerHTML = 'Error removing alert'; }
+            });
+
+        });
+
+        $("#removeQWarnBtn").click(function () {
+            qwarnLayer.remove(selectedEvent);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Content("~/TrafCont/PostQWarn")',
+                data: {
+                    roadwayId: $("#selectedRoadwayId").val(),
+                    endMM: $("#selectedEndMM").val(),
+                },
+
+                success: function (response) {
+
+                },
+                error: function () { document.getElementById('rmvAlertErr').innerHTML = 'Error removing alert'; }
+            });
+
+        });
+        var map;
+        var trafficLayer;
+        var qwarnLayer;
+        var speedHarmLayer;
+        var vehiclesLayer;
+        var selectedEvent;
+
+        function initialize() {
+            timerTick();
+        }
+
+        function timerTick() {
+
+            updateMap();
+
+            var timeToWait = 30 * 1000;
+            t = setTimeout("timerTick()", timeToWait);
+        }
+
+        function updateMap() {
+            $.getJSON('http://rwpm.cloudapp.net/api/RWProbe', {}, function (data) {
+
+                vehiclesLayer.forEach(function (feature) {
+                    SetIsSelectedVehicle(data, feature);
+                    vehiclesLayer.remove(feature);
+                });
+
+
+                vehiclesLayer.addGeoJson(data);
+
+                vehiclesLayer.forEach(function (feature) {
+                    if (feature.getProperty('IsSelected') == true) {
+                        UpdateVehiclesDisplay(feature);
+                    }
+                });
+            });
+
+            $.getJSON('http://rwpm.cloudapp.net/api/QWarn', {}, function (data) {
+                qwarnLayer.forEach(function (feature) {
+                    SetIsSelected(data, feature);
+                    qwarnLayer.remove(feature);
+                });
+
+                qwarnLayer.addGeoJson(data);
+
+                qwarnLayer.forEach(function (feature) {
+                    if (feature.getProperty('IsSelected') == true) {
+                        UpdateQWarnDisplay(feature);
+                    }
+                });
+            });
+
+            $.getJSON('http://rwpm.cloudapp.net/api/SpeedHarm', {}, function (data) {
+                speedHarmLayer.forEach(function (feature) {
+                    SetIsSelected(data, feature);
+                    speedHarmLayer.remove(feature);
+                });
+
+
+                speedHarmLayer.addGeoJson(data);
+
+                speedHarmLayer.forEach(function (feature) {
+                    if (feature.getProperty('IsSelected') == true) {
+                        UpdateSpeedHarmDisplay(feature);
+                    }
+                });
+            });
+
+
+            
+
+        }
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10,
+                center: { lat: 44.9778, lng: -93.2650 }
+            });
+
+            map.addListener("click", function (event) {
+                ClearInfloDisplay();
+                ClearVehiclesDisplay();
+            });
+
+            qwarnLayer = GetQwarnLayer(map);
+
+            speedHarmLayer = GetSpeedHarmLayer(map);
+
+            vehiclesLayer = GetVehiclesLayer(map);
+
+            if (document.getElementById('vehicles').checked) {
+                vehiclesLayer.setMap(map);
+            }
+
+            if (document.getElementById('queue').checked) {
+                qwarnLayer.setMap(map);
+            }
+
+            if (document.getElementById('speedharm').checked) {
+                speedHarmLayer.setMap(map);
+            }
+
+            trafficLayer = new google.maps.TrafficLayer();
+
+            if (document.getElementById('traffic').checked) {
+                trafficLayer.setMap(map);
+            }
+
+            document.getElementById('traffic').onclick = function () {
+                // access properties using this keyword
+                if (this.checked) {
+                    trafficLayer.setMap(map);
+                } else {
+                    trafficLayer.setMap(null);
+                }
+            };
+
+            document.getElementById('queue').onclick = function () {
+                // access properties using this keyword
+                if (this.checked) {
+
+                    qwarnLayer.setMap(map);
+                } else {
+                    qwarnLayer.setMap(null);
+                }
+            };
+
+            document.getElementById('speedharm').onclick = function () {
+                // access properties using this keyword
+                if (this.checked) {
+                    speedHarmLayer.setMap(map);
+                } else {
+                    speedHarmLayer.setMap(null);
+                }
+            };
+
+            document.getElementById('vehicles').onclick = function () {
+                // access properties using this keyword
+                if (this.checked) {
+                    vehiclesLayer.setMap(map);
+                } else {
+                    vehiclesLayer.setMap(null);
+                }
+            };
+
+            initialize();
+
+        }
+
+
+    </script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgKZPY8rUUAHloF82uJCDLF7jRnKAU_lM&callback=initMap">
+    </script>
+
+}

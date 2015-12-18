@@ -1,0 +1,156 @@
+﻿@using RWPMPortal.Common
+@{
+    ViewBag.Title = "Weather Event Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<i>Displays summary information for weather event for each site. </i>
+
+<h3>Weather Event: @ViewBag.Message</h3>
+<div id="container">
+    <div id="sidebar">
+        <div id='loadingmessage' style='display:none'>
+            <img src='~/Content/ajax-loader.gif' />
+        </div>
+        <div id="info-box"> </div>
+
+    </div>
+    <div id="canvasloader-container" class="wrapper"></div>
+    <div id="map"></div>
+    <div id="cleared"></div>
+</div>
+<a href="https://mapicons.mapsmarker.com/"><img src="~/Content/miclogo-88x31.gif" /></a>
+@section scripts {
+    <script src="~/Scripts/PikAlertDisplay.js"></script>
+    <script type="text/javascript">
+
+        var map;
+        var trafficLayer;
+
+        function initMap() {
+
+            //Center map on Minneapolis
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10,
+                center: { lat: 44.9778, lng: -93.2650 }
+            });
+
+
+           
+
+            var siteLayer = GetBasicSitesLocLayer(map);
+
+            map.addListener("click", function (event) {
+                siteLayer.forEach(function (feature) {
+                    feature.setProperty('IsSelected', false);
+                });
+            });
+
+        }
+
+        function GetBasicSitesLocLayer(map) {
+            var siteLayer = new google.maps.Data();
+
+            siteLayer.loadGeoJson('http://rwpm.cloudapp.net/api/PikAlertEMDSS/Get?weatherEventId=' + @ViewBag.Id);
+
+            
+            siteLayer.setStyle(function (feature) {
+                //Start off with Dark Red to catch any other conditions we may not have coded up.
+                var pavmentIcon = '../../Content/anemometer_mono.png';
+                var lineColor = 'black';
+
+                if (feature.getProperty('IsSelected') == true)
+                {
+                    var newIcon = {
+                        url: pavmentIcon,
+                        scaledSize: new google.maps.Size(43, 50)
+                        
+                    };
+
+                    lineColor = 'yellow';
+                    pavmentIcon = newIcon;
+                }
+
+                return {
+                    icon: pavmentIcon,
+                    strokeColor: lineColor,
+                    strokeWeight: 4
+                };
+            });
+
+
+            siteLayer.addListener('click', function (event) {
+
+                var id=event.feature.getProperty('siteId');
+                $('#loadingmessage').show();
+
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Content("~/WeatherEvents/Get")',
+                    data: {
+                        weatherEventId: @ViewBag.Id,
+                        siteId: id
+                    },
+                    success: function (response) {
+
+                        siteLayer.forEach(function (feature) {
+                            feature.setProperty('IsSelected', false);
+                        });
+
+                        event.feature.setProperty('IsSelected', true);
+
+                        $('#loadingmessage').hide();
+
+                        var cont = "<h3>Site Summary for Weather Event</h3><h5>";
+                        cont = cont.concat(response.SiteDescription);
+                        cont = cont.concat("</h5><ul><li><strong>Road Temperature:</strong> ");
+                        cont = cont.concat(response.RoadTemperature+ "&deg;");
+                        cont = cont.concat("</li><li><strong>Pavement Observations by conditions:</strong> ");
+                        cont = cont.concat("<ul>");
+                        cont = cont.concat("<li>Ice: " + response.PavementPcntIce+ "%</li>");
+                        cont = cont.concat("<li>Snow: " + response.PavementPcntSnow+ "%</li>");
+                        cont = cont.concat("<li>Wet: " + response.PavementPcntWet+ "%</li>");
+                        cont = cont.concat("<li>Clear: " + response.PavementPcntClear+ "%</li>");
+                        cont = cont.concat("</ul>");
+                        cont = cont.concat("</li><li><strong>Precipitation Observations by conditions:</strong> ");
+                        cont = cont.concat("<ul>");
+                        cont = cont.concat("<li>Ice: " + response.PrecipPcntIce+ "%</li>");
+                        cont = cont.concat("<li>Snow: " + response.PrecipPcntSnow+ "%</li>");
+                        cont = cont.concat("<li>Wet: " + response.PrecipPcntWet+ "%</li>");
+                        cont = cont.concat("<li>Clear: " + response.PrecipPcntClear+ "%</li>");
+                        cont = cont.concat("</ul>");
+                        cont = cont.concat("</li><li><strong>Average Speed Heading South:</strong> ");
+                        cont = cont.concat(response.AvgSpeedSouth + " mph");
+                        cont = cont.concat("</li><li><strong>Average Speed Heading North:</strong> ");
+                        cont = cont.concat(response.AvgSpeedNorth+ " mph");
+                        cont = cont.concat("</li></ul>");
+
+                        document.getElementById('info-box').innerHTML = cont;
+                    },
+                    error:function(xhr,err){
+                        $('#loadingmessage').hide();
+
+                        var err = 'Error retrieving data. Please retry. If condition persists, please contact your administrator.\n\n';
+                        err = err +"readyState: "+xhr.readyState+"\nstatus: "+xhr.status+"\n\nresponseText: "+xhr.responseText;
+
+                        document.getElementById('info-box').innerHTML = err;
+                        //  alert(err);
+                    }
+                });
+
+
+            });
+
+
+            siteLayer.setMap(map);
+
+            return siteLayer;
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgKZPY8rUUAHloF82uJCDLF7jRnKAU_lM&callback=initMap">
+    </script>
+
+
+}

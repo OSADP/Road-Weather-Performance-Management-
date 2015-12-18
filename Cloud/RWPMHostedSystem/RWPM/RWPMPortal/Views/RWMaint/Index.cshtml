@@ -1,0 +1,171 @@
+﻿@using RWPMPortal.Common
+@model IList<InfloCommon.WeatherEvent>
+@{
+    ViewBag.Title = "Road Weather Maintenance";
+}
+
+<h2>Road Weather Maintenance</h2>
+
+@if (User.IsInRole(UIConstants.ROLE_BATTELLE_STR) || User.IsInRole(UIConstants.ROLE_RWMAINT_ADMIN_STR))
+{
+    @Html.ActionLink("Road Weather Maintenance Administration", "Admin", "RWMaint")<br /><br />
+}
+
+<div id="container">
+    <div id="sidebar">
+        <div id="settings-box">
+            <form>
+                @*<img src="~/Content/car.png" />*@<input type="checkbox" id="traffic" checked="checked">Show Traffic<br />
+                <img src="~/Content/googlemapslegend.png" /><br />
+                @*<img src="~/Content/sunny.png" />*@<input type="checkbox" id="observations" checked="checked">Show Observations<br>
+                <img src="~/Content/sunny.png" />Dry <img src="~/Content/rainy.png" />Wet <img src="~/Content/snowy.png" />Snowy <img src="~/Content/icyroad.png" />Icy<br />
+                @*<img src="~/Content/plowtruck.png" />*@<input type="checkbox" id="treatments" checked="checked">Show Treatments<br>
+                <img src="~/Content/plowtruck.png" />Plow <img src="~/Content/salttruck.png" />Chemical<br />
+            </form>
+        </div>
+        <div id="sidebar-content">
+            <div id="info-box"> </div>
+        </div>
+    </div>
+    <div id="canvasloader-container" class="wrapper"></div>
+    <div id="map"></div>
+    <div id="cleared"></div>
+</div>
+<a href="https://mapicons.mapsmarker.com/"><img src="~/Content/miclogo-88x31.gif" /></a>
+@section scripts {
+    <script src="~/Scripts/PikAlertDisplay.js"></script>
+<script src="~/Scripts/InfloDisplay.js"></script>
+    <script type="text/javascript">
+        var map;
+        var trafficLayer;
+        var siteLayer;
+        var treatmentLayer;
+
+
+        function initialize() {
+            timerTick();
+        }
+
+        function timerTick() {
+
+            updateMap();
+
+            var timeToWait = 30 * 1000;
+            t = setTimeout("timerTick()", timeToWait);
+        }
+
+        function updateMap() {
+
+            var siteurlDataJson = 'http://rwpm.cloudapp.net/api/PikAlertEMDSS';
+
+           
+            $.getJSON(siteurlDataJson, {}, function (data) {
+
+
+                siteLayer.forEach(function (feature) {
+                    SetIsSelected(data, feature);
+                    siteLayer.remove(feature);
+                });
+
+                siteLayer.addGeoJson(data);
+
+                siteLayer.forEach(function (feature) {
+                    if (feature.getProperty('IsSelected') == true) {
+                        UpdateSiteObservationDetailDisplay(feature);
+                    }
+                });
+            });
+
+            var treatmenturlDataJson = 'http://rwpm.cloudapp.net/api/PikAlertEMDSS';
+            $.getJSON(treatmenturlDataJson, { returnPlowOtherThanNone: true, returnChemicalOtherThanNone: true }, function (data) {
+                treatmentLayer.forEach(function (feature) {
+                    SetIsSelected(data, feature);
+                    treatmentLayer.remove(feature);
+                });
+
+                treatmentLayer.addGeoJson(data);
+
+                treatmentLayer.forEach(function (feature) {
+                    if (feature.getProperty('IsSelected') == true) {
+                        UpdateTreatmentDetailDisplay(feature);
+                    }
+                });
+            });
+
+        }
+
+        function initMap() {
+
+            //Center map on Minneapolis
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10,
+                center: { lat: 44.9778, lng: -93.2650 }
+            });
+
+            map.addListener("click", function (event) {
+                ClearSelected();
+            });
+
+            siteLayer = GetSitesLayer(map);
+
+            treatmentLayer = GetTreatmentsLayer(map);
+
+            trafficLayer = new google.maps.TrafficLayer();
+
+            document.getElementById('traffic').onclick = function () {
+                // access properties using this keyword
+                if (this.checked) {
+                    if (trafficLayer != null)
+                        trafficLayer.setMap(map);
+                } else {
+                    if (trafficLayer != null)
+                        trafficLayer.setMap(null);
+                }
+            };
+
+            document.getElementById('observations').onclick = function () {
+                // access properties using this keyword
+                if (this.checked) {
+                    if (siteLayer != null)
+                        siteLayer.setMap(map);
+                } else {
+                    if (siteLayer != null)
+                        siteLayer.setMap(null);
+                }
+            };
+
+            document.getElementById('treatments').onclick = function () {
+                // access properties using this keyword
+                if (this.checked) {
+                    if (treatmentLayer != null)
+                        treatmentLayer.setMap(map);
+                } else {
+                    if (treatmentLayer != null)
+                        treatmentLayer.setMap(null);
+                }
+            };
+
+            
+
+            if (document.getElementById('traffic').checked) {
+                trafficLayer.setMap(map);
+            }
+
+            if (document.getElementById('treatments').checked) {
+                treatmentLayer.setMap(map);
+            }
+
+            if (document.getElementById('observations').checked) {
+                siteLayer.setMap(map);
+            }
+
+            initialize();
+        }
+
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgKZPY8rUUAHloF82uJCDLF7jRnKAU_lM&callback=initMap">
+    </script>
+
+
+}

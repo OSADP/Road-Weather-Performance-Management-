@@ -1,0 +1,73 @@
+﻿@model IList<InfloCommon.WeatherEvent>
+@{
+    ViewBag.Title = "Weather Events";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+<h3>Recent Events</h3>
+<ul>
+    @foreach (var m in Model)
+    {
+        <li>
+            @{
+
+        var EndTime = " Currently In Progress ";
+            }
+            @m.Name [@m.StartTime.ToLocalTime()  -
+            @if (@m.EndTime != null)
+            {
+                DateTime t = (DateTime)m.EndTime;
+                EndTime = t.ToLocalTime().ToString();
+                
+                @Html.Raw(EndTime);
+            }
+            else
+            { 
+                @Html.ActionLink(
+          linkText: "End this event",
+    actionName: "EndEvent",
+    controllerName: "WeatherEvents",
+    routeValues: new {
+        id = m.Id
+    },
+    htmlAttributes: null    
+        );
+            }
+            ]  
+@Html.ActionLink(
+          linkText: "View Details",
+    actionName: "Details",
+    controllerName: "WeatherEvents",
+     routeValues: new
+     {
+         id = m.Id
+     },
+    htmlAttributes: null
+        )
+        </li>
+    }
+</ul>
+<br /><br />
+@using (Html.BeginForm("Create", "WeatherEvents"))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Start new Weather Event</legend>
+
+        <div class="editor-label">
+            Name for weather event:
+        </div>
+        <div class="editor-field">
+            <input id="EventName" name="EventName" type="text" />
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+

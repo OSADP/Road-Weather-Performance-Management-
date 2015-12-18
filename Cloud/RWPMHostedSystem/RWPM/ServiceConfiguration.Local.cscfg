@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="RWPM" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2015-04.2.6">
+  <Role name="DataProcessorWorkerRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="StorageAccountConnectionString" value="DefaultEndpointsProtocol=http;AccountName=inflostorage;AccountKey=m3F1+Kg0N5UiaRZG8Sr6GysssCna/IxQDRXu1MuY7CbPbsuTPA54pgJu75eBd7CXQM6dg7O/5E7g/LhvthApIQ==" />
+      <Setting name="InfloDatabaseConnectionString" value="metadata=res://*/InfloDb.csdl|res://*/InfloDb.ssdl|res://*/InfloDb.msl;provider=System.Data.SqlClient;provider connection string='data source=hguz1d8jjq.database.windows.net,1433;initial catalog=inflo;user id=inflo;password=B@ttelle;MultipleActiveResultSets=True;App=EntityFramework'" />
+      <Setting name="RunCVProcessor" value="true" />
+      <Setting name="RunTSSProcessor" value="true" />
+      <Setting name="CVProcessorSleepTimeSec" value="5" />
+      <Setting name="TSSProcessorSleepTimeSec" value="30" />
+      <Setting name="INFLOConfigFile" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;INFLOConfig&gt;&lt;DBInterface&gt;sqlserver&lt;/DBInterface&gt;&lt;DBConnection&gt;&lt;AccessDBFileName&gt;C:\Users\Public\Documents\INFLO\Data\INFLODatabase.accdb&lt;/AccessDBFileName&gt;&lt;DSNName&gt;&lt;/DSNName&gt;&lt;SqlServer&gt;hguz1d8jjq.database.windows.net,1433&lt;/SqlServer&gt;&lt;SqlServerDatabase&gt;inflo&lt;/SqlServerDatabase&gt;&lt;SqlServerUserId&gt;inflo&lt;/SqlServerUserId&gt;&lt;SqlServerPassword&gt;B@ttelle&lt;/SqlServerPassword&gt;&lt;SqlServerConnection&gt;Server=hguz1d8jjq.database.windows.net,1433; Database=inflo; Integrated Security=false; Connect Timeout=30; User id=inflo;Password=B@ttelle&lt;/SqlServerConnection&gt;&lt;/DBConnection&gt;&lt;ConfigurationFiles&gt;&lt;RoadwayLinkConfigFile&gt;I5-NB\INFLO_SeattleDeployment_I5_NB_RoadwayLinks.csv&lt;/RoadwayLinkConfigFile&gt;&lt;RoadwayDetectionStationConfigFile&gt;I5-NB\INFLO_SeattleDeployment_I5_NB_DetectorStations.csv&lt;/RoadwayDetectionStationConfigFile&gt;&lt;RoadwayDetectionZoneConfigFile&gt;I5-NB\INFLO_SeattleDeployment_I5_NB_DetectionZones.csv&lt;/RoadwayDetectionZoneConfigFile&gt;&lt;RoadwayDetectionZoneCombinedConfigFile&gt;INFLO_SeattleDeployment_DetectionZoneCombinedConfigFile.CSV&lt;/RoadwayDetectionZoneCombinedConfigFile&gt;&lt;MileMarkerConfigFile&gt;I5-NB\MileMarkerConfiguration-I5North.csv&lt;/MileMarkerConfigFile&gt;&lt;CVDataDirectory&gt;D:\Projects\RWPM\LegacyCode\TTI\Data\CVDataFiles\&lt;/CVDataDirectory&gt;&lt;TSSDataDirectory&gt;D:\Projects\RWPM\LegacyCode\TTI\Data\TSSDataFiles\&lt;/TSSDataDirectory&gt;&lt;/ConfigurationFiles&gt;&lt;RoadwayInfo&gt;&lt;RoadwayName&gt;I35W_N&lt;/RoadwayName&gt;&lt;RoadwayID&gt;I35W_N&lt;/RoadwayID&gt;&lt;BeginMM&gt;0&lt;/BeginMM&gt;&lt;EndMM&gt;41.4&lt;/EndMM&gt;&lt;MMIncreasingDir&gt;North&lt;/MMIncreasingDir&gt;&lt;Direction&gt;NB&lt;/Direction&gt;&lt;RecurringCongestionMMLocation&gt;41.4&lt;/RecurringCongestionMMLocation&gt;&lt;/RoadwayInfo&gt;&lt;MinimumDisplaySpeed&gt;20&lt;/MinimumDisplaySpeed&gt;&lt;TroupeRange&gt;5&lt;/TroupeRange&gt;&lt;ThreeGantrySpeed&gt;15&lt;/ThreeGantrySpeed&gt;&lt;CVDataStartingInterval&gt;2660&lt;/CVDataStartingInterval&gt;&lt;CVDataLoadingFrequencySecs&gt;1&lt;/CVDataLoadingFrequencySecs&gt;&lt;TSSDataStartingInterval&gt;2660&lt;/TSSDataStartingInterval&gt;&lt;TSSDataLoadingFrequencySecs&gt;30&lt;/TSSDataLoadingFrequencySecs&gt;&lt;CVDataPollingFrequencySecs&gt;5&lt;/CVDataPollingFrequencySecs&gt;&lt;TSSDataPollingFrequencySecs&gt;30&lt;/TSSDataPollingFrequencySecs&gt;&lt;ESSDataPollingFrequencyMins&gt;5&lt;/ESSDataPollingFrequencyMins&gt;&lt;MobileESSDataPollingFrequencyMins&gt;15&lt;/MobileESSDataPollingFrequencyMins&gt;&lt;QueueSpeedThreshold&gt;20&lt;/QueueSpeedThreshold&gt;&lt;CongestionSpeedThreshold&gt;40&lt;/CongestionSpeedThreshold&gt;&lt;SubLinkPercentQueuedCV&gt;10&lt;/SubLinkPercentQueuedCV&gt;&lt;SubLinkLength&gt;0.1&lt;/SubLinkLength&gt;&lt;MaximumDisplaySpeed&gt;55.0&lt;/MaximumDisplaySpeed&gt;&lt;COFLowerThreshold&gt;0.3&lt;/COFLowerThreshold&gt;&lt;COFUpperThreshold&gt;0.7&lt;/COFUpperThreshold&gt;&lt;RoadSurfaceStatusDryCOF&gt;0.9&lt;/RoadSurfaceStatusDryCOF&gt;&lt;RoadSurfaceStatusSnowCOF&gt;0.2&lt;/RoadSurfaceStatusSnowCOF&gt;&lt;RoadSurfaceStatusWetCOF&gt;0.5&lt;/RoadSurfaceStatusWetCOF&gt;&lt;RoadSurfaceStatusIceCOF&gt;0.1&lt;/RoadSurfaceStatusIceCOF&gt;&lt;WRTMMaxRecommendedSpeed&gt;55&lt;/WRTMMaxRecommendedSpeed&gt;&lt;WRTMMaxRecommendedSpeedLevel1&gt;45&lt;/WRTMMaxRecommendedSpeedLevel1&gt;&lt;WRTMMaxRecommendedSpeedLevel2&gt;20&lt;/WRTMMaxRecommendedSpeedLevel2&gt;&lt;WRTMMaxRecommendedSpeedLevel3&gt;40&lt;/WRTMMaxRecommendedSpeedLevel3&gt;&lt;WRTMMaxRecommendedSpeedLevel4&gt;30&lt;/WRTMMaxRecommendedSpeedLevel4&gt;&lt;WRTMMinRecommendedSpeed&gt;20&lt;/WRTMMinRecommendedSpeed&gt;&lt;VisibilityThreshold&gt;4200&lt;/VisibilityThreshold&gt;&lt;VisibilityThreshold&gt;4200&lt;/VisibilityThreshold&gt;&lt;VisibilityStatusClear&gt;5700&lt;/VisibilityStatusClear&gt;&lt;VisibilityStatusFogNotPatchy&gt;3900&lt;/VisibilityStatusFogNotPatchy&gt;&lt;VisibilityStatusPatchyFog&gt;3400&lt;/VisibilityStatusPatchyFog&gt;&lt;VisibilityStatusBlowingSnow&gt;3100&lt;/VisibilityStatusBlowingSnow&gt;&lt;VisibilityStatusSmoke&gt;2700&lt;/VisibilityStatusSmoke&gt;&lt;VisibilityStatusSeaSpray&gt;3200&lt;/VisibilityStatusSeaSpray&gt;&lt;VisibilityStatusVehicleSpray&gt;3300&lt;/VisibilityStatusVehicleSpray&gt;&lt;VisibilityStatusBlowingDust&gt;2800&lt;/VisibilityStatusBlowingDust&gt;&lt;VisibilityStatusBlowingSand&gt;2600&lt;/VisibilityStatusBlowingSand&gt;&lt;VisibilityStatusSunGlare&gt;2900&lt;/VisibilityStatusSunGlare&gt;&lt;VisibilityStatusSwarmsOfInsects&gt;3000&lt;/VisibilityStatusSwarmsOfInsects&gt;&lt;OccupancyThreshold&gt;8&lt;/OccupancyThreshold&gt;&lt;VolumeThreshold&gt;10&lt;/VolumeThreshold&gt;&lt;/INFLOConfig&gt;" />
+      <Setting name="LoggerLevel" value="Debug" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="zinkg@battelle.org" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEDvvPFrMIOa/QKOQCrx8+4UwDQYJKoZIhvcNAQEBBQAEggEACAWe68sVtgSPhbOXnfoeHEM8eBcNyVAa+OWPxPPzYp7fg908Ff2S4E/IR2haTapKkwj+wKa5YzHFhHmSsEl896uI5wHWwIozNbD3g4VSt14eu1MfITRYzDAtUA2Gzl4kRd0i/xrJr1efRw6gxfJ9d4c7Id20MkQdRjvMyRb3ljQRt0Nvd4D24duuhVPNsHR4HeXumhNHRzih5Mo1G6q5pRm5RA2dzBdJe5p6spyc3QAkjdejDMPw9tKmAe75AS1qjw2F8IB1ef4C9+aidv5QAFnqI5vA5qpyfsZBl1yB7mgGseH2eAcjwESyfcgBwSrxNBgA1zZgBlMp8Z1P8azEyzAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECDZa0I5J9pYOgBD3yjlhL+HmoICIch3SyzIA" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2016-09-03T23:59:59.0000000-04:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="8F11A274335D449653D96AC5CBEDEC930141F285" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+  <Role name="BsmWorkerRole">
+    <Instances count="3" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=inflostorage;AccountKey=m3F1+Kg0N5UiaRZG8Sr6GysssCna/IxQDRXu1MuY7CbPbsuTPA54pgJu75eBd7CXQM6dg7O/5E7g/LhvthApIQ==" />
+      <Setting name="StorageAccountConnectionString" value="DefaultEndpointsProtocol=http;AccountName=inflostorage;AccountKey=m3F1+Kg0N5UiaRZG8Sr6GysssCna/IxQDRXu1MuY7CbPbsuTPA54pgJu75eBd7CXQM6dg7O/5E7g/LhvthApIQ==" />
+      <Setting name="InfloDatabaseConnectionString" value="metadata=res://*/InfloDb.csdl|res://*/InfloDb.ssdl|res://*/InfloDb.msl;provider=System.Data.SqlClient;provider connection string='data source=hguz1d8jjq.database.windows.net,1433;initial catalog=inflo;user id=inflo;password=B@ttelle;MultipleActiveResultSets=True;App=EntityFramework'" />
+      <Setting name="Stats_LogStatisticalData" value="true" />
+      <Setting name="Stats_MinimalLoggedElapsedTime" value="0" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="zinkg@battelle.org" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEDvvPFrMIOa/QKOQCrx8+4UwDQYJKoZIhvcNAQEBBQAEggEACAWe68sVtgSPhbOXnfoeHEM8eBcNyVAa+OWPxPPzYp7fg908Ff2S4E/IR2haTapKkwj+wKa5YzHFhHmSsEl896uI5wHWwIozNbD3g4VSt14eu1MfITRYzDAtUA2Gzl4kRd0i/xrJr1efRw6gxfJ9d4c7Id20MkQdRjvMyRb3ljQRt0Nvd4D24duuhVPNsHR4HeXumhNHRzih5Mo1G6q5pRm5RA2dzBdJe5p6spyc3QAkjdejDMPw9tKmAe75AS1qjw2F8IB1ef4C9+aidv5QAFnqI5vA5qpyfsZBl1yB7mgGseH2eAcjwESyfcgBwSrxNBgA1zZgBlMp8Z1P8azEyzAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECDZa0I5J9pYOgBD3yjlhL+HmoICIch3SyzIA" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2016-09-03T23:59:59.0000000-04:00" />
+      <Setting name="OsmMapModelDbConnectionString" value="data source=hguz1d8jjq.database.windows.net;initial catalog=osm_map;user id=inflo;password=B@ttelle;MultipleActiveResultSets=True;App=EntityFramework" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="8F11A274335D449653D96AC5CBEDEC930141F285" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+  <Role name="InfloWebRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=inflostorage;AccountKey=m3F1+Kg0N5UiaRZG8Sr6GysssCna/IxQDRXu1MuY7CbPbsuTPA54pgJu75eBd7CXQM6dg7O/5E7g/LhvthApIQ==" />
+      <Setting name="StorageAccountConnectionString" value="DefaultEndpointsProtocol=http;AccountName=inflostorage;AccountKey=m3F1+Kg0N5UiaRZG8Sr6GysssCna/IxQDRXu1MuY7CbPbsuTPA54pgJu75eBd7CXQM6dg7O/5E7g/LhvthApIQ==" />
+      <Setting name="InfloDatabaseConnectionString" value="metadata=res://*/InfloDb.csdl|res://*/InfloDb.ssdl|res://*/InfloDb.msl;provider=System.Data.SqlClient;provider connection string='data source=hguz1d8jjq.database.windows.net,1433;initial catalog=inflo;user id=inflo;password=B@ttelle;MultipleActiveResultSets=True;App=EntityFramework'" />
+      <Setting name="AlertSearchDistance" value="0.1" />
+      <Setting name="QWarnAlertDistance" value="1.0" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="zinkg@battelle.org" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEDvvPFrMIOa/QKOQCrx8+4UwDQYJKoZIhvcNAQEBBQAEggEACAWe68sVtgSPhbOXnfoeHEM8eBcNyVAa+OWPxPPzYp7fg908Ff2S4E/IR2haTapKkwj+wKa5YzHFhHmSsEl896uI5wHWwIozNbD3g4VSt14eu1MfITRYzDAtUA2Gzl4kRd0i/xrJr1efRw6gxfJ9d4c7Id20MkQdRjvMyRb3ljQRt0Nvd4D24duuhVPNsHR4HeXumhNHRzih5Mo1G6q5pRm5RA2dzBdJe5p6spyc3QAkjdejDMPw9tKmAe75AS1qjw2F8IB1ef4C9+aidv5QAFnqI5vA5qpyfsZBl1yB7mgGseH2eAcjwESyfcgBwSrxNBgA1zZgBlMp8Z1P8azEyzAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECDZa0I5J9pYOgBD3yjlhL+HmoICIch3SyzIA" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2016-09-03T23:59:59.0000000-04:00" />
+      <Setting name="OsmMapModelDbConnectionString" value="data source=hguz1d8jjq.database.windows.net;initial catalog=osm_map;user id=inflo;password=B@ttelle;MultipleActiveResultSets=True;App=EntityFramework" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="8F11A274335D449653D96AC5CBEDEC930141F285" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+  <Role name="PikalertDataWorkerRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="zinkg@battelle.org" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEDvvPFrMIOa/QKOQCrx8+4UwDQYJKoZIhvcNAQEBBQAEggEACAWe68sVtgSPhbOXnfoeHEM8eBcNyVAa+OWPxPPzYp7fg908Ff2S4E/IR2haTapKkwj+wKa5YzHFhHmSsEl896uI5wHWwIozNbD3g4VSt14eu1MfITRYzDAtUA2Gzl4kRd0i/xrJr1efRw6gxfJ9d4c7Id20MkQdRjvMyRb3ljQRt0Nvd4D24duuhVPNsHR4HeXumhNHRzih5Mo1G6q5pRm5RA2dzBdJe5p6spyc3QAkjdejDMPw9tKmAe75AS1qjw2F8IB1ef4C9+aidv5QAFnqI5vA5qpyfsZBl1yB7mgGseH2eAcjwESyfcgBwSrxNBgA1zZgBlMp8Z1P8azEyzAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECDZa0I5J9pYOgBD3yjlhL+HmoICIch3SyzIA" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2016-09-03T23:59:59.0000000-04:00" />
+      <Setting name="InfloDatabaseConnectionString" value="metadata=res://*/InfloDb.csdl|res://*/InfloDb.ssdl|res://*/InfloDb.msl;provider=System.Data.SqlClient;provider connection string='data source=hguz1d8jjq.database.windows.net,1433;initial catalog=inflo;user id=inflo;password=B@ttelle;MultipleActiveResultSets=True;App=EntityFramework'" />
+      <Setting name="OsmMapModelDbConnectionString" value="data source=hguz1d8jjq.database.windows.net;initial catalog=osm_map;user id=inflo;password=B@ttelle;MultipleActiveResultSets=True;App=EntityFramework" />
+      <Setting name="RunPikAlertProcessor" value="true" />
+      <Setting name="RunDetectorDataProcessor" value="true" />
+      <Setting name="PikAlertSleepTimeSec" value="300" />
+      <Setting name="DetectorDataSleepTimeSec" value="30" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="8F11A274335D449653D96AC5CBEDEC930141F285" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

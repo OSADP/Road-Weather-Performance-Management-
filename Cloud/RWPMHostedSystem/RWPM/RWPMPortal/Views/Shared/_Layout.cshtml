@@ -1,0 +1,84 @@
+﻿@using RWPMPortal.Common
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script type="text/javascript">
+        var appInsights = window.appInsights || function (config) {
+            function r(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, u = document, e = window, o = "script", s = u.createElement(o), i, f; for (s.src = config.url || "//az416426.vo.msecnd.net/scripts/a/ai.0.js", u.getElementsByTagName(o)[0].parentNode.appendChild(s), t.cookie = u.cookie, t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace"]; i.length;) r("track" + i.pop()); return r("setAuthenticatedUserContext"), r("clearAuthenticatedUserContext"), config.disableExceptionTracking || (i = "onerror", r("_" + i), f = e[i], e[i] = function (config, r, u, e, o) { var s = f && f(config, r, u, e, o); return s !== !0 && t["_" + i](config, r, u, e, o), s }), t
+        }({
+            instrumentationKey: "64981f58-8f8d-4bca-9fed-890070a21cda"
+        });
+
+        window.appInsights = appInsights;
+        appInsights.trackPageView();
+
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("RWPM Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (User.IsInRole(UIConstants.ROLE_BATTELLE_STR) || User.IsInRole(UIConstants.ROLE_RWMAINT_ADMIN_STR) || User.IsInRole(UIConstants.ROLE_RWMAINT_ELEVATED_STR) || User.IsInRole(UIConstants.ROLE_RWMAINT_READONLY_STR))
+                    {
+                        <li>@Html.ActionLink("RW Maintenance", "Index", "RWMaint")</li>
+                    }
+                    @if (User.IsInRole(UIConstants.ROLE_BATTELLE_STR) || User.IsInRole(UIConstants.ROLE_MOTORADV_ADMIN_STR) || User.IsInRole(UIConstants.ROLE_MOTORADV_ELEVATED_STR) || User.IsInRole(UIConstants.ROLE_MOTORADV_READONLY_STR))
+                    {
+                        <li>@Html.ActionLink("Motorist Advisories", "Index", "MotorAdv")</li>
+                    }
+                    @if (User.IsInRole(UIConstants.ROLE_BATTELLE_STR) || User.IsInRole(UIConstants.ROLE_TRAFCONT_ADMIN_STR) || User.IsInRole(UIConstants.ROLE_TRAFCONT_ELEVATED_STR) || User.IsInRole(UIConstants.ROLE_TRAFCONT_READONLY_STR))
+                    {
+                        <li>
+                            @Html.ActionLink("Traffic Control", "Index", "TrafCont")
+                        </li>
+                    }
+                    @if (User.IsInRole(UIConstants.ROLE_BATTELLE_STR))
+                    {
+                        <li>@Html.ActionLink("User Management", "CreateUsers", "BattelleAccount")</li>
+                    }
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+        
+        <div id="weatherEvent"> </div>
+    </div>
+    @if(ViewBag.InACurrentWeatherEvent==true)
+    {
+    <div id="banner">
+        <div id="banner-content">
+            A weather event is currently in progress
+        </div>
+    </div>
+    }
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Battelle</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
