@@ -17,10 +17,11 @@
     <div id="sidebar">
         <div id="settings-box">
             <form>
-                <input type="checkbox" id="traffic" checked="checked" /><label> Show Traffic</label><br>
+                <input type="checkbox" id="traffic" checked="checked" /><label> Show Google Traffic</label><br>
                 <img src="~/Content/googlemapslegend.png" /><br />
                 <img src="~/Content/dkred.png" /><input type="checkbox" id="queue" checked="checked" /><label> Show Queues</label><br>
-                <img src="~/Content/dkpurple.png" /><input type="checkbox" id="speedharm" checked="checked" /><label> Show Speed Harm</label><br>
+                <img src="~/Content/dkpurple.png" /><input type="checkbox" id="speedharm" checked="checked" /><label> Show Speed Harms</label><br>
+                <img src="~/Content/blue.png" /><input type="checkbox" id="mawalert" checked="checked" /><label> Show MAW Alerts</label><br>
                 @if (User.IsInRole(UIConstants.ROLE_BATTELLE_STR) || User.IsInRole(UIConstants.ROLE_MOTORADV_ADMIN_STR))
                 {
                     <img src="~/Content/car.png" /><input type="checkbox" id="vehicles" checked="checked"><label> Vehicles</label><br />;
@@ -32,14 +33,14 @@
             <div id="spdHarmBtnDiv">
                 @if (User.IsInRole(UIConstants.ROLE_BATTELLE_STR) || User.IsInRole(UIConstants.ROLE_MOTORADV_ADMIN_STR))
                 {
-                <button id="removeSpdHarmBtn" name="removeSpdHarmBtn" class="removeSpdHarmBtn" type="button">Remove Speed Harm Alert</button>
+                //<button id="removeSpdHarmBtn" name="removeSpdHarmBtn" class="removeSpdHarmBtn" type="button" >Remove Speed Harm Alert</button>
                 }
 
             </div>
             <div id="qWarnBtnDiv">
                 @if (User.IsInRole(UIConstants.ROLE_BATTELLE_STR) || User.IsInRole(UIConstants.ROLE_MOTORADV_ADMIN_STR))
                 {
-                <button id="removeQWarnBtn" name="removeQWarnBtn" class="removeQWarnBtn" type="button">Remove Queue Warning Alert</button>
+                //<button id="removeQWarnBtn" name="removeQWarnBtn" class="removeQWarnBtn" type="button">Remove Queue Warning Alert</button>
                 }
 
             </div>
@@ -98,6 +99,7 @@
         var speedHarmLayer;
         var vehiclesLayer;
         var selectedEvent;
+        var mawLayer;
 
         function initialize() {
             timerTick();
@@ -129,9 +131,19 @@
                 });
             });
 
+            $.getJSON('http://rwpm.cloudapp.net/api/MAW', {}, function (data) {
+                
+                mawLayer.forEach(function (feature) {
+                    mawLayer.remove(feature);
+                });
+
+                mawLayer.addGeoJson(data);
+
+            });
+
             $.getJSON('http://rwpm.cloudapp.net/api/QWarn', {}, function (data) {
                 qwarnLayer.forEach(function (feature) {
-                    SetIsSelected(data, feature);
+                    SetIsSelectedQueue(data, feature);
                     qwarnLayer.remove(feature);
                 });
 
@@ -146,7 +158,7 @@
 
             $.getJSON('http://rwpm.cloudapp.net/api/SpeedHarm', {}, function (data) {
                 speedHarmLayer.forEach(function (feature) {
-                    SetIsSelected(data, feature);
+                    SetIsSelectedSpeedHarm(data, feature);
                     speedHarmLayer.remove(feature);
                 });
 
@@ -171,19 +183,32 @@
                 center: { lat: 44.9778, lng: -93.2650 }
             });
 
+
             map.addListener("click", function (event) {
                 ClearInfloDisplay();
                 ClearVehiclesDisplay();
+                ClearMawDisplay();
             });
+
+            mawLayer = GetMawLayer(map);
 
             qwarnLayer = GetQwarnLayer(map);
 
             speedHarmLayer = GetSpeedHarmLayer(map);
 
+            
             vehiclesLayer = GetVehiclesLayer(map);
+            var isAllowedToSeeVehicles = false;
 
-            if (document.getElementById('vehicles').checked) {
-                vehiclesLayer.setMap(map);
+
+            if (document.getElementById('vehicles') != null) {
+                if (document.getElementById('vehicles').checked) {
+                    vehiclesLayer.setMap(map);
+                }
+            }
+
+            if (document.getElementById('mawalert').checked) {
+                mawLayer.setMap(map);
             }
 
             if (document.getElementById('queue').checked) {
@@ -198,6 +223,15 @@
 
             if (document.getElementById('traffic').checked) {
                 trafficLayer.setMap(map);
+            }
+
+            document.getElementById('mawalert').onclick = function () {
+                if (this.checked) {
+                    mawLayer.setMap(map);
+                }
+                else {
+                    mawLayer.setMap(null);
+                }
             }
 
             document.getElementById('traffic').onclick = function () {
@@ -228,14 +262,16 @@
                 }
             };
 
-            document.getElementById('vehicles').onclick = function () {
-                // access properties using this keyword
-                if (this.checked) {
-                    vehiclesLayer.setMap(map);
-                } else {
-                    vehiclesLayer.setMap(null);
-                }
-            };
+            if (document.getElementById('vehicles') != null) {
+                document.getElementById('vehicles').onclick = function () {
+                    // access properties using this keyword
+                    if (this.checked) {
+                        vehiclesLayer.setMap(map);
+                    } else {
+                        vehiclesLayer.setMap(null);
+                    }
+                };
+            }
 
             initialize();
 

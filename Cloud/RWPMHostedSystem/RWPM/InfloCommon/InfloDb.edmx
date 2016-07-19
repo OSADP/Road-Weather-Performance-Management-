@@ -38,6 +38,7 @@
     <EntitySet Name="Districts" EntityType="InfloCommon.Store.Districts" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Sites" EntityType="InfloCommon.Store.Sites" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SiteObservations" EntityType="InfloCommon.Store.SiteObservations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WeatherLogs" EntityType="InfloCommon.Store.WeatherLogs" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="EDMSSAlertDistrict" Association="InfloCommon.Store.EDMSSAlertDistrict">
       <End Role="EDMSSAlert" EntitySet="EDMSSAlerts" />
       <End Role="District" EntitySet="Districts" />
@@ -49,6 +50,10 @@
     <AssociationSet Name="SiteSiteObservation" Association="InfloCommon.Store.SiteSiteObservation">
       <End Role="Site" EntitySet="Sites" />
       <End Role="SiteObservation" EntitySet="SiteObservations" />
+    </AssociationSet>
+    <AssociationSet Name="SiteMAWOutput" Association="InfloCommon.Store.SiteMAWOutput">
+      <End Role="Site" EntitySet="Sites" />
+      <End Role="MAWOutput" EntitySet="MAWOutputs" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Configuration_ESS">
@@ -511,6 +516,7 @@
     <Property Name="PavementCode" Type="int" Nullable="false" />
     <Property Name="VisibilityCode" Type="int" Nullable="false" />
     <Property Name="ActionCode" Type="int" Nullable="false" />
+    <Property Name="SiteId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="WeatherEvents">
     <Key>
@@ -579,6 +585,33 @@
     <Property Name="TreatmentAlertCode" Type="nvarchar" Nullable="false" MaxLength="100" />
     <Property Name="Visibility" Type="nvarchar" Nullable="false" MaxLength="100" />
     <Property Name="SiteId" Type="int" Nullable="false" />
+    <Property Name="PaveValClear" Type="smallint" Nullable="false" DefaultValue="0" />
+    <Property Name="PaveValWet" Type="smallint" Nullable="false" DefaultValue="0" />
+    <Property Name="PaveValSnow" Type="smallint" Nullable="false" DefaultValue="0" />
+    <Property Name="PaveValIce" Type="smallint" Nullable="false" DefaultValue="0" />
+    <Property Name="PrecipValClear" Type="smallint" Nullable="false" DefaultValue="0" />
+    <Property Name="PrecipValWet" Type="smallint" Nullable="false" DefaultValue="0" />
+    <Property Name="PrecipValSnow" Type="smallint" Nullable="false" DefaultValue="0" />
+    <Property Name="PrecipValIce" Type="smallint" Nullable="false" DefaultValue="0" />
+  </EntityType>
+  <EntityType Name="WeatherLogs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaveCntClear" Type="smallint" Nullable="false" />
+    <Property Name="PaveCntWet" Type="smallint" Nullable="false" />
+    <Property Name="PaveCntSnow" Type="smallint" Nullable="false" />
+    <Property Name="PaveCntIce" Type="smallint" Nullable="false" />
+    <Property Name="PrecipCntClear" Type="smallint" Nullable="false" />
+    <Property Name="PrecipCntWet" Type="smallint" Nullable="false" />
+    <Property Name="PrecipCntSnow" Type="smallint" Nullable="false" />
+    <Property Name="PrecipCntIce" Type="smallint" Nullable="false" />
+    <Property Name="TotalReportedSites" Type="smallint" Nullable="false" />
+    <Property Name="Time" Type="datetime" Nullable="false" />
+    <Property Name="RoadTempAvg" Type="float" Nullable="false" />
+    <Property Name="Message" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="WeatherEventId" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="EDMSSAlertDistrict">
     <End Role="EDMSSAlert" Type="InfloCommon.Store.EDMSSAlerts" Multiplicity="1" />
@@ -612,6 +645,18 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="SiteObservation">
+        <PropertyRef Name="SiteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SiteMAWOutput">
+    <End Role="Site" Type="InfloCommon.Store.Sites" Multiplicity="1" />
+    <End Role="MAWOutput" Type="InfloCommon.Store.MAWOutputs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Site">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MAWOutput">
         <PropertyRef Name="SiteId" />
       </Dependent>
     </ReferentialConstraint>
@@ -1089,6 +1134,11 @@
             <End Role="Site" EntitySet="Sites" />
             <End Role="SiteObservation" EntitySet="SiteObservations" />
           </AssociationSet>
+          <EntitySet Name="WeatherLogs" EntityType="InfloCommon.WeatherLog" />
+          <AssociationSet Name="SiteMAWOutput" Association="InfloCommon.SiteMAWOutput">
+            <End Role="Site" EntitySet="Sites" />
+            <End Role="MAWOutput" EntitySet="MAWOutputs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="RoadWeatherProbeInputs">
           <Key>
@@ -1122,10 +1172,12 @@
           <Property Name="AlertRequestTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="AlertTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="AlertGenTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="PrecipitationCode" Type="InfloCommon.PrecipitationCode" Nullable="false" />
-          <Property Name="PavementCode" Type="InfloCommon.PavementCode" Nullable="false" />
-          <Property Name="VisibilityCode" Type="InfloCommon.VisibilityCode" Nullable="false" />
-          <Property Name="ActionCode" Type="InfloCommon.ActionCode" Nullable="false" />
+          <Property Name="PrecipitationCode" Type="Int32" Nullable="false" />
+          <Property Name="PavementCode" Type="Int32" Nullable="false" />
+          <Property Name="VisibilityCode" Type="Int32" Nullable="false" />
+          <Property Name="ActionCode" Type="Int32" Nullable="false" />
+          <Property Name="SiteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Site" Relationship="InfloCommon.SiteMAWOutput" FromRole="MAWOutput" ToRole="Site" />
         </EntityType>
         <EnumType Name="PrecipitationCode">
           <Member Name="Clear" Value="0" />
@@ -1234,6 +1286,7 @@
           <Property Name="DistrictId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SiteObservations" Relationship="InfloCommon.SiteSiteObservation" FromRole="Site" ToRole="SiteObservation" />
           <Property Name="MileMarker" Type="Double" Nullable="true" />
+          <NavigationProperty Name="MAWOutputs" Relationship="InfloCommon.SiteMAWOutput" FromRole="Site" ToRole="MAWOutput" />
         </EntityType>
         <Association Name="DistrictSite">
           <End Type="InfloCommon.District" Role="District" Multiplicity="1" />
@@ -1263,6 +1316,14 @@
           <Property Name="Visibility" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Site" Relationship="InfloCommon.SiteSiteObservation" FromRole="SiteObservation" ToRole="Site" />
           <Property Name="SiteId" Type="Int32" Nullable="false" />
+          <Property Name="PaveValClear" Type="Int16" Nullable="false" DefaultValue="0" />
+          <Property Name="PaveValWet" Type="Int16" Nullable="false" DefaultValue="0" />
+          <Property Name="PaveValSnow" Type="Int16" Nullable="false" DefaultValue="0" />
+          <Property Name="PaveValIce" Type="Int16" Nullable="false" DefaultValue="0" />
+          <Property Name="PrecipValClear" Type="Int16" Nullable="false" DefaultValue="0" />
+          <Property Name="PrecipValWet" Type="Int16" Nullable="false" DefaultValue="0" />
+          <Property Name="PrecipValSnow" Type="Int16" Nullable="false" DefaultValue="0" />
+          <Property Name="PrecipValIce" Type="Int16" Nullable="false" DefaultValue="0" />
         </EntityType>
         <Association Name="SiteSiteObservation">
           <End Type="InfloCommon.Site" Role="Site" Multiplicity="1" />
@@ -1272,6 +1333,37 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="SiteObservation">
+              <PropertyRef Name="SiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="WeatherLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaveCntClear" Type="Int16" Nullable="false" />
+          <Property Name="PaveCntWet" Type="Int16" Nullable="false" />
+          <Property Name="PaveCntSnow" Type="Int16" Nullable="false" />
+          <Property Name="PaveCntIce" Type="Int16" Nullable="false" />
+          <Property Name="PrecipCntClear" Type="Int16" Nullable="false" />
+          <Property Name="PrecipCntWet" Type="Int16" Nullable="false" />
+          <Property Name="PrecipCntSnow" Type="Int16" Nullable="false" />
+          <Property Name="PrecipCntIce" Type="Int16" Nullable="false" />
+          <Property Name="TotalReportedSites" Type="Int16" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" />
+          <Property Name="RoadTempAvg" Type="Double" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" FixedLength="false" MaxLength="100" />
+          <Property Name="WeatherEventId" Type="Int32" Nullable="true" />
+        </EntityType>
+        <Association Name="SiteMAWOutput">
+          <End Type="InfloCommon.Site" Role="Site" Multiplicity="1" />
+          <End Type="InfloCommon.MAWOutput" Role="MAWOutput" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Site">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MAWOutput">
               <PropertyRef Name="SiteId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1714,6 +1806,7 @@
           <ScalarProperty Name="PavementCode" ColumnName="PavementCode" />
           <ScalarProperty Name="VisibilityCode" ColumnName="VisibilityCode" />
           <ScalarProperty Name="ActionCode" ColumnName="ActionCode" />
+          <ScalarProperty Name="SiteId" ColumnName="SiteId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1787,6 +1880,34 @@
           <ScalarProperty Name="TreatmentAlertCode" ColumnName="TreatmentAlertCode" />
           <ScalarProperty Name="Visibility" ColumnName="Visibility" />
           <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+          <ScalarProperty Name="PaveValClear" ColumnName="PaveValClear" />
+          <ScalarProperty Name="PaveValWet" ColumnName="PaveValWet" />
+          <ScalarProperty Name="PaveValSnow" ColumnName="PaveValSnow" />
+          <ScalarProperty Name="PaveValIce" ColumnName="PaveValIce" />
+          <ScalarProperty Name="PrecipValClear" ColumnName="PrecipValClear" />
+          <ScalarProperty Name="PrecipValWet" ColumnName="PrecipValWet" />
+          <ScalarProperty Name="PrecipValSnow" ColumnName="PrecipValSnow" />
+          <ScalarProperty Name="PrecipValIce" ColumnName="PrecipValIce" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WeatherLogs">
+      <EntityTypeMapping TypeName="IsTypeOf(InfloCommon.WeatherLog)">
+        <MappingFragment StoreEntitySet="WeatherLogs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PaveCntClear" ColumnName="PaveCntClear" />
+          <ScalarProperty Name="PaveCntWet" ColumnName="PaveCntWet" />
+          <ScalarProperty Name="PaveCntSnow" ColumnName="PaveCntSnow" />
+          <ScalarProperty Name="PaveCntIce" ColumnName="PaveCntIce" />
+          <ScalarProperty Name="PrecipCntClear" ColumnName="PrecipCntClear" />
+          <ScalarProperty Name="PrecipCntWet" ColumnName="PrecipCntWet" />
+          <ScalarProperty Name="PrecipCntSnow" ColumnName="PrecipCntSnow" />
+          <ScalarProperty Name="PrecipCntIce" ColumnName="PrecipCntIce" />
+          <ScalarProperty Name="TotalReportedSites" ColumnName="TotalReportedSites" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="RoadTempAvg" ColumnName="RoadTempAvg" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="WeatherEventId" ColumnName="WeatherEventId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

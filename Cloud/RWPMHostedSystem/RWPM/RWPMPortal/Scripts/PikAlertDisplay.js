@@ -174,23 +174,30 @@ function GetTreatmentsLayer(map)
 
 function UpdateTreatmentDetailDisplay(feature)
 {
-    var cont = "<h3>Treatment Recommendation</h3> ";
+    var cont = "<h3>Site Treatment</h3> ";
 
     cont = cont.concat("<ul>");
-    cont = cont.concat("<li><strong>Chemical</strong>: ");
-    cont = cont.concat(event.feature.getProperty('Chemical'));
+    cont = cont.concat("<li><strong>Description</strong>: ");
+    cont = cont.concat(feature.getProperty('Description'));
     cont = cont.concat("</li>");
-    cont = cont.concat("<li><strong>Pavement</strong>: ");
-    cont = cont.concat(event.feature.getProperty('Pavement'));
+    cont = cont.concat("<li><strong>Observation Time UTC</strong>: ");
+    cont = cont.concat(feature.getProperty('Observation Time'));
+    cont = cont.concat("</li>");
+    cont = cont.concat("<li><strong>Observation Time</strong>: ");
+    cont = cont.concat(LocalizeTime(feature.getProperty('Observation Time')));
+    cont = cont.concat("</li>");
+    cont = cont.concat("<li><strong>Chemical</strong>: ");
+    cont = cont.concat(feature.getProperty('Chemical'));
     cont = cont.concat("</li>");
     cont = cont.concat("<li><strong>Plow</strong>: ");
-    cont = cont.concat(event.feature.getProperty('Plow'));
+    cont = cont.concat(feature.getProperty('Plow'));
     cont = cont.concat("</li>");
     cont = cont.concat("<li><strong>Road Temp</strong>: ");
-    cont = cont.concat(event.feature.getProperty('RoadTemp'));
+    cont = cont.concat(feature.getProperty('RoadTemp'));
     cont = cont.concat("</li>");
     cont = cont.concat("<li><strong>Treatment Alert Code</strong>: ");
-    cont = cont.concat(event.feature.getProperty('TreatmentAlertCode'));
+    cont = cont.concat(feature.getProperty('TreatmentAlertCode'));
+    cont = cont.concat("</li>");
     cont = cont.concat("</ul>");
 
     document.getElementById('info-box').innerHTML = cont;

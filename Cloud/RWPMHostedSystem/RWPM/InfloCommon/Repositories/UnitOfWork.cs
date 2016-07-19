@@ -22,8 +22,6 @@ namespace InfloCommon.Repositories
         {
         }
 
-
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             
@@ -62,7 +60,9 @@ namespace InfloCommon.Repositories
         public virtual DbSet<Site> Sites { get; set; }
         public virtual DbSet<SiteObservation> SiteObservations { get; set; }
         public virtual DbSet<WeatherEvent> WeatherEvents { get; set; }
+        public virtual DbSet<WeatherLog> WeatherLogs { get; set; }
 
+        public virtual DbSet<MAWOutput> MAWOutputs { get; set; }
         public int Commit()
         {
             return this.SaveChanges();

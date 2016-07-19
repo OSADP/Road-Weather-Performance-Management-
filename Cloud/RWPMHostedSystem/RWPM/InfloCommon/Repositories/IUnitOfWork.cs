@@ -36,13 +36,14 @@ namespace InfloCommon.Repositories
         DbSet<TMEOutput_SPDHARMMessage_CV> TMEOutput_SPDHARMMessage_CVs { get; set; }
         DbSet<TMEOutput_SPDHARMMessage_Infrastructure> TMEOutput_SPDHARMMessage_Infrastructures { get; set; }
         DbSet<TMEOutput_WRTM_Alerts> TMEOutput_WRTM_Alerts { get; set; }
-
+        DbSet<MAWOutput> MAWOutputs { get; set; }
         DbSet<RoadWeatherProbeInputs> RoadWeatherProbeInputs { get; set; }
         DbSet<EDMSSAlert> EDMSSAlerts { get; set; }
         DbSet<District> Districts { get; set; }
         DbSet<Site> Sites { get; set; }
         DbSet<SiteObservation> SiteObservations { get; set; }
         DbSet<WeatherEvent> WeatherEvents { get; set; }
+        DbSet<WeatherLog> WeatherLogs { get; set; }
 
       //  IRepository<Configuration_ESS> Configuration_ESSs { get; }
 

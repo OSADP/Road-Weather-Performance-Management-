@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/23/2015 09:21:58
--- Generated from EDMX file: D:\Projects\RWPM\SourceCode\Cloud\trunk\RWPMHostedSystem\RWPM\InfloCommon\InfloDb.edmx
+-- Date Created: 05/09/2016 12:22:12
+-- Generated from EDMX file: D:\Projects\RW-PM\Cloud\trunk\RWPMHostedSystem\RWPM\InfloCommon\InfloDb.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -25,6 +25,9 @@ IF OBJECT_ID(N'[dbo].[FK_DistrictSite]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_SiteSiteObservation]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[SiteObservations] DROP CONSTRAINT [FK_SiteSiteObservation];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SiteMAWOutput]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MAWOutputs] DROP CONSTRAINT [FK_SiteMAWOutput];
 GO
 
 -- --------------------------------------------------
@@ -126,6 +129,9 @@ IF OBJECT_ID(N'[dbo].[Sites]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[SiteObservations]', 'U') IS NOT NULL
     DROP TABLE [dbo].[SiteObservations];
+GO
+IF OBJECT_ID(N'[dbo].[WeatherLogs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[WeatherLogs];
 GO
 
 -- --------------------------------------------------
@@ -536,7 +542,8 @@ CREATE TABLE [dbo].[MAWOutputs] (
     [PrecipitationCode] int  NOT NULL,
     [PavementCode] int  NOT NULL,
     [VisibilityCode] int  NOT NULL,
-    [ActionCode] int  NOT NULL
+    [ActionCode] int  NOT NULL,
+    [SiteId] int  NOT NULL
 );
 GO
 
@@ -604,7 +611,34 @@ CREATE TABLE [dbo].[SiteObservations] (
     [RoadTemp] float  NOT NULL,
     [TreatmentAlertCode] nvarchar(100)  NOT NULL,
     [Visibility] nvarchar(100)  NOT NULL,
-    [SiteId] int  NOT NULL
+    [SiteId] int  NOT NULL,
+    [PaveValClear] smallint  NOT NULL,
+    [PaveValWet] smallint  NOT NULL,
+    [PaveValSnow] smallint  NOT NULL,
+    [PaveValIce] smallint  NOT NULL,
+    [PrecipValClear] smallint  NOT NULL,
+    [PrecipValWet] smallint  NOT NULL,
+    [PrecipValSnow] smallint  NOT NULL,
+    [PrecipValIce] smallint  NOT NULL
+);
+GO
+
+-- Creating table 'WeatherLogs'
+CREATE TABLE [dbo].[WeatherLogs] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [PaveCntClear] smallint  NOT NULL,
+    [PaveCntWet] smallint  NOT NULL,
+    [PaveCntSnow] smallint  NOT NULL,
+    [PaveCntIce] smallint  NOT NULL,
+    [PrecipCntClear] smallint  NOT NULL,
+    [PrecipCntWet] smallint  NOT NULL,
+    [PrecipCntSnow] smallint  NOT NULL,
+    [PrecipCntIce] smallint  NOT NULL,
+    [TotalReportedSites] smallint  NOT NULL,
+    [Time] datetime  NOT NULL,
+    [RoadTempAvg] float  NOT NULL,
+    [Message] nvarchar(100)  NOT NULL,
+    [WeatherEventId] int  NULL
 );
 GO
 
@@ -804,6 +838,12 @@ ADD CONSTRAINT [PK_SiteObservations]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
+-- Creating primary key on [Id] in table 'WeatherLogs'
+ALTER TABLE [dbo].[WeatherLogs]
+ADD CONSTRAINT [PK_WeatherLogs]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
@@ -850,6 +890,21 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_SiteSiteObservation'
 CREATE INDEX [IX_FK_SiteSiteObservation]
 ON [dbo].[SiteObservations]
+    ([SiteId]);
+GO
+
+-- Creating foreign key on [SiteId] in table 'MAWOutputs'
+ALTER TABLE [dbo].[MAWOutputs]
+ADD CONSTRAINT [FK_SiteMAWOutput]
+    FOREIGN KEY ([SiteId])
+    REFERENCES [dbo].[Sites]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SiteMAWOutput'
+CREATE INDEX [IX_FK_SiteMAWOutput]
+ON [dbo].[MAWOutputs]
     ([SiteId]);
 GO
 

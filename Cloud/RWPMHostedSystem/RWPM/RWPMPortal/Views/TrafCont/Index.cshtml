@@ -134,7 +134,7 @@
                 urlDataJson = 'http://rwpm.cloudapp.net/api/SpeedHarm';
                 $.getJSON(urlDataJson, {}, function (data) {
                     speedHarmLayer.forEach(function (feature) {
-                        SetIsSelected(data, feature);
+                        SetIsSelectedSpeedHarm(data, feature);
                         speedHarmLayer.remove(feature);
                     });
 

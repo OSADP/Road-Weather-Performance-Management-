@@ -1,0 +1,9 @@
+﻿<Window x:Class="Utilities.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Button x:Name="process_configuration_sensor_data" Content="Process Configuration Sensor Data" HorizontalAlignment="Left" Margin="92,38,0,0" VerticalAlignment="Top" Width="225" Click="process_configuration_sensor_data_Click"/>
+
+    </Grid>
+</Window>

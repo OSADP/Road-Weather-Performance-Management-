@@ -1,10 +1,18 @@
-﻿@model IList<InfloCommon.WeatherEvent>
+﻿@model PagedList.IPagedList<InfloCommon.WeatherEvent>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Weather Events";
 }
 
 <h2>@ViewBag.Title</h2>
-
+@Html.ActionLink(
+          linkText: "View Weather Logs",
+    actionName: "Logs",
+    controllerName: "WeatherEvents",
+     routeValues: null,
+    htmlAttributes: null
+        )
 
 <h3>Recent Events</h3>
 <ul>
@@ -15,28 +23,29 @@
 
         var EndTime = " Currently In Progress ";
             }
-            @m.Name [@m.StartTime.ToLocalTime()  -
+            @m.Name [@m.StartTime.ToLocalTime().ToString("MM/dd/yy hh:mm")  -
             @if (@m.EndTime != null)
             {
                 DateTime t = (DateTime)m.EndTime;
-                EndTime = t.ToLocalTime().ToString();
-                
+                EndTime = t.ToLocalTime().ToString("MM/dd/yy hh:mm");
+
                 @Html.Raw(EndTime);
             }
             else
-            { 
+            {
                 @Html.ActionLink(
           linkText: "End this event",
     actionName: "EndEvent",
     controllerName: "WeatherEvents",
-    routeValues: new {
+    routeValues: new
+    {
         id = m.Id
     },
-    htmlAttributes: null    
+    htmlAttributes: null
         );
             }
-            ]  
-@Html.ActionLink(
+            ]
+            @Html.ActionLink(
           linkText: "View Details",
     actionName: "Details",
     controllerName: "WeatherEvents",
@@ -49,7 +58,13 @@
         </li>
     }
 </ul>
-<br /><br />
+<br />
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+<br />
 @using (Html.BeginForm("Create", "WeatherEvents"))
 {
     @Html.ValidationSummary(true)
@@ -69,5 +84,8 @@
         </p>
     </fieldset>
 }
+<br />
+
+
 
 

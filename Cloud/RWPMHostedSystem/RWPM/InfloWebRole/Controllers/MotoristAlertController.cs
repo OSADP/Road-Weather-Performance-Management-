@@ -158,45 +158,49 @@ namespace InfloWebRole.Controllers
                             }
                         }
 
-                        //Query PikAlert for alerts
-                        var client = new RestClient("http://vm-pikalert.cloudapp.net:8080");
+                        //m.Pik.AddRange(GetPikAlertMAW(latitude, longitude));
+                        //give me everything from .25 before me, and .5 miles ahead of me
+                        double topBound = 0;
+                        double bottomBound = 0;
 
-                        var request = new RestRequest("/maw_alerts_adhoc", Method.GET);
-                        request.RequestFormat = DataFormat.Json;
-
-                        request.AddParameter("lat", latitude);
-                        request.AddParameter("lon", longitude);
-                        request.AddParameter("state", "minnesota");
-
-                        IRestResponse response = client.Execute(request);
-                        response.ContentType = "application/json";
-
-                        if (response != null)
+                        if (increasingDir)
                         {
-                            String jsonRep = response.Content;
+                            topBound = mileMarker + 0.5;
+                            bottomBound = mileMarker - 0.25;
+                        }
+                        else
+                        {
+                            topBound = mileMarker + 0.25;
+                            bottomBound = mileMarker - 0.5;
+                        }
 
+                        Trace.WriteLine("Searching for sites between mile marker " + topBound.ToString() + " and " + bottomBound.ToString());
 
-                            MAWOutputModel mawOutput = Newtonsoft.Json.JsonConvert.DeserializeObject<MAWOutputModel>(jsonRep);
+                        var qSites = srInfloDbContext.Sites.Where(s => (s.MileMarker >= bottomBound) && (s.MileMarker <= topBound)).OrderBy(a => a.MileMarker).FirstOrDefault();
 
-                            if (mawOutput != null)
+                        if (qSites != null)
+                        {
+                            Trace.WriteLine("Searching for mawAlert for site " + qSites.SiteIdName + " at mile marker " + qSites.MileMarker.ToString());
+                            var mawAlert = srInfloDbContext.MAWOutputs.Where(a => a.SiteId == qSites.Id).OrderByDescending(a=>a.AlertGenTime).FirstOrDefault();
+                            if (mawAlert != null)
                             {
+                                Trace.WriteLine("Found mawAlert for site " + qSites.SiteIdName + " time " + mawAlert.AlertGenTime.ToShortTimeString() + " date " + mawAlert.AlertGenTime.ToShortDateString() + " action code " + mawAlert.ActionCode);
+                                MotoristAlertModel.PikalertMAW maw = new MotoristAlertModel.PikalertMAW();
+                                maw.AlertAction = MAWAlertCodeConverter.GetActionTextFromCode(mawAlert.ActionCode);
+                                maw.AlertActionCode = mawAlert.ActionCode;
+                                maw.AlertGenerationTime = mawAlert.AlertGenTime;
+                                maw.AlertTime = mawAlert.AlertTime;
+                                maw.DateGenerated = mawAlert.AlertRequestTime;
+                                maw.MileMarker = qSites.MileMarker.Value;
+                                maw.PavementAlert = MAWAlertCodeConverter.GetPavementAlertTextFromCode(mawAlert.PavementCode);
+                                maw.PavementAlertCode = mawAlert.PavementCode;
+                                maw.PrecipAlert = MAWAlertCodeConverter.GetPrecipitationAlertTextFromCode(mawAlert.PrecipitationCode);
+                                maw.PrecipAlertCode = mawAlert.PrecipitationCode;
+                                maw.RoadwayId = roadSegment.RoadwayID;
+                                maw.VisibilityAlert = MAWAlertCodeConverter.GetVisibilityAlertTextFromCode(mawAlert.VisibilityCode);
+                                maw.VisibilityAlertCode = mawAlert.VisibilityCode;
 
-                                MotoristAlertModel.PikalertMAW mawAlert = new MotoristAlertModel.PikalertMAW();
-                                mawAlert.AlertGenerationTime = DateTime.ParseExact(mawOutput.alert_gen_time, "yyyyMMddHHmmss", null);
-                                mawAlert.AlertTime = DateTime.ParseExact(mawOutput.alert_time, "yyyyMMddHHmmss", null);
-                                mawAlert.DateGenerated = DateTime.UtcNow;
-                                mawAlert.MileMarker = roadSegment.MileMarker;
-                                mawAlert.PavementAlert = MAWAlertCodeConverter.GetPavementAlertTextFromCode(mawOutput.alert_code_pavement);
-                                mawAlert.PavementAlertCode = mawOutput.alert_code_pavement;
-                                mawAlert.PrecipAlert = MAWAlertCodeConverter.GetPrecipitationAlertTextFromCode(mawOutput.alert_code_precip);
-                                mawAlert.PrecipAlertCode = mawOutput.alert_code_precip;
-                                mawAlert.RoadwayId = roadSegment.RoadwayID;
-                                mawAlert.VisibilityAlert = MAWAlertCodeConverter.GetVisibilityAlertTextFromCode(mawOutput.alert_code_visibility);
-                                mawAlert.VisibilityAlertCode = mawOutput.alert_code_visibility;
-                                mawAlert.AlertAction = MAWAlertCodeConverter.GetActionTextFromCode(mawOutput.alert_action_code);
-                                mawAlert.AlertActionCode = mawOutput.alert_action_code;
-
-                                m.Pik.Add(mawAlert);
+                                m.Pik.Add(maw);
                             }
                         }
 
@@ -212,12 +216,66 @@ namespace InfloWebRole.Controllers
                             ReasonPhrase = "Error MotoristAlertController"
                         };
                         throw new HttpResponseException(resp);
+
+
+
                     }
+
                     //Return data
                     return m;
 
                 }
             }
         }
+
+
+
+        private List<MotoristAlertModel.PikalertMAW> GetPikAlertMAW(double latitude, double longitude, RoadSegment roadSegment)
+        {
+            List<MotoristAlertModel.PikalertMAW> maws = new List<MotoristAlertModel.PikalertMAW>();
+            //Query PikAlert for alerts
+            var client = new RestClient("http://vm-pikalert.cloudapp.net:8080");
+
+            var request = new RestRequest("/maw_alerts_adhoc", Method.GET);
+            request.RequestFormat = DataFormat.Json;
+
+            request.AddParameter("lat", latitude);
+            request.AddParameter("lon", longitude);
+            request.AddParameter("state", "minnesota");
+
+            IRestResponse response = client.Execute(request);
+            response.ContentType = "application/json";
+
+            if (response != null)
+            {
+                String jsonRep = response.Content;
+
+
+                MAWOutputModel mawOutput = Newtonsoft.Json.JsonConvert.DeserializeObject<MAWOutputModel>(jsonRep);
+
+                if (mawOutput != null)
+                {
+
+                    MotoristAlertModel.PikalertMAW mawAlert = new MotoristAlertModel.PikalertMAW();
+                    mawAlert.AlertGenerationTime = DateTime.ParseExact(mawOutput.alert_gen_time, "yyyyMMddHHmmss", null);
+                    mawAlert.AlertTime = DateTime.ParseExact(mawOutput.alert_time, "yyyyMMddHHmmss", null);
+                    mawAlert.DateGenerated = DateTime.UtcNow;
+                    mawAlert.MileMarker = roadSegment.MileMarker;
+                    mawAlert.PavementAlert = MAWAlertCodeConverter.GetPavementAlertTextFromCode(mawOutput.alert_code_pavement);
+                    mawAlert.PavementAlertCode = mawOutput.alert_code_pavement;
+                    mawAlert.PrecipAlert = MAWAlertCodeConverter.GetPrecipitationAlertTextFromCode(mawOutput.alert_code_precip);
+                    mawAlert.PrecipAlertCode = mawOutput.alert_code_precip;
+                    mawAlert.RoadwayId = roadSegment.RoadwayID;
+                    mawAlert.VisibilityAlert = MAWAlertCodeConverter.GetVisibilityAlertTextFromCode(mawOutput.alert_code_visibility);
+                    mawAlert.VisibilityAlertCode = mawOutput.alert_code_visibility;
+                    mawAlert.AlertAction = MAWAlertCodeConverter.GetActionTextFromCode(mawOutput.alert_action_code);
+                    mawAlert.AlertActionCode = mawOutput.alert_action_code;
+                    maws.Add(mawAlert);
+                }
+            }
+
+            return maws;
+        }
+
     }
 }

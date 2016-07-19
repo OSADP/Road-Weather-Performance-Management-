@@ -1,4 +1,5 @@
-﻿@using RWPMPortal.Common
+﻿@model RWPMPortal.Models.WeatherEventModel
+    @using RWPMPortal.Common
 @{
     ViewBag.Title = "Weather Event Details";
 }
@@ -6,8 +7,17 @@
 <h2>@ViewBag.Title</h2>
 
 <i>Displays summary information for weather event for each site. </i>
-
-<h3>Weather Event: @ViewBag.Message</h3>
+@Html.ActionLink(
+          linkText: "See Weather Log for this event",
+    actionName: "Logs",
+    controllerName: "WeatherEvents",
+     routeValues: new
+     {
+         id = ViewBag.Id
+     },
+    htmlAttributes: null
+        )
+<h4>Weather Event: @ViewBag.Message</h4>
 <div id="container">
     <div id="sidebar">
         <div id='loadingmessage' style='display:none'>
@@ -19,6 +29,28 @@
     <div id="canvasloader-container" class="wrapper"></div>
     <div id="map"></div>
     <div id="cleared"></div>
+
+    <h4>First Five Minutes Starting Weather Event</h4>
+    <ul>
+        @foreach (var m in Model.TriggeringData)
+        {
+            <li>
+                 Site @m.SiteId : [ @m.DateTime.ToLocalTime().ToString("MM/dd/yy hh:mm") ] @m.Pavement - @m.Precipitation
+          
+            </li>
+        }
+    </ul>
+    <h4>Last Five Minutes Ending Weather Event</h4>
+    <ul>
+        @foreach (var m in Model.FinalData)
+        {
+            <li>
+                Site @m.SiteId : [ @m.DateTime.ToLocalTime().ToString("MM/dd/yy hh:mm") ] @m.Pavement - @m.Precipitation
+
+            </li>
+        }
+    </ul>
+    <br /><br />
 </div>
 <a href="https://mapicons.mapsmarker.com/"><img src="~/Content/miclogo-88x31.gif" /></a>
 @section scripts {

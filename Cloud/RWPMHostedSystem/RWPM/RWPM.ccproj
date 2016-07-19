@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>2.6</ProductVersion>
+    <ProductVersion>2.9</ProductVersion>
     <ProjectGuid>a0401a2d-62ec-414d-b583-5b9b8db0e529</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RWPM</RootNamespace>
     <AssemblyName>RWPM</AssemblyName>
-    <StartDevelopmentStorage>True</StartDevelopmentStorage>
+    <StartDevelopmentStorage>False</StartDevelopmentStorage>
     <Name>RWPM</Name>
     <PackageEnableRemoteDebugger>False</PackageEnableRemoteDebugger>
+    <UseWebProjectPorts>True</UseWebProjectPorts>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -87,10 +88,54 @@
   <ItemGroup>
     <PublishProfile Include="Profiles\RWPMProduction.azurePubxml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="PikalertDataWorkerRoleContent\DemoJson1.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PikalertDataWorkerRoleContent\DemoJson10.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PikalertDataWorkerRoleContent\DemoJson2.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PikalertDataWorkerRoleContent\DemoJson3.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PikalertDataWorkerRoleContent\DemoJson4.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PikalertDataWorkerRoleContent\DemoJson5.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PikalertDataWorkerRoleContent\DemoJson6.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PikalertDataWorkerRoleContent\DemoJson7.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PikalertDataWorkerRoleContent\DemoJson8.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PikalertDataWorkerRoleContent\DemoJson9.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PikalertDataWorkerRoleContent\MAW_Clear.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PikalertDataWorkerRoleContent\MAW_HeavySnow.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PikalertDataWorkerRoleContent\MAW_LightSnow.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PikalertDataWorkerRoleContent\MAW_ModerateSnow.json">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
-    <CloudExtensionsDir Condition=" '$(CloudExtensionsDir)' == '' ">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Windows Azure Tools\2.6\</CloudExtensionsDir>
+    <CloudExtensionsDir Condition=" '$(CloudExtensionsDir)' == '' ">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Windows Azure Tools\2.9\</CloudExtensionsDir>
   </PropertyGroup>
   <Import Project="$(CloudExtensionsDir)Microsoft.WindowsAzure.targets" />
 </Project>

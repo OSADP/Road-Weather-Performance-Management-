@@ -140,32 +140,41 @@ namespace InfloWebRole.Controllers
             }
             using (IUnitOfWork srInfloDbContext = new UnitOfWork(strDatabaseConnectionString))
             {
-                var probeInputs = srInfloDbContext.RoadWeatherProbeInputs.Where(d => d.DateGenerated >= dtUCT).OrderByDescending(d => d.DateGenerated)
-                    .GroupBy(d=>d.NomadicDeviceId).ToList();
+               // var probeInputs = srInfloDbContext.RoadWeatherProbeInputs.Where(d => d.DateGenerated >= dtUCT).OrderByDescending(d => d.DateGenerated)
+               //     .GroupBy(d=>d.NomadicDeviceId).ToList();
 
-                foreach(var nomaticDeviceProbes in probeInputs)
+                var probeInputIds = srInfloDbContext.RoadWeatherProbeInputs.Where(d => d.DateGenerated >= dtUCT).OrderByDescending(d => d.DateGenerated)
+                   .Select(d=>d.Id).ToList();
+                //We only want to include the latest per nomadicDevice. Query taking too long, so we did a simple Id query
+                //above and will handle the "latest by" manually.
+                List<string> nomadicDeviceIdsIncluded = new List<string>();
+                foreach (var id in probeInputIds)
                 {
-                    var probeInput = nomaticDeviceProbes.FirstOrDefault();
+                    var probeInput = srInfloDbContext.RoadWeatherProbeInputs.Where(d => d.Id == id).FirstOrDefault();
+                    string nomadicDeviceId = probeInput.NomadicDeviceId;
+                    if (!nomadicDeviceIdsIncluded.Contains(nomadicDeviceId))
+                    {
+                        nomadicDeviceIdsIncluded.Add(nomadicDeviceId);
+                        var point = new Point(new GeographicPosition(probeInput.GpsLatitude, probeInput.GpsLongitude, probeInput.GpsElevation));
+                        var props = new Dictionary<string, object>();
+                        props.Add("GpsHeading", probeInput.GpsHeading);
+                        props.Add("GpsSpeed", probeInput.GpsSpeed);
+                        props.Add("HeadlightStatus", probeInput.HeadlightStatus);
+                        props.Add("AirTemperature", probeInput.AirTemperature);
+                        props.Add("AtmosphericPressure", probeInput.AtmosphericPressure);
+                        props.Add("LeftFrontWheelSpeed", probeInput.LeftFrontWheelSpeed);
+                        props.Add("LeftRearWheelSpeed", probeInput.LeftRearWheelSpeed);
+                        props.Add("NomadicDeviceId", nomadicDeviceId);
+                        props.Add("RightFrontWheelSpeed", probeInput.RightFrontWheelSpeed);
+                        props.Add("RightRearWheelSpeed", probeInput.RightRearWheelSpeed);
+                        props.Add("Speed", probeInput.Speed);
+                        props.Add("SteeringWheelAngle", probeInput.SteeringWheelAngle);
+                        props.Add("WiperStatus", probeInput.WiperStatus);
+                        props.Add("DateGenerated", probeInput.DateGenerated);
 
-                    var point = new Point(new GeographicPosition(probeInput.GpsLatitude, probeInput.GpsLongitude,probeInput.GpsElevation));
-                    var props = new Dictionary<string, object>();
-                    props.Add("GpsHeading", probeInput.GpsHeading);
-                    props.Add("GpsSpeed", probeInput.GpsSpeed);
-                    props.Add("HeadlightStatus", probeInput.HeadlightStatus);
-                    props.Add("AirTemperature", probeInput.AirTemperature);
-                    props.Add("AtmosphericPressure", probeInput.AtmosphericPressure);
-                    props.Add("LeftFrontWheelSpeed", probeInput.LeftFrontWheelSpeed);
-                    props.Add("LeftRearWheelSpeed", probeInput.LeftRearWheelSpeed);
-                    props.Add("NomadicDeviceId", probeInput.NomadicDeviceId);
-                    props.Add("RightFrontWheelSpeed", probeInput.RightFrontWheelSpeed);
-                    props.Add("RightRearWheelSpeed", probeInput.RightRearWheelSpeed);
-                    props.Add("Speed", probeInput.Speed);
-                    props.Add("SteeringWheelAngle", probeInput.SteeringWheelAngle);
-                    props.Add("WiperStatus", probeInput.WiperStatus);
-                    props.Add("DateGenerated", probeInput.DateGenerated);
-                    
-                    var feature = new Feature(point, props);
-                    features.Features.Add(feature);
+                        var feature = new Feature(point, props);
+                        features.Features.Add(feature);
+                    }
                 }
             }  
 

@@ -141,6 +141,7 @@ namespace InfloWebRole.Controllers
                                     props.Add("FOQMMLocation", qWarn.FOQMMLocation);
                                     props.Add("BOQMMLocation", qWarn.BOQMMLocation);
                                     props.Add("DateGenerated", qWarn.DateGenerated);
+   
                                     if (qWarn.ValidityDuration.HasValue)
                                         props.Add("ValidityDuration", qWarn.ValidityDuration.Value);
 

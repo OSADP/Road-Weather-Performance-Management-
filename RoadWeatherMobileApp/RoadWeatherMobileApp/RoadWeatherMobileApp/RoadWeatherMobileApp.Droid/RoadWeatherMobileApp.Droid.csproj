@@ -116,6 +116,13 @@
     <AndroidResource Include="Resources\drawable\speed_harm_50.png" />
     <AndroidResource Include="Resources\drawable\speed_harm_55.png" />
     <AndroidResource Include="Resources\drawable\alert.png" />
+    <AndroidResource Include="Resources\drawable\snowy.png" />
+    <AndroidResource Include="Resources\drawable\icy2.png" />
+    <AndroidResource Include="Resources\drawable\icy3.png" />
+    <AndroidResource Include="Resources\drawable\slippery2.png" />
+    <AndroidResource Include="Resources\drawable\slippery3.png" />
+    <AndroidResource Include="Resources\drawable\snowy2.png" />
+    <AndroidResource Include="Resources\drawable\snowy3.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CITOAndroidCommon\CITOAndroidCommon.csproj">

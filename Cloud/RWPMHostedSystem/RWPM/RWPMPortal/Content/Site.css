@@ -83,3 +83,20 @@ div#banner-content {
     padding: 5px;
     border: 1px solid #000;
 }
+
+table {
+    border-collapse: collapse;
+}
+
+table,  td {
+    border: 1px;
+ 
+      padding: 5px;
+    text-align: center;
+}
+th {
+    text-align: center;
+    background-color:  #DBDAD8;
+    color: white;
+     padding: 0px;
+}

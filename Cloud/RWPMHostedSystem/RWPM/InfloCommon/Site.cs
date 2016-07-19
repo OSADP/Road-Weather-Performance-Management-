@@ -17,6 +17,7 @@ namespace InfloCommon
         public Site()
         {
             this.SiteObservations = new HashSet<SiteObservation>();
+            this.MAWOutputs = new HashSet<MAWOutput>();
         }
     
         public int Id { get; set; }
@@ -36,5 +37,6 @@ namespace InfloCommon
     
         public virtual District District { get; set; }
         public virtual ICollection<SiteObservation> SiteObservations { get; set; }
+        public virtual ICollection<MAWOutput> MAWOutputs { get; set; }
     }
 }

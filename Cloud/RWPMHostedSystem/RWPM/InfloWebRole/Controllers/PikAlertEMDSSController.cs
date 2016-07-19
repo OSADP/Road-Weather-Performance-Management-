@@ -262,7 +262,7 @@ namespace InfloWebRole.Controllers
                             props.Add("Description", site.Description);
 
                             //var siteObservations = observations.Where(o => o.SiteId == site.Id);
-                              var observations = uow.SiteObservations.Where(s => s.DateTime > dtSince && s.DateTime <= dtTo);
+                              var observations = uow.SiteObservations.Where(s => s.DateTime >= dtSince && s.DateTime <= dtTo);
                         var siteObservations = observations.Where(o => o.SiteId == siteId);
 
                             props.Add("Road Temperature", siteObservations.Average(s => s.RoadTemp));

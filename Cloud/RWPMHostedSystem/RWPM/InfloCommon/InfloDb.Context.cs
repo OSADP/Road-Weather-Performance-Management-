@@ -57,5 +57,6 @@ namespace InfloCommon
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<Site> Sites { get; set; }
         public virtual DbSet<SiteObservation> SiteObservations { get; set; }
+        public virtual DbSet<WeatherLog> WeatherLogs { get; set; }
     }
 }

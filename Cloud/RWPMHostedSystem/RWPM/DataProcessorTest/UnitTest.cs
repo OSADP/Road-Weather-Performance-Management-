@@ -165,10 +165,10 @@ namespace DataProcessorTest
         {
             WeatherEventStatistics stats = new WeatherEventStatistics();
 
-            stats.TrackPavementCondCnts[(int)WeatherEventStatistics.WeatherCondition.Clear] = 16;
-            stats.TrackPavementCondCnts[(int)WeatherEventStatistics.WeatherCondition.Ice] = 4;
-            stats.TrackPavementCondCnts[(int)WeatherEventStatistics.WeatherCondition.Snow] = 2;
-            stats.TrackPavementCondCnts[(int)WeatherEventStatistics.WeatherCondition.Rain] = 0;
+            stats.TrackPavementCondCnts[(int)WeatherCondition.Clear] = 16;
+            stats.TrackPavementCondCnts[(int)WeatherCondition.Ice] = 4;
+            stats.TrackPavementCondCnts[(int)WeatherCondition.Snow] = 2;
+            stats.TrackPavementCondCnts[(int)WeatherCondition.Wet] = 0;
 
             double clear, wet, snow, ice;
             stats.CalculatePavementPercentages(out ice, out snow, out wet, out clear);

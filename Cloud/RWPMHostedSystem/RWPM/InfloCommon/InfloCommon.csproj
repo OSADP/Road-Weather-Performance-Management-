@@ -133,6 +133,7 @@
     <Compile Include="Models\MotoristAlertModel.cs" />
     <Compile Include="Models\PA_District.cs" />
     <Compile Include="Models\PA_DistrictAlerts.cs" />
+    <Compile Include="Models\PA_MAWAlerts.cs" />
     <Compile Include="Models\PA_Site.cs" />
     <Compile Include="Models\PA_Time_Series.cs" />
     <Compile Include="Models\PA_Vehicles_District.cs" />
@@ -209,6 +210,9 @@
       <DependentUpon>InfloDb.tt</DependentUpon>
     </Compile>
     <Compile Include="WeatherEventStatistics.cs" />
+    <Compile Include="WeatherLog.cs">
+      <DependentUpon>InfloDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="WorkerRoleCommon\BaseProcManager.cs" />
     <Compile Include="WorkerRoleCommon\BaseProcWorker.cs" />
     <Compile Include="WorkerRoleCommon\IProcessWorker.cs" />

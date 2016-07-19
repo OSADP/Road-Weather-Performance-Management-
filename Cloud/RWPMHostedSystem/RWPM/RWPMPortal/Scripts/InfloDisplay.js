@@ -1,11 +1,141 @@
-﻿
-function GetQwarnLayer(map)
-{
-    var qwarnLayer = new google.maps.Data();
+﻿function GetMawLayer(map) {
+    var mawLayer = new google.maps.Data();
 
-    qwarnLayer.setStyle(function (event) {
+    mawLayer.addListener('click', function (event) {
 
-        var icon = '../Content/unknown.png';
+        clearAllDisplay();
+
+        UpdateSiteMAWDetailDisplay(event.feature);
+        event.feature.setProperty('IsSelected', true);
+    });
+
+    mawLayer.setStyle(function (feature) {
+        //Start off with Dark Red to catch any other conditions we may not have coded up.
+
+        var icon = '../Content/blue.png';
+        var lineColor = 'black';
+
+        if ((feature.getProperty('ActionCode') == 1)) {
+            if(feature.getProperty('PavementCode') == 2 ||
+                feature.getProperty('PavementCode') == 3)
+            {
+                icon = '../Content/maw_snowy_1.png';
+            }
+            else if (feature.getProperty('PavementCode') == 4 ||
+                feature.getProperty('PavementCode') == 5 ||
+                feature.getProperty('PavementCode') == 7 ||
+                feature.getProperty('PavementCode') == 8 ||
+                feature.getProperty('PavementCode') == 9)
+            {
+                icon = '../Content/maw_icy_1.png';
+            }
+            else if (feature.getProperty('PavementCode') == 1 ||
+                feature.getProperty('PavementCode') == 6) {
+                icon = '../Content/maw_slippery_1.png';
+            }
+            lineColor = '#FFFF00';
+        } else if ((feature.getProperty('ActionCode') == 2)) {
+            if (feature.getProperty('PavementCode') == 2 ||
+                feature.getProperty('PavementCode') == 3) {
+                icon = '../Content/maw_snowy_2.png';
+            }
+            else if (feature.getProperty('PavementCode') == 4 ||
+                feature.getProperty('PavementCode') == 5 ||
+                feature.getProperty('PavementCode') == 7 ||
+                feature.getProperty('PavementCode') == 8 ||
+                feature.getProperty('PavementCode') == 9) {
+                icon = '../Content/maw_icy_2.png';
+            }
+            else if (feature.getProperty('PavementCode') == 1 ||
+                feature.getProperty('PavementCode') == 6) {
+                icon = '../Content/maw_slippery_2.png';
+            }
+            lineColor = '#ffa500';
+        } else if ((feature.getProperty('ActionCode') == 3)) {
+            if (feature.getProperty('PavementCode') == 2 ||
+                          feature.getProperty('PavementCode') == 3) {
+                icon = '../Content/maw_snowy_3.png';
+            }
+            else if (feature.getProperty('PavementCode') == 4 ||
+                feature.getProperty('PavementCode') == 5 ||
+                feature.getProperty('PavementCode') == 7 ||
+                feature.getProperty('PavementCode') == 8 ||
+                feature.getProperty('PavementCode') == 9) {
+                icon = '../Content/maw_icy_3.png';
+            }
+            else if (feature.getProperty('PavementCode') == 1 ||
+                feature.getProperty('PavementCode') == 6) {
+                icon = '../Content/maw_slippery_3.png';
+            }
+            lineColor = '#bf0000';
+        }
+
+        if (feature.getProperty('IsSelected') == true) {
+            var newIcon = {
+                url: icon,
+                scaledSize: new google.maps.Size(43, 50)
+            };
+
+            icon = newIcon;
+        }
+
+
+        return {
+            icon: icon,
+            strokeColor: lineColor,
+            strokeOpacity: '1.0',
+            strokeWeight: '4.0'
+        };
+
+    });
+
+    mawLayer.setMap(map);
+
+    return mawLayer;
+}
+
+function UpdateSiteMAWDetailDisplay(feature) {
+    var cont = "<h3>MAW Alert Details</h3> ";
+
+    cont = cont.concat("<ul>");
+    cont = cont.concat("<li><strong>ActionCode</strong>: ");
+    cont = cont.concat(feature.getProperty('ActionCode'));
+    cont = cont.concat(" : " + feature.getProperty('Action'));
+    cont = cont.concat("</li>");
+    cont = cont.concat("<li><strong>AlertGenTime (UTC)</strong>: ");
+    cont = cont.concat(feature.getProperty('AlertGenTime'));
+    cont = cont.concat("</li>");
+    cont = cont.concat("<li><strong>AlertTime (UTC)</strong>: ");
+    cont = cont.concat(LocalizeTime(feature.getProperty('AlertTime')));
+    cont = cont.concat("</li>");
+    cont = cont.concat("<li><strong>PavementCode</strong>: ");
+    cont = cont.concat(feature.getProperty('PavementCode'));
+    cont = cont.concat(" : " + feature.getProperty('Pavement'));
+    cont = cont.concat("</li>");
+    cont = cont.concat("<li><strong>PrecipitationCode</strong>: ");
+    cont = cont.concat(feature.getProperty('PrecipitationCode'));
+    cont = cont.concat(" : " + feature.getProperty('Precipitation'));
+    cont = cont.concat("</li>");
+    cont = cont.concat("<li><strong>VisibilityCode</strong>: ");
+    cont = cont.concat(feature.getProperty('VisibilityCode'));
+    cont = cont.concat(" : " + feature.getProperty('Visibility'));
+    cont = cont.concat("</li>");
+    cont = cont.concat("</ul>");
+
+    document.getElementById('info-box').innerHTML = cont;
+}
+
+function GetQwarnLayer(map) {
+    var layer = new google.maps.Data();
+
+    layer.addListener('click', function (event) {
+        clearAllDisplay();
+        UpdateQWarnDisplay(event.feature)
+        event.feature.setProperty('IsSelected', true);
+    });
+
+    layer.setStyle(function (feature) {
+        var icon = '../Content/dkred.png';
         if (feature.getProperty('IsSelected') == true) {
             var newIcon = {
                 url: icon,
@@ -24,35 +154,36 @@ function GetQwarnLayer(map)
         };
     });
 
-    qwarnLayer.addListener('click', function (event) {
-        qwarnLayer.forEach(function (feature) {
-            feature.setProperty('IsSelected', false);
-        });
-        UpdateQWarnDisplay(event.feature);
-        event.feature.setProperty('IsSelected', true);
-    });
 
-    qwarnLayer.addListener('mouseout', function (event) {
-        
-    });
-    qwarnLayer.setMap(map);
 
-    return qwarnLayer;
+    layer.setMap(map);
+
+    return layer;
+}
+
+function clearAllDisplay()
+{
+    ClearInfloDisplay();
+    ClearVehiclesDisplay();
+    ClearSpeedSensorDisplay();
+    ClearMawDisplay();
+
 }
 
 function ClearInfloDisplay()
 {
-    qwarnLayer.forEach(function (feature) {
-        feature.setProperty('IsSelected', false);
-    });
+    if (typeof qwarnLayer != 'undefined') {
+        qwarnLayer.forEach(function (feature) {
+            feature.setProperty('IsSelected', false);
+        });
+    }
 
-    speedHarmLayer.forEach(function (feature) {
-        feature.setProperty('IsSelected', false);
-    });
+    if (typeof speedHarmLayer != 'undefined') {
+        speedHarmLayer.forEach(function (feature) {
+            feature.setProperty('IsSelected', false);
+        });
+    }
 
-    
-    
-    
     document.getElementById('info-box').innerHTML = "";
     $("#qWarnBtnDiv").hide();
     $("#spdHarmBtnDiv").hide();
@@ -62,22 +193,44 @@ function ClearInfloDisplay()
 function ClearVehiclesDisplay()
 {
     document.getElementById('info-box').innerHTML = "";
-    vehiclesLayer.forEach(function (feature) {
-        feature.setProperty('IsSelected', false);
-    });
+    if (typeof vehiclesLayer != 'undefined') {
+        vehiclesLayer.forEach(function (feature) {
+            feature.setProperty('IsSelected', false);
+        });
+    }
 
 }
+
 function ClearSpeedSensorDisplay()
 {
     document.getElementById('info-box').innerHTML = "";
-    speedSensorLayer.forEach(function (feature) {
-        feature.setProperty('IsSelected', false);
-    });
+    if (typeof speedSensorLayer != 'undefined') {
+        speedSensorLayer.forEach(function (feature) {
+            feature.setProperty('IsSelected', false);
+        });
+    }
 }
+
+function ClearMawDisplay()
+{
+    document.getElementById('info-box').innerHTML = "";
+    if (typeof mawLayer != 'undefined') {
+        mawLayer.forEach(function (feature) {
+            feature.setProperty('IsSelected', false);
+        });
+    }
+}
+
 function UpdateQWarnDisplay(feature)
 {
     var cont = "<h3>QWarn Properties</h3> ";
     cont = cont.concat("<ul>");
+    cont = cont.concat("<li>Date UTC: ")
+    cont = cont.concat(feature.getProperty('DateGenerated'));
+    cont = cont.concat("</li>");
+    cont = cont.concat("<li>Date: ")
+    cont = cont.concat(LocalizeTime(feature.getProperty('DateGenerated')));
+    cont = cont.concat("</li>");
     cont = cont.concat("<li>Distance: ")
     cont = cont.concat(feature.getProperty('Distance'));
     cont = cont.concat("</li>");
@@ -86,11 +239,6 @@ function UpdateQWarnDisplay(feature)
     cont = cont.concat("</li>");
     cont = cont.concat("<li>Back Of Queue: ")
     cont = cont.concat(feature.getProperty('BOQMMLocation'));
-    cont = cont.concat("</li>");
-    cont = cont.concat("<li>Date UTC: ")
-    cont = cont.concat(feature.getProperty('DateGenerated'));
-    cont = cont.concat("<li>Date: ")
-    cont = cont.concat(LocalizeTime(feature.getProperty('DateGenerated')));
     cont = cont.concat("</li>");
     cont = cont.concat("<li>Valid Duration: ")
     cont = cont.concat(feature.getProperty('ValidityDuration'));
@@ -102,9 +250,9 @@ function UpdateQWarnDisplay(feature)
 
     document.getElementById('info-box').innerHTML = cont;
 
-    $("#selectedRoadwayId").val(event.feature.getProperty('RoadwayId'));
-    $("#selectedEndMM").val(event.feature.getProperty('FOQMMLocation'));
-    selectedEvent = event.feature;
+   $("#selectedRoadwayId").val(feature.getProperty('RoadwayId'));
+    $("#selectedEndMM").val(feature.getProperty('FOQMMLocation'));
+    selectedEvent = feature;
     document.getElementById('rmvAlertErr').innerHTML = '';
     //show qwarn button's div, hide spd harm's div.
     $("#spdHarmBtnDiv").hide();
@@ -115,6 +263,12 @@ function UpdateSpeedHarmDisplay(feature)
 {
     var cont = "<h3>SpeedHarm Properties</h3> ";
     cont = cont.concat("<ul>");
+    cont = cont.concat("<li>Date UTC: ")
+    cont = cont.concat(feature.getProperty('DateGenerated'));
+    cont = cont.concat("</li>");
+    cont = cont.concat("<li>Date: ")
+    cont = cont.concat(LocalizeTime(feature.getProperty('DateGenerated')));
+    cont = cont.concat("</li>");
     cont = cont.concat("<li>RecommendedSpeed: ")
     cont = cont.concat(feature.getProperty('RecommendedSpeed'));
     cont = cont.concat("</li>");
@@ -126,6 +280,9 @@ function UpdateSpeedHarmDisplay(feature)
     cont = cont.concat("</li>");
     cont = cont.concat("<li>Distance: ")
     cont = cont.concat(feature.getProperty('Distance'));
+    cont = cont.concat("</li>");
+    cont = cont.concat("<li>Valid Duration: ")
+    cont = cont.concat(feature.getProperty('ValidityDuration'));
     cont = cont.concat("</li>");
     cont = cont.concat("</ul>");
 
@@ -144,6 +301,12 @@ function UpdateSpeedHarmDisplay(feature)
 function GetSpeedHarmLayer(map)
 {
     var speedHarmLayer = new google.maps.Data();
+
+    speedHarmLayer.addListener('click', function (event) {
+        clearAllDisplay();
+        UpdateSpeedHarmDisplay(event.feature)
+        event.feature.setProperty('IsSelected', true);
+    });
 
     speedHarmLayer.setStyle(function (feature) {
         var icon = '../Content/dkpurple.png';
@@ -165,13 +328,7 @@ function GetSpeedHarmLayer(map)
         };
     });
 
-    speedHarmLayer.addListener('click', function (event) {
-        speedHarmLayer.forEach(function (feature) {
-            feature.setProperty('IsSelected', false);
-        });
-        UpdateSpeedHarmDisplay(event.feature)
-        event.feature.setProperty('IsSelected', true);
-    });
+    
 
     speedHarmLayer.setMap(map);
 
@@ -199,9 +356,7 @@ function GetVehiclesLayer(map) {
     });
 
     vehiclesLayer.addListener('click', function (event) {
-        vehiclesLayer.forEach(function (feature) {
-            feature.setProperty('IsSelected', false);
-        });
+        clearAllDisplay();
         UpdateVehiclesDisplay(event.feature)
         event.feature.setProperty('IsSelected', true);
     });
@@ -350,9 +505,7 @@ function GetSpeedSensorsLayer(map)
     });
 
     speedSensorLayer.addListener('click', function (event) {
-        speedSensorLayer.forEach(function (feature) {
-            feature.setProperty('IsSelected', false);
-        });
+        clearAllDisplay();
         UpdateSpeedSensorDisplay(event.feature);
         event.feature.setProperty('IsSelected', true);
     });
@@ -368,6 +521,37 @@ function SetIsSelected(data, feature)
         if (newFeature.properties['Description'] == feature.getProperty('Description')) {
             if (feature.getProperty('IsSelected') == true) {
                 newFeature.properties['IsSelected'] = true;
+            }
+            else {
+                newFeature.properties['IsSelected'] = false;
+            }
+        }
+    });
+}
+
+function SetIsSelectedSpeedHarm(data, feature) {
+    data.features.forEach(function (newFeature) {
+        if (newFeature.properties['RoadwayId'] == feature.getProperty('RoadwayId') &&
+            newFeature.properties['BeginMM'] == feature.getProperty('BeginMM')) {
+            if (feature.getProperty('IsSelected') == true) {
+                newFeature.properties['IsSelected'] = true;
+            }
+            else {
+                newFeature.properties['IsSelected'] = false;
+            }
+        }
+    });
+}
+
+function SetIsSelectedQueue(data, feature) {
+    data.features.forEach(function (newFeature) {
+        if (newFeature.properties['RoadwayId'] == feature.getProperty('RoadwayId') &&
+            newFeature.properties['FOQStart'] == feature.getProperty('FOQStart')) {
+            if (feature.getProperty('IsSelected') == true) {
+                newFeature.properties['IsSelected'] = true;
+            }
+            else {
+                newFeature.properties['IsSelected'] = false;
             }
         }
     });
@@ -392,6 +576,17 @@ function SetIsSelectedSpeedSensor(data, feature) {
         }
     });
 }
+
+function SetIsSelectedMAW(data, feature) {
+    data.features.forEach(function (newFeature) {
+        if (newFeature.properties['Description'] == feature.getProperty('Description')) {
+            if (feature.getProperty('IsSelected') == true) {
+                newFeature.properties['IsSelected'] = true;
+            }
+        }
+    });
+}
+
 
 function LocalizeTime(date)
 {

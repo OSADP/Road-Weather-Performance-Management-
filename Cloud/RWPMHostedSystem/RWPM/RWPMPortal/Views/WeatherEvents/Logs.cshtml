@@ -1,0 +1,104 @@
+﻿@model IList<InfloCommon.WeatherLog>
+@{
+    ViewBag.Title = "Weather Log";
+}
+
+<h3>@ViewBag.Title</h3>
+@Html.ActionLink(
+          linkText: "View Weather Events",
+    actionName: "Index",
+    controllerName: "WeatherEvents",
+     routeValues: null,
+    htmlAttributes: null
+        )
+<br />
+
+@using (Html.BeginForm("LogsByDate", "WeatherEvents"))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+
+        <table>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        Date From:  <input id="startDate" name="startDate" type="text" value="@ViewBag.startDate" />
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        Date To:  <input id="endDate" name="endDate" type="text" value="@ViewBag.endDate" />
+                    </div>
+                </td>
+                <td><input type="submit" value="View" /></td>
+            </tr>
+        </table>
+
+    </fieldset>
+}
+<br />
+<table>
+    <tr>
+        <td></td>
+        <td></td>
+        <th colspan="4">Num Site Reporting Pavement Condition</th>
+        <th colspan="4">Num Site Reporting Precipitation Condition</th>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Time</td>
+        <td>Message</td>
+
+        <td>Clear</td>
+        <td>Wet</td>
+        <td bgcolor="#ADDFFF">Snow</td>
+        <td bgcolor="#8D38C9">Ice</td>
+
+        <td>Clear</td>
+        <td>Wet</td>
+        <td bgcolor="#ADDFFF">Snow</td>
+        <td bgcolor="#8D38C9">Ice</td>
+
+        <td>Total Sites</td>
+        <td>Avg Road Temp</td>
+        <td>Event Details</td>
+
+    </tr>
+    @foreach (var m in Model)
+    {
+        <tr>
+            <td>@m.Time.ToLocalTime().ToString("MM/dd/yy hh:mm") </td>
+            <td>@m.Message</td>
+            <td>@m.PaveCntClear</td>
+            <td>@m.PaveCntWet</td>
+            <td bgcolor="#ADDFFF">@m.PaveCntSnow</td>
+            <td bgcolor="#8D38C9">@m.PaveCntIce</td>
+            <td>@m.PrecipCntClear</td>
+            <td>@m.PrecipCntWet</td>
+            <td bgcolor="#ADDFFF">@m.PrecipCntSnow</td>
+            <td bgcolor="#8D38C9">@m.PrecipCntIce</td>
+            <td>@m.TotalReportedSites</td>
+            <td>@m.RoadTempAvg.ToString("0.00")</td>
+            <td>
+                @if (@m.WeatherEventId != null)
+                {
+
+                    @Html.ActionLink(
+          linkText: "View",
+    actionName: "Details",
+    controllerName: "WeatherEvents",
+     routeValues: new
+     {
+         id = m.WeatherEventId
+     },
+    htmlAttributes: null
+        )
+                }
+        </td>
+
+    </tr>
+    }
+</table>

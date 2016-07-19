@@ -18,9 +18,12 @@ namespace InfloCommon
         public System.DateTime AlertRequestTime { get; set; }
         public System.DateTime AlertTime { get; set; }
         public System.DateTime AlertGenTime { get; set; }
-        public PrecipitationCode PrecipitationCode { get; set; }
-        public PavementCode PavementCode { get; set; }
-        public VisibilityCode VisibilityCode { get; set; }
-        public ActionCode ActionCode { get; set; }
+        public int PrecipitationCode { get; set; }
+        public int PavementCode { get; set; }
+        public int VisibilityCode { get; set; }
+        public int ActionCode { get; set; }
+        public int SiteId { get; set; }
+    
+        public virtual Site Site { get; set; }
     }
 }

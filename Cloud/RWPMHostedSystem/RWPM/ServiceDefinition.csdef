@@ -11,6 +11,7 @@
       <Setting name="TSSProcessorSleepTimeSec" />
       <Setting name="INFLOConfigFile" />
       <Setting name="LoggerLevel" />
+      <Setting name="APPINSIGHTS_INSTRUMENTATIONKEY" />
     </ConfigurationSettings>
     <Imports>
       <Import moduleName="RemoteAccess" />
@@ -25,6 +26,7 @@
       <Setting name="Stats_LogStatisticalData" />
       <Setting name="Stats_MinimalLoggedElapsedTime" />
       <Setting name="OsmMapModelDbConnectionString" />
+      <Setting name="APPINSIGHTS_INSTRUMENTATIONKEY" />
     </ConfigurationSettings>
     <Imports>
       <Import moduleName="RemoteAccess" />
@@ -45,6 +47,7 @@
       <Setting name="AlertSearchDistance" />
       <Setting name="QWarnAlertDistance" />
       <Setting name="OsmMapModelDbConnectionString" />
+      <Setting name="APPINSIGHTS_INSTRUMENTATIONKEY" />
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="80" />
@@ -62,6 +65,7 @@
       <Setting name="RunDetectorDataProcessor" />
       <Setting name="PikAlertSleepTimeSec" />
       <Setting name="DetectorDataSleepTimeSec" />
+      <Setting name="APPINSIGHTS_INSTRUMENTATIONKEY" />
     </ConfigurationSettings>
     <Imports>
       <Import moduleName="RemoteAccess" />

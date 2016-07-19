@@ -19,6 +19,7 @@ namespace RoadWeatherMobileApp
     {
         private MotoristAlertsService MotoristAlertSvc;
         Label AlertLabel;
+        Label AlertLabel2;
         Image AlertImage;
         Label ErrorStatus;
         Label CloudStatus;
@@ -36,16 +37,24 @@ namespace RoadWeatherMobileApp
             AlertLabel = new Label
             {
                 Text = "",
-                TextColor = Color.Red,
-                FontSize = 40,
+                TextColor = Color.White,
+                FontSize = 25,
+                HorizontalOptions = LayoutOptions.Center
+            };
+
+            AlertLabel2 = new Label
+            {
+                Text = "",
+                TextColor = Color.White,
+                FontSize = 25,
                 HorizontalOptions = LayoutOptions.Center
             };
 
             AlertImage = new Image
             {
                 Aspect = Aspect.AspectFit,
-                WidthRequest = 190,
-                HeightRequest = 190
+                WidthRequest = 160,
+                HeightRequest = 160
             };
             AlertImage.Source = "";
 
@@ -92,7 +101,7 @@ namespace RoadWeatherMobileApp
             {
                 Spacing = 10,
                 VerticalOptions = LayoutOptions.CenterAndExpand,
-                Children = { AlertImage, AlertLabel }
+                Children = { AlertLabel, AlertImage, AlertLabel2 }
             };
 
             Content = new StackLayout
@@ -285,34 +294,95 @@ namespace RoadWeatherMobileApp
             {
                 String imgSrc = null;
                 String alertText = null;
+                String alertText2 = null;
+                Color textColor = Color.White;
                 //Check for PikAlert with ICE, PikAlert Visibility, then Queue, then Speed Harm, then PikAlert PrecipAlert
                 if (newMotoristAlerts.Pik.Count > 0)
                 {
+                    if(newMotoristAlerts.Pik[0].AlertActionCode > 0)
+                    {
+                        alertText = newMotoristAlerts.Pik[0].AlertAction;
+                        alertText2 = newMotoristAlerts.Pik[0].PavementAlert;
+                        
+                        if(newMotoristAlerts.Pik[0].AlertActionCode ==1)
+                        {
+                            textColor = Color.FromHex("#ffd27f");
+                   
+                        }
+                        else if (newMotoristAlerts.Pik[0].AlertActionCode == 2)
+                        {
+                            textColor = Color.FromHex("#ffa500");
 
-                    if (newMotoristAlerts.Pik[0].PavementAlert.ToLower().Contains("icy") ||
-                    newMotoristAlerts.Pik[0].PavementAlert.ToLower().Contains("ice"))
+                        }
+                        else if (newMotoristAlerts.Pik[0].AlertActionCode == 3)
+                        {
+                            textColor = Color.FromHex("#bf0000");
+
+                        }
+
+                    }
+                    else
+                    {
+                        alertText = null;
+                        textColor = Color.White;
+                    }
+
+
+
+                    if (newMotoristAlerts.Pik[0].PavementAlertCode ==  4||
+                    newMotoristAlerts.Pik[0].PavementAlertCode == 5 ||
+                    newMotoristAlerts.Pik[0].PavementAlertCode == 7 ||
+                    newMotoristAlerts.Pik[0].PavementAlertCode == 8 ||
+                    newMotoristAlerts.Pik[0].PavementAlertCode == 9)
                     {
                         //icy
                         imgSrc = "icy.png";
-                        alertText = "Caution! Icy Road";
+                        if (newMotoristAlerts.Pik[0].AlertActionCode == 2)
+                        {
+                            imgSrc = "icy2.png";
+
+                        }
+                        else if (newMotoristAlerts.Pik[0].AlertActionCode == 3)
+                        {
+                            imgSrc = "icy3.png";
+
+                        }
                     }
-                    else if (newMotoristAlerts.Pik[0].PavementAlert.ToLower().Contains("snowy") ||
-                    newMotoristAlerts.Pik[0].PavementAlert.ToLower().Contains("snow"))
+                    else if (newMotoristAlerts.Pik[0].PavementAlertCode ==2 ||
+                    newMotoristAlerts.Pik[0].PavementAlertCode == 3)
                     {
                         //snowy
-                        imgSrc = "slippery.png";
-                        alertText = "Caution! Snow Covered Road";
+                        imgSrc = "snowy.png";
+                        if (newMotoristAlerts.Pik[0].AlertActionCode == 2)
+                        {
+                            imgSrc = "snowy2.png";
+
+                        }
+                        else if (newMotoristAlerts.Pik[0].AlertActionCode == 3)
+                        {
+                            imgSrc = "snowy3.png";
+
+                        }
                     }
-                    else if (newMotoristAlerts.Pik[0].PavementAlert.ToLower().Contains("wet"))
+                    else if (newMotoristAlerts.Pik[0].PavementAlertCode == 1 ||
+                    newMotoristAlerts.Pik[0].PavementAlertCode == 6)
                     {
                         //wet
                         imgSrc = "slippery.png";
-                        alertText = "Caution! Wet Road";
+                        if (newMotoristAlerts.Pik[0].AlertActionCode == 2)
+                        {
+                            imgSrc = "slippery2.png";
+
+                        }
+                        else if (newMotoristAlerts.Pik[0].AlertActionCode == 3)
+                        {
+                            imgSrc = "slippery3.png";
+
+                        }
                     }
-                    else if (newMotoristAlerts.Pik[0].VisibilityAlert.ToLower().Contains("fog"))
+                    else if (newMotoristAlerts.Pik[0].VisibilityAlertCode ==3)
                     {
                         imgSrc = "fog.png";
-                        alertText = "Caution! Fog";
                     }
                 }
 
@@ -334,9 +404,11 @@ namespace RoadWeatherMobileApp
                         }
                     }
                 }
-                
 
-                if(!String.IsNullOrEmpty(imgSrc))
+                AlertLabel.TextColor = textColor;
+                AlertLabel2.TextColor = textColor;
+
+                if (!String.IsNullOrEmpty(imgSrc))
                 {
                     AlertImage.Source = imgSrc;
                 }
@@ -345,9 +417,20 @@ namespace RoadWeatherMobileApp
                     AlertImage.Source = "";
                 }
 
+                if(!String.IsNullOrEmpty(alertText2))
+                {
+                    AlertLabel2.Text = alertText2;
+                    
+                }
+                else
+                {
+                    AlertLabel2.Text = "";
+                }
+
                 if(!String.IsNullOrEmpty(alertText))
                 {
                     AlertLabel.Text = alertText;
+                    
                 }
                 else
                 {

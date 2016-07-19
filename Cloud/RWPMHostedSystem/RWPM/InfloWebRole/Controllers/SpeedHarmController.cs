@@ -131,6 +131,8 @@ namespace InfloWebRole.Controllers
                                    
                                     var point = new Point(new GeographicPosition(beginLoc.Latitude, beginLoc.Longitude));
                                     var props = new Dictionary<string, object>();
+                                    props.Add("DateGenerated", spdH.DateGenerated);
+                                    props.Add("ValidityDuration", spdH.ValidityDuration);
                                     props.Add("RoadwayId", spdH.RoadwayId);
                                     props.Add("RecommendedSpeed", spdH.RecommendedSpeed);
                                     props.Add("BeginMM", spdH.BeginMM);

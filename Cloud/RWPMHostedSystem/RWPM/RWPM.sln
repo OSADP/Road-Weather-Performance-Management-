@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "RWPM", "RWPM.ccproj", "{A0401A2D-62EC-414D-B583-5B9B8DB0E529}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RWPMPortal", "RWPMPortal\RWPMPortal.csproj", "{D356AB5F-D939-4E2C-B9C7-A5A30860C40B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PikalertDataWorkerRole", "PikalertDataWorkerRole\PikalertDataWorkerRole.csproj", "{02110655-3B7E-4671-B795-041F7D98096E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "..\Utilities\Utilities.csproj", "{2C858FA8-B96A-4464-81ED-6176C5035A53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -169,6 +171,18 @@ Global
 		{02110655-3B7E-4671-B795-041F7D98096E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{02110655-3B7E-4671-B795-041F7D98096E}.Release|Win32.ActiveCfg = Release|Any CPU
 		{02110655-3B7E-4671-B795-041F7D98096E}.Release|x64.ActiveCfg = Release|Any CPU
+		{2C858FA8-B96A-4464-81ED-6176C5035A53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C858FA8-B96A-4464-81ED-6176C5035A53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C858FA8-B96A-4464-81ED-6176C5035A53}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2C858FA8-B96A-4464-81ED-6176C5035A53}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2C858FA8-B96A-4464-81ED-6176C5035A53}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{2C858FA8-B96A-4464-81ED-6176C5035A53}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2C858FA8-B96A-4464-81ED-6176C5035A53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C858FA8-B96A-4464-81ED-6176C5035A53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C858FA8-B96A-4464-81ED-6176C5035A53}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2C858FA8-B96A-4464-81ED-6176C5035A53}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2C858FA8-B96A-4464-81ED-6176C5035A53}.Release|Win32.ActiveCfg = Release|Any CPU
+		{2C858FA8-B96A-4464-81ED-6176C5035A53}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
