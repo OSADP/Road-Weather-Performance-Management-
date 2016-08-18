@@ -1,22 +1,8 @@
-Application Name:
+Open Source Overview
+============================
 Road Weather Performance Management (RW-PM)
-Version Number: 
-v1.0 
+Version 1.0 
 
-Primary Functions:
-RoadWeatherMobileApp - Collected mobility data for use by the RW-PM system, and display traffic mobility and road weather alerts to drivers.
-Cloud - Collect data from the RoadWeatherMobileApp, and share it with two subsystems: Pikalert and INFLO.  The Cloud RW-PM system will receive processed output from Pikalert including
-road weather information, road treatment recommendations, and pavement conditions.  The Cloud RW-PM system will receive traffic mobiltity information from the INFLO system including recommended
-speed information and traffic backup locations.
-
-Hardware Supported:
-Cloud Based Services: Microsoft Azure
-RoadWeatherMobileApp: Android 54.0+
-
-Installation Instructions:
-There is no installer included with this package. Only Source code is provided.
-
-Description of the project:
 The tool captures and analyzes applicable traffic mobility and road weather data continuously from multiple sources. This includes capturing road weather data from fixed weather 
 stations (e.g., environmental sensor stations) and traffic mobility data from fixed speed sensors (e.g., inductive loop detectors) and/or subscription services. 
 The Tool is capable of capturing also captures  data from mobile sources such as road weather maintenance vehicles, connected vehicles, and drivers’ personal mobile devices. 
@@ -34,16 +20,32 @@ and traffic mobility returns to normal). Following the event, system performance
  RW-PM strategies for implementation in responding to future weather events. System performance is evaluated seasonally and/or annually and strategies are updated 
  to enhance seasonal and annual performance.
 
-Category:
-Traffic Management
+Primary Functions:
+RoadWeatherMobileApp - Collected mobility data for use by the RW-PM system, and display traffic mobility and road weather alerts to drivers.
+Cloud - Collect data from the RoadWeatherMobileApp, and share it with two subsystems: Pikalert and INFLO.  The Cloud RW-PM system will receive processed output from Pikalert including
+road weather information, road treatment recommendations, and pavement conditions.  The Cloud RW-PM system will receive traffic mobiltity information from the INFLO system including recommended
+speed information and traffic backup locations.
 
-Subcategory:
-Transportation
+License information
+-------------------
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+file except in compliance with the License.
+You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied. See the License for the specific language governing
+permissions and limitations under the License.
 
-Suggested System requirements:
-IDTO MDT Android Mobile Device:
-Android Phone running Android 5.0+
 
-Azure:
-Cloud Services, Web Sites, and Web API
+System Requirements
+-------------------------
+Hardware Supported:
+Cloud Based Services: Microsoft Azure
+RoadWeatherMobileApp: Android 54.0+
+
+Installation Instructions:
+There is no installer included with this package. Only Source code is provided.
+
+Documentation
+-------------
 
